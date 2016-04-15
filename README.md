@@ -1,5 +1,5 @@
 # TP Grupal - Primera Entrega
-
+![Build Status](https://travis-ci.org/lfrinaldi/template-tp-grupal.svg?branch=master) 
 ## Enunciado ##
 
 Se desea implementar un motor de generación de juegos tipo aventura gráfica (o similares).
