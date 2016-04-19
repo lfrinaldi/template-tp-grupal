@@ -11,4 +11,4 @@ cache:
   - $HOME/.gradle/wrapper
   - $HOME/.gradle/caches
 notifications:
-  slack: tecnicas7510-01-2016:ZSQOqlNFjRfwaL60V4zX0Ntu
+  slack: tecnicas7510-01-2016:vT3OSwtHAm5hWH2q88bbJr9A
