@@ -1,14 +1,12 @@
 package ar.fiuba.tdd.tp.engine;
 
-import ar.fiuba.tdd.tp.game.GameObject;
-
 import java.util.ArrayList;
 
-public class Action {
+public abstract class Action {
     private String name;
-    private ArrayList<GameObject> objects;
+    private ArrayList<String> objects;
 
-    public Action(String name, ArrayList<GameObject> objects) {
+    public Action(String name, ArrayList<String> objects) {
         this.name = name;
         this.objects = objects;
     }
@@ -17,7 +15,7 @@ public class Action {
         return name;
     }
 
-    public GameObject getPrimaryObject() {
+    public String getPrimaryObject() {
         return this.objects.get(0);
     }
 }

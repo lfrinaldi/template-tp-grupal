@@ -16,7 +16,7 @@ public class Game extends BaseGame{
 
     public Game(String description, List<Playable> playables){
         super.setDescription(description);
-        this.playables = new ArrayList<Playable>(playables);
+        this.playables = new ArrayList<>(playables);
     }
 
     public void addPlayable(Playable playable){
@@ -31,4 +31,6 @@ public class Game extends BaseGame{
     public void play() {
         System.out.print("Jugando " + super.getDescription());
     }
+
+
 }

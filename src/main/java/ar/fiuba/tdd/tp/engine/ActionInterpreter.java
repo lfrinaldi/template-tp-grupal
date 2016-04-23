@@ -23,11 +23,18 @@ public class ActionInterpreter {
     }
 
     private Action createNewAction(String[] words) {
-        ArrayList<GameObject> objects = new ArrayList<>();
-        for (int i = 1 ; i < words.length ; ++i) {
-            objects.add(new GameObject(words[i]));
+        ArrayList<String> objects = new ArrayList<>();
+        objects.addAll(Arrays.asList(words).subList(1, words.length));
+        if (isRoomAction(words[0])) {
+            return new RoomAction(words[0], objects);
+        } else {
+            return new ObjectAction(words[0], objects);
         }
-        return new Action(words[0], objects);
+    }
+
+    private boolean isRoomAction(String word) {
+        //TODO: Clean this mess
+        return word.equals("Lookaround");
     }
 
     private boolean stringsAreValid(String[] words) {

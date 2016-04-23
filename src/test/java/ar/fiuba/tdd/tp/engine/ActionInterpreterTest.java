@@ -11,6 +11,6 @@ public class ActionInterpreterTest {
         String string = "Usar Puerta";
         Action action = actionInterpreter.interpret(string);
         Assert.assertTrue(action.getName().equals("Usar"));
-        Assert.assertTrue(action.getPrimaryObject().getDescription().equals("Puerta"));
+        Assert.assertTrue(action.getPrimaryObject().equals("Puerta"));
     }
 }
