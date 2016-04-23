@@ -5,9 +5,9 @@ package ar.fiuba.tdd.tp.game;
  */
 public interface Useable {
 
-    public void usar();
+    void usar();
 
-    public Useable interactuar(Useable useable);
+    Useable interactuar(Useable useable);
 
-    public String getDescription();
+    String getDescription();
 }

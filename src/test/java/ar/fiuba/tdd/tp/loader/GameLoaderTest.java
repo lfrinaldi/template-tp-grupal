@@ -1,6 +1,5 @@
 package ar.fiuba.tdd.tp.loader;
 
-import ar.fiuba.tdd.tp.game.GameLoader;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +20,7 @@ public class GameLoaderTest {
 
     @Test
     public void getNullGameTest() {
-        Optional game = Optional.ofNullable(gameLoader.get(null));
-        Assert.assertTrue(game.isPresent());
+        Optional game = gameLoader.get(null);
+        Assert.assertTrue(!game.isPresent());
     }
 }

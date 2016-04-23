@@ -1,6 +1,6 @@
-package ar.fiuba.tdd.tp.game;
+package ar.fiuba.tdd.tp.loader;
 
-import ar.fiuba.tdd.tp.loader.Loader;
+import ar.fiuba.tdd.tp.game.Playable;
 
 import java.util.Optional;
 
