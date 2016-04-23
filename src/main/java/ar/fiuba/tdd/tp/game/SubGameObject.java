@@ -3,12 +3,12 @@ package ar.fiuba.tdd.tp.game;
 /**
  * Created by Adrián on 4/23/2016.
  */
-public class SubGameObject implements Useable{
+public class SubGameObject implements Useable {
 
     private String description;
 
 
-    public SubGameObject(String description){
+    public SubGameObject(String description) {
         this.description = description;
     }
 
@@ -18,7 +18,7 @@ public class SubGameObject implements Useable{
     }
 
     @Override
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
