@@ -5,4 +5,5 @@ package ar.fiuba.tdd.tp.game;
  */
 public interface Playable {
     void play();
+    public void addUseable(Useable useable);
 }
