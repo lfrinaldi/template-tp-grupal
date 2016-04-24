@@ -1,9 +1,6 @@
 package ar.fiuba.tdd.tp.connection;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 
 public class Client implements Runnable {
@@ -11,9 +8,19 @@ public class Client implements Runnable {
     private Thread thread;
     private Socket socket;
     private boolean finished = false;
+    private PrintWriter out;
+
 
     public Client(Socket socket) {
         this.socket = socket;
+        this.out = null;
+        thread = new Thread(this);
+        thread.start();
+    }
+
+    public Client(Socket socket, PrintWriter out) {
+        this.socket = socket;
+        this.out = out;
         thread = new Thread(this);
         thread.start();
     }
@@ -32,12 +39,16 @@ public class Client implements Runnable {
                 if (line == null) {
                     finished = true;
                 } else {
-                    System.out.println(line);
+                    if (out != null) {
+                        out.println(line);
+                    } else {
+                        System.out.println(line);
+                    }
+
                 }
             }
-
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 }
