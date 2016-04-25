@@ -1,9 +1,6 @@
 package ar.fiuba.tdd.tp.server;
 
 import ar.fiuba.tdd.tp.connection.GameServer;
-import ar.fiuba.tdd.tp.game.GameLoader;
-import ar.fiuba.tdd.tp.game.Playable;
-import ar.fiuba.tdd.tp.loader.Loader;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -18,12 +15,12 @@ public class ServerMain {
 
     static {
         serverMap.put("fetch quest", 8001);
-        serverMap.put("Abrir Puerta", 8002);
-        serverMap.put("Abrir Puerta 2", 8003);
-        serverMap.put("Objeto Maldito", 8004);
-        serverMap.put("Acertijo del lobo, la oveja y la col", 8005);
-        serverMap.put("Torres de Hanoi", 8006);
-        serverMap.put("Busqueda del Tesoro", 8007);
+        serverMap.put("abrir puerta", 8002);
+        serverMap.put("abrir puerta 2", 8003);
+        serverMap.put("objeto maldito", 8004);
+        serverMap.put("acertijo del lobo, la oveja y la col", 8005);
+        serverMap.put("torres de hanoi", 8006);
+        serverMap.put("busqueda del tesoro", 8007);
     }
 
     public static String getKeyByValue(Integer value) {
@@ -65,9 +62,7 @@ public class ServerMain {
 
     private static void instanceEngineGameServer(String game, int port) {
         try {
-            Loader loader = new GameLoader();
-            Playable gameInstance = loader.get(game);
-            Thread gameServer = new GameServer(port, gameInstance);
+            Thread gameServer = new GameServer(port, game);
             gameServer.start();
             System.out.println(String.format("%s loaded and listening on port %s", game, port));
         } catch (Exception e) {
