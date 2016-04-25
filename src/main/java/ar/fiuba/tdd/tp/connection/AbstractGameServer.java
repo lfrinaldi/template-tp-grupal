@@ -4,14 +4,16 @@ import ar.fiuba.tdd.tp.game.GameLoader;
 import ar.fiuba.tdd.tp.game.Playable;
 import ar.fiuba.tdd.tp.loader.Loader;
 
+import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
-public class GameServer extends Thread {
+public abstract class AbstractGameServer extends Thread {
 
-    private int port;
-    private String gameName;
+    protected int port;
+    protected String gameName;
 
-    public GameServer(int port, String gameName) {
+    public AbstractGameServer(int port, String gameName) {
         this.port = port;
         this.gameName = gameName;
     }
@@ -23,10 +25,13 @@ public class GameServer extends Thread {
             Playable gameInstance = loader.get(gameName);
             //noinspection InfiniteLoopStatement
             while (true) {
-                new Server(listener.accept(), gameInstance).start();
+                AbstractServer server = makeServer(listener.accept(), gameInstance);
+                server.start();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    protected abstract AbstractServer makeServer(Socket socket, Playable gameInstance) throws IOException;
 }

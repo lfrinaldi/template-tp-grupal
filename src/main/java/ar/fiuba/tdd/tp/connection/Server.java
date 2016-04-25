@@ -1,90 +1,80 @@
 package ar.fiuba.tdd.tp.connection;
 
-import ar.fiuba.tdd.tp.game.Game;
-import ar.fiuba.tdd.tp.game.Playable;
-import ar.fiuba.tdd.tp.server.ServerMain;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
-import java.io.*;
-import java.net.Socket;
-import java.net.SocketTimeoutException;
-import java.nio.charset.StandardCharsets;
+public class Server {
 
-public class Server extends Thread {
+    private static final Map<String, Integer> serverMap = new HashMap<>();
 
-    private Socket socket;
-    private Playable game;
-
-    public Server(Socket socket, Playable game) throws IOException {
-        this.socket = socket;
-        this.game = game;
+    static {
+        serverMap.put("fetch quest", 8001);
+        serverMap.put("abrir puerta", 8002);
+        serverMap.put("abrir puerta 2", 8003);
+        serverMap.put("objeto maldito", 8004);
+        serverMap.put("acertijo del lobo, la oveja y la col", 8005);
+        serverMap.put("torres de hanoi", 8006);
+        serverMap.put("busqueda del tesoro", 8007);
     }
 
-    public void run() {
+    public static String getKeyByValue(Integer value) {
+        for (Map.Entry<String, Integer> entry : serverMap.entrySet()) {
+            if (Objects.equals(value, entry.getValue())) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
         try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
-            PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true);
-            processInput(in, out);
-        } catch (SocketTimeoutException s) {
-            System.out.println("Socket timed out!");
-        } catch (IOException e) {
+            System.out.println("Welcome MainServer");
+            System.out.println("Please, enter command (type exit to finish sever):");
+            String command = "";
+            InputStream inputStream = System.in;
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            int serverPort = 8000;
+            instanceGameServer(serverPort);
+            while (!"exit".equals(command)) {
+                command = bufferedReader.readLine();
+                if (command != null) {
+                    if (command.startsWith("load game ")) {
+                        String game = command.replace("load game ", "");
+                        if (serverMap.containsKey(game)) {
+                            int port = serverMap.get(game);
+                            instanceEngineGameServer(game, port);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                socket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        }
+
+    }
+
+    private static void instanceEngineGameServer(String game, int port) {
+        try {
+            Thread gameServer = new EngineGameServer(port, game);
+            gameServer.start();
+            System.out.println(String.format("%s loaded and listening on port %s", game, port));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    private void processInput(BufferedReader in, PrintWriter out) throws IOException {
-        while (true) {
-            String input = in.readLine();
-            if (input != null) {
-                input = connectCommand(in, out, input);
-                if (input.equals(".")) {
-                    out.println(input);
-                    break;
-                }
-                if (game != null) {
-                    String response = ((Game) game).receiveMessage(input);
-                    out.println(response);
-                } else {
-                    out.println(input);
-                }
-            }
+    private static void instanceGameServer(int serverPort) {
+        try {
+            Thread gameServer = new MainGameServer(serverPort, null);
+            gameServer.start();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    private String connectCommand(BufferedReader in, PrintWriter out, String input) throws IOException {
-        if (input.startsWith("connect ")) {
-            String ipPort = input.replace("connect ", "");
-            String[] data = ipPort.split(":");
-            String ip = data[0];
-            String port = data[1];
-            input = connectGameServer(in, out, ip, port);
-        }
-        return input;
-    }
-
-    private String connectGameServer(BufferedReader in, PrintWriter out, String ip, String port) throws IOException {
-        String input;
-        Integer numPort = Integer.parseInt(port);
-        Socket socket = new Socket(ip, numPort);
-        new Client(socket, out);
-        OutputStream outputStream = socket.getOutputStream();
-        PrintStream printStream = new PrintStream(outputStream, true, "UTF-8");
-        out.println("Welcome to " + ServerMain.getKeyByValue(numPort));
-        while (true) {
-            String line = in.readLine();
-            if (line != null) {
-                printStream.println(line);
-                if (".".equals(line)) {
-                    input = ".";
-                    break;
-                }
-            }
-        }
-        return input;
-    }
 }
