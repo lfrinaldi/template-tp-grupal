@@ -40,7 +40,7 @@ public class Game extends BaseGame {
     }
 
     public String receiveMessage(String message) {
-        System.out.print("Mensaje: " + message);
+        //System.out.print("Mensaje: " + message);
         Action action = interpreter.interpret(message);
         // Send action to the current level
         String response = null;

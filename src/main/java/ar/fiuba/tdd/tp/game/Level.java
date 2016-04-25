@@ -19,17 +19,17 @@ public class Level extends BaseGame {
     }
 
     public String play(RoomAction action) {
-        System.out.print("Nivel " + super.getDescription());
+        //System.out.print("Nivel " + super.getDescription());
         // return list of useables as string
         return "stick";
     }
 
     public String play(ObjectAction action) {
-        System.out.print("Nivel " + super.getDescription());
+        //System.out.print("Object: " + super.getDescription());
         // Pasar esta accion al useable.getDescripcion() == action.getPrimaryObject()
         //return useables.get(0).usar(action);
         useables.get(0).usar();
-        return "Not implemented";
+        return "Accion desconocida";
     }
 
 }

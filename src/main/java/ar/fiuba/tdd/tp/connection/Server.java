@@ -1,5 +1,9 @@
 package ar.fiuba.tdd.tp.connection;
 
+import ar.fiuba.tdd.tp.game.Game;
+import ar.fiuba.tdd.tp.game.Playable;
+import ar.fiuba.tdd.tp.server.ServerMain;
+
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -8,9 +12,11 @@ import java.nio.charset.StandardCharsets;
 public class Server extends Thread {
 
     private Socket socket;
+    private Playable game;
 
-    public Server(Socket socket) throws IOException {
+    public Server(Socket socket, Playable game) throws IOException {
         this.socket = socket;
+        this.game = game;
     }
 
     public void run() {
@@ -40,7 +46,12 @@ public class Server extends Thread {
                     out.println(input);
                     break;
                 }
-                out.println(input);
+                if (game != null) {
+                    String response = ((Game) game).receiveMessage(input);
+                    out.println(response);
+                } else {
+                    out.println(input);
+                }
             }
         }
     }
@@ -58,11 +69,12 @@ public class Server extends Thread {
 
     private String connectGameServer(BufferedReader in, PrintWriter out, String ip, String port) throws IOException {
         String input;
-        Socket socket = new Socket(ip, Integer.parseInt(port));
+        Integer numPort = Integer.parseInt(port);
+        Socket socket = new Socket(ip, numPort);
         new Client(socket, out);
         OutputStream outputStream = socket.getOutputStream();
         PrintStream printStream = new PrintStream(outputStream, true, "UTF-8");
-        out.println("Welcome to " + port);
+        out.println("Welcome to " + ServerMain.getKeyByValue(numPort));
         while (true) {
             String line = in.readLine();
             if (line != null) {
