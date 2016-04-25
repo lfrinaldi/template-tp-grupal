@@ -6,30 +6,30 @@ import java.util.List;
 /**
  * Created by Adrian on 4/23/2016.
  */
-public class GameObject implements Useable{
+public class GameObject implements Useable {
 
     private String description;
     private List<Useable> useables;
 
-    public GameObject(String description){
+    public GameObject(String description) {
         this.description = description;
     }
 
-    public GameObject(String description, List<Useable> useables){
+    public GameObject(String description, List<Useable> useables) {
         this.description = description;
         this.useables = new ArrayList<Useable>(useables);
     }
 
-    public void addUseable(Useable useable){
+    public void addUseable(Useable useable) {
         this.useables.add(useable);
     }
 
-    public List<Useable> getUseable(){
+    public List<Useable> getUseable() {
         return this.useables;
     }
 
     @Override
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 

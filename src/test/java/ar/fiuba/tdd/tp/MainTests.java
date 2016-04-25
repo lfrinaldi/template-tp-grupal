@@ -15,8 +15,7 @@ public class MainTests {
         assertEquals(0, 0);
     }
 
-    public void games(){
-
+    public void games() {
         Playable game = new Game("TorreHanaoi");
         Useable disco = new GameObject("disco");
         game.addUseable(disco);

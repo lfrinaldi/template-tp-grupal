@@ -19,9 +19,4 @@ public class GameLoaderTest {
         gameLoader = new GameLoader();
     }
 
-    @Test
-    public void getNullGameTest() {
-        Optional game = Optional.ofNullable(gameLoader.get(null));
-        Assert.assertTrue(game.isPresent());
-    }
 }
