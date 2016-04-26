@@ -1,5 +1,6 @@
 package ar.fiuba.tdd.tp.connection;
 
+import ar.fiuba.tdd.tp.game.Game;
 import ar.fiuba.tdd.tp.game.Playable;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ public class EngineGameServer extends AbstractGameServer {
         super(port, gameName);
     }
 
-    protected AbstractServer makeServer(Socket socket, Playable gameInstance) throws IOException {
+    protected AbstractServer makeServer(Socket socket, Game gameInstance) throws IOException {
         return new EngineServer(socket, gameInstance);
     }
 }

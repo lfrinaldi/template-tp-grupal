@@ -11,9 +11,9 @@ import java.nio.charset.StandardCharsets;
 public abstract class AbstractServer extends Thread {
 
     protected Socket socket;
-    protected Playable game;
+    protected Game game;
 
-    public AbstractServer(Socket socket, Playable game) throws IOException {
+    public AbstractServer(Socket socket, Game game) throws IOException {
         this.socket = socket;
         this.game = game;
     }
@@ -78,7 +78,7 @@ public abstract class AbstractServer extends Thread {
                     exit = processOutput(out, input);
                 } else {
                     if (game != null) {
-                        String response = ((Game) game).receiveMessage(input);
+                        String response = game.receiveMessage(input);
                         out.println(response);
                     } else {
                         out.println(input);

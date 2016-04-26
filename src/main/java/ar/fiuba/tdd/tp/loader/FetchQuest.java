@@ -14,18 +14,18 @@ import java.util.List;
 public class FetchQuest extends Game {
     private GameObject character;
     private GameObject stick;
-    private Level room;
+    private Room room;
 
     public FetchQuest() {
         character = new GameObject("character");
         stick = new GameObject("stick");
-        room = new Level("room", new ArrayList<Useable>(Arrays.asList(stick)));
-        addPlayable(room);
+        room = new Room("room", new ArrayList<>(Arrays.asList(stick)));
+        addRoom(room);
     }
 
     private boolean checkWinRule() {
         // Gana el juego si el Character tiene el stick
-        return character.getUseable().contains(stick);
+        return character.getObjects().contains(stick);
     }
 
     private boolean checkLoseRule() {

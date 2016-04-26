@@ -16,7 +16,7 @@ public class GameLoader implements Loader {
 //        Game game = null;
 //        if ("fetch quest".equals(name)) {
 //            GameObject stick = new GameObject("stick");
-//            Level room = new Level("room", new ArrayList<Useable>(Arrays.asList(stick)));
+//            Room room = new Room("room", new ArrayList<GameObject>(Arrays.asList(stick)));
 //            game = new Game("This is fetch quest game, only one room", new ArrayList<Playable>(Arrays.asList(room)));
 //        }
 //        return game;

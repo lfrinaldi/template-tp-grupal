@@ -9,38 +9,22 @@ import java.util.List;
 /**
  * Created by Adrian on 4/23/2016.
  */
-public class Game extends BaseGame {
+public abstract class Game {
 
-    private List<Playable> playables;
+    private List<Room> rooms;
     private ActionInterpreter interpreter;
 
     public Game() {
         interpreter = new ActionInterpreter();
     }
 
-    public Game(String description) {
-        super.setDescription(description);
+    public Game(List<Room> rooms) {
+        this.rooms = rooms;
         interpreter = new ActionInterpreter();
     }
 
-    public Game(String description, List<Playable> playables) {
-        super.setDescription(description);
-        this.playables = new ArrayList<>(playables);
-        interpreter = new ActionInterpreter();
-    }
-
-    public void addPlayable(Playable playable) {
-        this.playables.add(playable);
-    }
-
-    public List<Playable> getPlayables() {
-        return this.playables;
-    }
-
-    @Override
-    public String play(Action action) {
-        System.out.print("Jugando " + super.getDescription());
-        return "Jugando";
+    public void addRoom(Room room) {
+        this.rooms.add(room);
     }
 
     private boolean checkWinRule() {
@@ -52,12 +36,11 @@ public class Game extends BaseGame {
     }
 
     public String receiveMessage(String message) {
-        //System.out.print("Mensaje: " + message);
         Action action = interpreter.interpret(message);
-        // Send action to the current level
+        // Send action to the current room
         String response = null;
-        if (!this.playables.isEmpty()) {
-            response = this.playables.get(0).play(action);
+        if (!this.rooms.isEmpty()) {
+            response = this.rooms.get(0).execute(action);
         }
         if (checkWinRule()) {
             response = "You won the game!";

@@ -9,6 +9,6 @@ public interface Playable {
 
     String play(Action action);
 
-    void addUseable(Useable useable);
+    void addObject(GameObject object);
 
 }

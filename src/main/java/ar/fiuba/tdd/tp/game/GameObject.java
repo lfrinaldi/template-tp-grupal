@@ -6,41 +6,30 @@ import java.util.List;
 /**
  * Created by Adrian on 4/23/2016.
  */
-public class GameObject implements Useable {
+public class GameObject {
 
-    private String description;
-    private List<Useable> useables;
+    private String name;
+    private List<GameObject> objects;
 
     public GameObject(String description) {
-        this.description = description;
+        this.name = description;
     }
 
-    public GameObject(String description, List<Useable> useables) {
-        this.description = description;
-        this.useables = new ArrayList<Useable>(useables);
+    public GameObject(String name, List<GameObject> objects) {
+        this.name = name;
+        this.objects = new ArrayList<>(objects);
     }
 
-    public void addUseable(Useable useable) {
-        this.useables.add(useable);
+    public void addObject(GameObject object) {
+        this.objects.add(object);
     }
 
-    public List<Useable> getUseable() {
-        return this.useables;
+    public List<GameObject> getObjects() {
+        return this.objects;
     }
 
-    @Override
-    public String getDescription() {
-        return this.description;
+    public String getName() {
+        return this.name;
     }
 
-    @Override
-    public void usar() {
-        System.out.print("Usando " + description);
-    }
-
-    @Override
-    public Useable interactuar(Useable useable) {
-        System.out.print("Interactuando " + this.description + "con " + useable.getDescription());
-        return null;
-    }
 }
