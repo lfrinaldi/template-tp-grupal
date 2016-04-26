@@ -1,8 +1,6 @@
 package ar.fiuba.tdd.tp.game;
 
 import ar.fiuba.tdd.tp.engine.Action;
-import ar.fiuba.tdd.tp.engine.ObjectAction;
-import ar.fiuba.tdd.tp.engine.RoomAction;
 
 import java.util.ArrayList;
 import java.util.List;

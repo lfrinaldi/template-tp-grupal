@@ -6,11 +6,11 @@ import org.junit.Test;
 public class ActionInterpreterTest {
 
     @Test
-    public void testInterpretValidAction() {
+    public void testInterpretPickAction() {
         ActionInterpreter actionInterpreter = new ActionInterpreter();
-        String string = "Usar Puerta";
+        String string = "pick stick";
         Action action = actionInterpreter.interpret(string);
-        Assert.assertTrue(action.getName().equals("Usar"));
-        Assert.assertTrue(action.getPrimaryObject().equals("Puerta"));
+        Assert.assertTrue(action.getName().equals("pick"));
+        Assert.assertTrue(action.getPrimaryObject().equals("stick"));
     }
 }

@@ -1,7 +1,5 @@
 package ar.fiuba.tdd.tp.engine;
 
-import ar.fiuba.tdd.tp.game.GameObject;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -10,8 +8,8 @@ public class ActionInterpreter {
     private ArrayList<String> validObjects;
 
     public ActionInterpreter() {
-        this.validActions = new ArrayList<>(Arrays.asList("Usar", "Mirar"));
-        this.validObjects = new ArrayList<>(Arrays.asList("Llave", "Puerta"));
+        this.validActions = new ArrayList<>(Arrays.asList("pick", "Mirar"));
+        this.validObjects = new ArrayList<>(Arrays.asList("Llave", "stick"));
     }
 
     public Action interpret(String string) {
@@ -25,16 +23,10 @@ public class ActionInterpreter {
     private Action createNewAction(String[] words) {
         ArrayList<String> objects = new ArrayList<>();
         objects.addAll(Arrays.asList(words).subList(1, words.length));
-        if (isRoomAction(words[0])) {
-            return new RoomAction(words[0], objects);
-        } else {
-            return new ObjectAction(words[0], objects);
+        switch (words[0]) {
+            case "pick": return new PickAction(words[0], objects);
+            default: return null;
         }
-    }
-
-    private boolean isRoomAction(String word) {
-        //TODO: Clean this mess
-        return word.equals("Lookaround");
     }
 
     private boolean stringsAreValid(String[] words) {
