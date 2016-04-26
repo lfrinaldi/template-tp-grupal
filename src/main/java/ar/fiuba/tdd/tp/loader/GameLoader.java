@@ -10,7 +10,7 @@ import java.util.Arrays;
  * Created by leandro on 22/04/16.
  */
 public class GameLoader implements Loader {
-    
+
     @Override
     public Game get(String gameName) {
         // Don't care about the name, just create fetch quest

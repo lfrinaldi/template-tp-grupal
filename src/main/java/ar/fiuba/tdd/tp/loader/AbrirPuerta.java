@@ -16,19 +16,19 @@ import java.util.Arrays;
 public class AbrirPuerta extends Game {
     private GameObject character;
     private GameObject key;
-    private GameObject door;
-    private ar.fiuba.tdd.tp.game.Room room1;
-    //private ar.fiuba.tdd.tp.game.object.Room room2;
+    private Door door;
+    private Room room1;
+    private Room room2;
 
     public AbrirPuerta() {
         character = new GameObject("character");
         key = new GameObject("Key");
-        //room2 = new Room("Room 2", new ArrayList<>(Arrays.asList()));
+        room2 = new Room("Room 2", new ArrayList<>(Arrays.asList()));
         door = new Door("Door", true, true);
-        //door.addNextRoom(room2);
+        door.addNextRoom(room2);
         room1 = new Room("Room 1", new ArrayList<>(Arrays.asList(key, door)));
         addRoom(room1);
-        //addRoom(room2);
+        addRoom(room2);
     }
 
     private boolean checkWinRule() {
