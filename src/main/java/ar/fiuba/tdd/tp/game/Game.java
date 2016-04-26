@@ -14,6 +14,10 @@ public class Game extends BaseGame {
     private List<Playable> playables;
     private ActionInterpreter interpreter;
 
+    public Game() {
+
+    }
+
     public Game(String description) {
         super.setDescription(description);
         interpreter = new ActionInterpreter();

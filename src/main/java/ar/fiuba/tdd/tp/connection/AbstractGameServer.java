@@ -1,7 +1,7 @@
 package ar.fiuba.tdd.tp.connection;
 
-import ar.fiuba.tdd.tp.game.GameLoader;
 import ar.fiuba.tdd.tp.game.Playable;
+import ar.fiuba.tdd.tp.loader.GameLoader;
 import ar.fiuba.tdd.tp.loader.Loader;
 
 import java.io.IOException;
