@@ -1,0 +1,13 @@
+package ar.fiuba.tdd.tp.loader;
+
+import ar.fiuba.tdd.tp.game.Game;
+
+/**
+ * Acertijo del lobo, la oveja y la col
+ * Hace mucho tiempo un granjero fue al mercado y compró un lobo , una oveja y una col. Para volver a su casa tenía que cruzar un río.
+ * El granjero dispone de una barca para cruzar a la otra orilla, pero en la barca solo caben él y una de sus compras.
+ * Si el lobo se queda solo con la oveja se la come, si la oveja se queda sola con la col se la come.
+ * El reto del granjero era cruzar él mismo y dejar sus compras a la otra orilla del río, dejando cada compra intacta. ¿Cómo lo hizo?
+ */
+public class LoboOvejaCol extends Game {
+}

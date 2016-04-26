@@ -10,18 +10,7 @@ import java.util.Arrays;
  * Created by leandro on 22/04/16.
  */
 public class GameLoader implements Loader {
-
-//    @Override
-//    public Game get(String name) {
-//        Game game = null;
-//        if ("fetch quest".equals(name)) {
-//            GameObject stick = new GameObject("stick");
-//            Room room = new Room("room", new ArrayList<GameObject>(Arrays.asList(stick)));
-//            game = new Game("This is fetch quest game, only one room", new ArrayList<Playable>(Arrays.asList(room)));
-//        }
-//        return game;
-//    }
-
+    
     @Override
     public Game get(String gameName) {
         // Don't care about the name, just create fetch quest
@@ -39,22 +28,22 @@ public class GameLoader implements Loader {
     }
 
     private Game abrirPuerta2() {
-        return new FetchQuest();
+        return new AbrirPuerta2();
     }
 
     private Game objetoMaldito() {
-        return new FetchQuest();
+        return new ObjetoMaldito();
     }
 
     private Game loboOvejaCol() {
-        return new FetchQuest();
+        return new LoboOvejaCol();
     }
 
     private Game torresHanoi() {
-        return new FetchQuest();
+        return new TorresHanoi();
     }
 
     private Game busquedaTersoro() {
-        return new FetchQuest();
+        return new BusquedaTesoro();
     }
 }

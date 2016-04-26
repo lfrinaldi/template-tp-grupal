@@ -32,16 +32,6 @@ public class FetchQuest extends Game {
         // There's no way you lost this game
         return false;
     }
-
-    // Compatibilidad con verisones anteriores
-    public FetchQuest(String description) {
-        // TODO: Remove constructor from Game
-    }
-
-    // Compatibilidad con verisones anteriores
-    public FetchQuest(String description, List<Playable> playables) {
-        //TODO: Remove constructor from Game
-    }
 }
 
 
