@@ -34,4 +34,27 @@ public class GameLoader implements Loader {
         return new FetchQuest();
     }
 
+    private Game abrirPuerta() {
+        return new FetchQuest();
+    }
+
+    private Game abrirPuerta2() {
+        return new FetchQuest();
+    }
+
+    private Game objetoMaldito() {
+        return new FetchQuest();
+    }
+
+    private Game loboOvejaCol() {
+        return new FetchQuest();
+    }
+
+    private Game torresHanoi() {
+        return new FetchQuest();
+    }
+
+    private Game busquedaTersoro() {
+        return new FetchQuest();
+    }
 }

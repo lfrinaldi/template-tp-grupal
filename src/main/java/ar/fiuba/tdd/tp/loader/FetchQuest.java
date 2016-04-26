@@ -12,10 +12,25 @@ import java.util.List;
  * Es necesario tomar el palo.
  */
 public class FetchQuest extends Game {
+    private GameObject character;
+    private GameObject stick;
+    private Level room;
+
     public FetchQuest() {
-        GameObject stick = new GameObject("stick");
-        Level room = new Level("room", new ArrayList<Useable>(Arrays.asList(stick)));
+        character = new GameObject("character");
+        stick = new GameObject("stick");
+        room = new Level("room", new ArrayList<Useable>(Arrays.asList(stick)));
         addPlayable(room);
+    }
+
+    private boolean checkWinRule() {
+        // Gana el juego si el Character tiene el stick
+        return character.getUseable().contains(stick);
+    }
+
+    private boolean checkLoseRule() {
+        // There's no way you lost this game
+        return false;
     }
 
     // Compatibilidad con verisones anteriores

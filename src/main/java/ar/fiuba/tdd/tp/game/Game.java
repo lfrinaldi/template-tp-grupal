@@ -15,7 +15,7 @@ public class Game extends BaseGame {
     private ActionInterpreter interpreter;
 
     public Game() {
-
+        interpreter = new ActionInterpreter();
     }
 
     public Game(String description) {
@@ -43,6 +43,14 @@ public class Game extends BaseGame {
         return "Jugando";
     }
 
+    private boolean checkWinRule() {
+        return true;
+    }
+
+    private boolean checkLoseRule() {
+        return false;
+    }
+
     public String receiveMessage(String message) {
         //System.out.print("Mensaje: " + message);
         Action action = interpreter.interpret(message);
@@ -51,6 +59,12 @@ public class Game extends BaseGame {
         if (!this.playables.isEmpty()) {
             response = this.playables.get(0).play(action);
         }
+        if (checkWinRule()) {
+            response = "You won the game!";
+        }
+        // if (checkLoseRule()) {
+        //     response = "You lose!";
+        // }
         return response;
     }
 
