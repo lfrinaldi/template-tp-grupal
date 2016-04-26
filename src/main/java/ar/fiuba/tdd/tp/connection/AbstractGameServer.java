@@ -1,6 +1,6 @@
 package ar.fiuba.tdd.tp.connection;
 
-import ar.fiuba.tdd.tp.game.Playable;
+import ar.fiuba.tdd.tp.game.Game;
 import ar.fiuba.tdd.tp.loader.GameLoader;
 import ar.fiuba.tdd.tp.loader.Loader;
 
@@ -22,7 +22,7 @@ public abstract class AbstractGameServer extends Thread {
         try {
             ServerSocket listener = new ServerSocket(port);
             Loader loader = new GameLoader();
-            Playable gameInstance = loader.get(gameName);
+            Game gameInstance = loader.get(gameName);
             //noinspection InfiniteLoopStatement
             while (true) {
                 AbstractServer server = makeServer(listener.accept(), gameInstance);
@@ -33,5 +33,5 @@ public abstract class AbstractGameServer extends Thread {
         }
     }
 
-    protected abstract AbstractServer makeServer(Socket socket, Playable gameInstance) throws IOException;
+    protected abstract AbstractServer makeServer(Socket socket, Game gameInstance) throws IOException;
 }

@@ -14,8 +14,8 @@ import java.util.List;
 public class FetchQuest extends Game {
     public FetchQuest() {
         GameObject stick = new GameObject("stick");
-        Level room = new Level("room", new ArrayList<Useable>(Arrays.asList(stick)));
-        addPlayable(room);
+        Room room = new Room("room", new ArrayList<>(Arrays.asList(stick)));
+        addRoom(room);
     }
 
     // Compatibilidad con verisones anteriores
