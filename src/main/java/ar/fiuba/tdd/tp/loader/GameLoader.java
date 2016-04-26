@@ -35,7 +35,7 @@ public class GameLoader implements Loader {
     }
 
     private Game abrirPuerta() {
-        return new FetchQuest();
+        return new AbrirPuerta();
     }
 
     private Game abrirPuerta2() {
