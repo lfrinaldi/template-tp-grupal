@@ -24,7 +24,6 @@ public class Room {
     }
 
     public String execute(Action action) {
-        //TODO: Repair this
-        return action.getName();
+        return null;
     }
 }

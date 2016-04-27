@@ -3,7 +3,7 @@ package ar.fiuba.tdd.tp.loader;
 import ar.fiuba.tdd.tp.game.Game;
 import ar.fiuba.tdd.tp.game.GameObject;
 import ar.fiuba.tdd.tp.game.Room;
-import ar.fiuba.tdd.tp.game.object.Box;
+import ar.fiuba.tdd.tp.game.object.Character;
 import ar.fiuba.tdd.tp.game.object.Door;
 import ar.fiuba.tdd.tp.game.object.Key;
 
@@ -23,10 +23,10 @@ public class AbrirPuerta extends Game {
     private Room room2;
 
     public AbrirPuerta() {
-        character = new GameObject("character");
+        character = new Character("character");
         key = new Key("Key");
         room2 = new Room("Room 2", new ArrayList<>(Arrays.asList()));
-        door = new Door("Door", true, true);
+        door = new Door("Door", new ArrayList<>(), true, true);
         door.addNextRoom(room2);
         room1 = new Room("Room 1", new ArrayList<>(Arrays.asList(key, door)));
         addRoom(room1);

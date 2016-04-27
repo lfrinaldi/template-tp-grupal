@@ -1,10 +1,11 @@
 package ar.fiuba.tdd.tp.game.object;
 
+import ar.fiuba.tdd.tp.engine.Action;
 import ar.fiuba.tdd.tp.game.GameObject;
 
 import java.util.List;
 
-public class AbstractCloseable extends GameObject {
+public abstract class AbstractCloseable extends GameObject {
 
     private boolean closed = true;
 
@@ -25,4 +26,7 @@ public class AbstractCloseable extends GameObject {
     public void setClosed(boolean closed) {
         this.closed = closed;
     }
+
+    @Override
+    public abstract String use(Action action);
 }

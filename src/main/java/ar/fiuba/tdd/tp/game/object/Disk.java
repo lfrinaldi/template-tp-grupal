@@ -1,5 +1,6 @@
 package ar.fiuba.tdd.tp.game.object;
 
+import ar.fiuba.tdd.tp.engine.Action;
 import ar.fiuba.tdd.tp.game.GameObject;
 
 import java.util.List;
@@ -13,10 +14,7 @@ public class Disk extends GameObject {
         this.size = size;
     }
 
-    public Disk(String name, List<GameObject> objects, Integer size) {
-        super(name, objects);
-        this.size = size;
-    }
+
 
     public Integer getSize() {
         return size;
@@ -24,5 +22,10 @@ public class Disk extends GameObject {
 
     public void setSize(Integer size) {
         this.size = size;
+    }
+
+    @Override
+    public String use(Action action) {
+        return null;
     }
 }

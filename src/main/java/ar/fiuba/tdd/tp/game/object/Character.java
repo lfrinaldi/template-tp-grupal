@@ -3,11 +3,11 @@ package ar.fiuba.tdd.tp.game.object;
 import ar.fiuba.tdd.tp.engine.Action;
 import ar.fiuba.tdd.tp.game.GameObject;
 
-import java.util.List;
-
-public class Treasure extends GameObject {
-
-    public Treasure(String description) {
+/**
+ * Created by leandro on 27/04/16.
+ */
+public class Character extends GameObject {
+    public Character(String description) {
         super(description);
     }
 

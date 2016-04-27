@@ -1,6 +1,8 @@
 package ar.fiuba.tdd.tp.loader;
 
 import ar.fiuba.tdd.tp.game.*;
+import ar.fiuba.tdd.tp.game.object.Character;
+import ar.fiuba.tdd.tp.game.object.Stick;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,8 +19,8 @@ public class FetchQuest extends Game {
     private Room room;
 
     public FetchQuest() {
-        character = new GameObject("character");
-        stick = new GameObject("stick");
+        character = new Character("character");
+        stick = new Stick("stick");
         room = new Room("room", new ArrayList<>(Arrays.asList(stick)));
         addRoom(room);
     }

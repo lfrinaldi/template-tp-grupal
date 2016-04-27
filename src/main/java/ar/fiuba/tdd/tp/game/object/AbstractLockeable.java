@@ -1,10 +1,11 @@
 package ar.fiuba.tdd.tp.game.object;
 
+import ar.fiuba.tdd.tp.engine.Action;
 import ar.fiuba.tdd.tp.game.GameObject;
 
 import java.util.List;
 
-public class AbstractLockeable extends AbstractCloseable {
+public abstract class AbstractLockeable extends AbstractCloseable {
 
     private boolean locked = true;
 
@@ -25,4 +26,7 @@ public class AbstractLockeable extends AbstractCloseable {
     public void setLocked(boolean locked) {
         this.locked = locked;
     }
+
+    @Override
+    public abstract String use(Action action);
 }

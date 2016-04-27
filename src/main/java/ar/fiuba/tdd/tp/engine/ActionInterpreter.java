@@ -21,12 +21,13 @@ public class ActionInterpreter {
     }
 
     private Action createNewAction(String[] words) {
-        ArrayList<String> objects = new ArrayList<>();
+        /*ArrayList<String> objects = new ArrayList<>();
         objects.addAll(Arrays.asList(words).subList(1, words.length));
         switch (words[0]) {
             case "pick": return new PickAction(words[0], objects);
             default: return null;
-        }
+        }*/
+        return null;
     }
 
     private boolean stringsAreValid(String[] words) {

@@ -1,8 +1,7 @@
 package ar.fiuba.tdd.tp.game.object;
 
+import ar.fiuba.tdd.tp.engine.Action;
 import ar.fiuba.tdd.tp.game.GameObject;
-
-import java.util.List;
 
 public class Poison extends GameObject {
 
@@ -10,7 +9,9 @@ public class Poison extends GameObject {
         super(description);
     }
 
-    public Poison(String name, List<GameObject> objects) {
-        super(name, objects);
+
+    @Override
+    public String use(Action action) {
+        return super.use(action);
     }
 }
