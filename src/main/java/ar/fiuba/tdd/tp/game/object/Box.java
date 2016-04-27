@@ -1,19 +1,30 @@
 package ar.fiuba.tdd.tp.game.object;
 
 import ar.fiuba.tdd.tp.engine.Action;
-import ar.fiuba.tdd.tp.game.GameObject;
+import ar.fiuba.tdd.tp.game.ComplexObject;
+import ar.fiuba.tdd.tp.game.Room;
 
-import java.util.List;
-
-public class Box extends AbstractCloseable {
+public class Box extends ComplexObject {
 
 
-    public Box(String name, List<GameObject> objects, boolean closed) {
-        super(name, objects, closed);
-    }
+/*    public Box(String name, List<Useable> objects) {
+        super(name, objects);
+    }*/
 
     @Override
     public String use(Action action) {
-        return null;
+        return action.execute(this);
+    }
+
+    public void deliverTo(Character character) {
+        character.addElement(this);
+    }
+
+    public void deliverTo(Room room) {
+        room.addObjects(this.getObjects());
+    }
+
+    public String getNoAction() {
+        return "no action";
     }
 }

@@ -9,6 +9,6 @@ public interface Playable {
 
     String play(Action action);
 
-    void addObject(GameObject object);
+    void addObject(ComplexObject object);
 
 }

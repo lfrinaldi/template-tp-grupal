@@ -1,12 +1,6 @@
 package ar.fiuba.tdd.tp.loader;
 
 import ar.fiuba.tdd.tp.game.Game;
-import ar.fiuba.tdd.tp.game.GameObject;
-import ar.fiuba.tdd.tp.game.Room;
-import ar.fiuba.tdd.tp.game.object.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Busqueda del Tesoro
@@ -27,7 +21,7 @@ import java.util.Arrays;
  * El jugador gana al encontrar el tesoro y volver a la habitación inicial.
  */
 public class BusquedaTesoro extends Game {
-//    private GameObject character;
+//    private ComplexObject character;
 //    private Treasure treasure;
 //    private Room cave;
 //    private Poison poison;
@@ -37,7 +31,7 @@ public class BusquedaTesoro extends Game {
 //    private Box greenBox;
 
     public BusquedaTesoro() {
-//        character = new GameObject("character");
+//        character = new ComplexObject("character");
 //        treasure = new Treasure("Treasure");
 //        greenBox = new Box("GreenBox", new ArrayList<>(Arrays.asList(treasure)), true);
 //        poison = new Poison("Poison");

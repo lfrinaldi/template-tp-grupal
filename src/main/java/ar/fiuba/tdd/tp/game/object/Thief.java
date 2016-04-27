@@ -1,17 +1,18 @@
 package ar.fiuba.tdd.tp.game.object;
 
 import ar.fiuba.tdd.tp.engine.Action;
-import ar.fiuba.tdd.tp.game.GameObject;
+import ar.fiuba.tdd.tp.game.ComplexObject;
+import ar.fiuba.tdd.tp.game.SimpleObject;
 
-import java.util.List;
-
-public class Thief extends GameObject {
+public class Thief extends SimpleObject {
 
     private String talk;
 
-    public Thief(String description) {
-        super(description);
+/*
+    public Thief(String name) {
+        super(name);
     }
+*/
 
 
     public String getTalk() {
@@ -24,6 +25,7 @@ public class Thief extends GameObject {
 
     @Override
     public String use(Action action) {
+        /*return action.execute(this);*/
         return null;
     }
 }

@@ -1,15 +1,6 @@
 package ar.fiuba.tdd.tp.loader;
 
 import ar.fiuba.tdd.tp.game.Game;
-import ar.fiuba.tdd.tp.game.GameObject;
-import ar.fiuba.tdd.tp.game.Room;
-import ar.fiuba.tdd.tp.game.object.Col;
-import ar.fiuba.tdd.tp.game.object.Door;
-import ar.fiuba.tdd.tp.game.object.Sheep;
-import ar.fiuba.tdd.tp.game.object.Wolf;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Acertijo del lobo, la oveja y la col
@@ -19,7 +10,7 @@ import java.util.Arrays;
  * El reto del granjero era cruzar él mismo y dejar sus compras a la otra orilla del río, dejando cada compra intacta. ¿Cómo lo hizo?
  */
 public class LoboOvejaCol extends Game {
-//    private GameObject character;
+//    private ComplexObject character;
 //    private Wolf wolf;
 //    private Sheep sheep;
 //    private Col col;
@@ -28,7 +19,7 @@ public class LoboOvejaCol extends Game {
 //    private Room room2;
 
     public LoboOvejaCol() {
-//        character = new GameObject("character");
+//        character = new ComplexObject("character");
 //        wolf = new Wolf("Wolf");
 //        sheep = new Sheep("Sheep");
 //        col = new Col("Col");

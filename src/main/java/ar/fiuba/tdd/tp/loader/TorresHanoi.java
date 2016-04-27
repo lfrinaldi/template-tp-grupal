@@ -1,12 +1,6 @@
 package ar.fiuba.tdd.tp.loader;
 
 import ar.fiuba.tdd.tp.game.Game;
-import ar.fiuba.tdd.tp.game.GameObject;
-import ar.fiuba.tdd.tp.game.Room;
-import ar.fiuba.tdd.tp.game.object.Disk;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Torres de Hanoi
@@ -19,7 +13,7 @@ import java.util.Arrays;
  * + Ningun disco se puede apilar sobre otro más pequeño.
  */
 public class TorresHanoi extends Game {
-//    private GameObject character;
+//    private ComplexObject character;
 //    private Room torre1;
 //    private Room torre2;
 //    private Room torre3;
@@ -28,7 +22,7 @@ public class TorresHanoi extends Game {
 //    private Disk disk3;
 
     public TorresHanoi() {
-//        character = new GameObject("character");
+//        character = new ComplexObject("character");
 //        disk1 = new Disk("Disco1", 10);
 //        disk2 = new Disk("Disco2", 20);
 //        disk3 = new Disk("Disco3", 30);

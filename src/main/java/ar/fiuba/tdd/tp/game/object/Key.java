@@ -1,20 +1,26 @@
 package ar.fiuba.tdd.tp.game.object;
 
 import ar.fiuba.tdd.tp.engine.Action;
-import ar.fiuba.tdd.tp.game.GameObject;
+import ar.fiuba.tdd.tp.game.SimpleObject;
 
-import java.util.List;
+public class Key extends SimpleObject {
 
-public class Key extends GameObject {
-
-    public Key(String description) {
-        super(description);
-    }
-
+/*    public Key(String name) {
+        super(name);
+    }*/
 
     @Override
     public String use(Action action) {
-        return super.use(action);
+        return action.execute(this);
     }
 
+
+    public void deliverTo(Character character) {
+        character.addElement(this);
+    }
+
+
+    public String getNoAction() {
+        return "no action";
+    }
 }

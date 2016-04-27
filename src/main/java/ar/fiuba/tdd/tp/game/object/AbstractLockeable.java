@@ -1,7 +1,7 @@
 package ar.fiuba.tdd.tp.game.object;
 
 import ar.fiuba.tdd.tp.engine.Action;
-import ar.fiuba.tdd.tp.game.GameObject;
+import ar.fiuba.tdd.tp.game.Useable;
 
 import java.util.List;
 
@@ -9,15 +9,15 @@ public abstract class AbstractLockeable extends AbstractCloseable {
 
     private boolean locked = true;
 
-    public AbstractLockeable(String description, boolean closed, boolean locked) {
-        super(description, closed);
-        this.locked = locked;
+/*
+    public AbstractLockeable(String description) {
+        super(description);
     }
+*/
 
-    public AbstractLockeable(String name, List<GameObject> objects, boolean closed, boolean locked) {
-        super(name, objects, closed);
-        this.locked = locked;
-    }
+/*    public AbstractLockeable(String name, List<Useable> objects) {
+        super();
+    }*/
 
     public boolean isLocked() {
         return locked;

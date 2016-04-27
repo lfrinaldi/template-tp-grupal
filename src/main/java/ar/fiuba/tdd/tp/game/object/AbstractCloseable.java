@@ -1,23 +1,25 @@
 package ar.fiuba.tdd.tp.game.object;
 
 import ar.fiuba.tdd.tp.engine.Action;
-import ar.fiuba.tdd.tp.game.GameObject;
+import ar.fiuba.tdd.tp.game.ComplexObject;
+import ar.fiuba.tdd.tp.game.Useable;
 
 import java.util.List;
 
-public abstract class AbstractCloseable extends GameObject {
+public abstract class AbstractCloseable extends ComplexObject {
 
     private boolean closed = true;
 
-    public AbstractCloseable(String description, boolean closed) {
+/*
+    public AbstractCloseable(String description) {
         super(description);
-        this.closed = closed;
     }
+*/
 
-    public AbstractCloseable(String name, List<GameObject> objects, boolean closed) {
+/*    public AbstractCloseable(String name, List<Useable> objects, boolean closed) {
         super(name, objects);
         this.closed = closed;
-    }
+    }*/
 
     public boolean isClosed() {
         return closed;

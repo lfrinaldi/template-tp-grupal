@@ -1,42 +1,27 @@
 package ar.fiuba.tdd.tp.game;
 
-import ar.fiuba.tdd.tp.engine.Action;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Created by Adrian on 4/23/2016.
+ * Created by Adrián on 4/27/2016.
  */
-public abstract class GameObject implements Usable {
+public abstract class GameObject implements Useable {
+    protected String name;
 
-    private String name;
-    private List<GameObject> objects;
 
-    public GameObject(String description) {
-        this.name = description;
-        this.objects = new ArrayList<>();
-    }
-
-    public GameObject(String name, List<GameObject> objects) {
+/*
+    public GameObject(String name) {
         this.name = name;
-        this.objects = new ArrayList<>(objects);
     }
+*/
 
-    public void addObject(GameObject object) {
-        this.objects.add(object);
-    }
-
-    public List<GameObject> getObjects() {
-        return this.objects;
+    public boolean is(String name) {
+        return this.name.equals(name);
     }
 
     public String getName() {
         return this.name;
     }
 
-    @Override
-    public String use(Action action) {
-        return action.execute(this);
+    public void setName(String name) {
+        this.name = name;
     }
 }

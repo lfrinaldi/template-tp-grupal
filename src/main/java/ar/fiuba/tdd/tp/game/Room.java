@@ -8,14 +8,19 @@ import java.util.List;
 public class Room {
 
     private String name;
-    private List<GameObject> objects;
+    private List<Useable> objects;
 
-    public Room(String name, ArrayList<GameObject> objects) {
+    public Room(String name, ArrayList<Useable> objects) {
         this.name = name;
         this.objects = objects;
     }
 
-    public List<GameObject> getObjects() {
+    public void setObjects(List<Useable> useables) {
+        this.objects = useables;
+    }
+
+
+    public List<Useable> getObjects() {
         return this.objects;
     }
 
@@ -25,5 +30,23 @@ public class Room {
 
     public String execute(Action action) {
         return null;
+    }
+
+    public void addObjects(List<Useable> objects) {
+
+        for (Useable useable : objects) {
+            this.objects.add(useable);
+        }
+    }
+
+    public boolean hasElement(Useable useable) {
+        boolean hasElement = false;
+        for (Useable element : this.objects) {
+            if (element.getName().equals(useable.getName())) {
+                hasElement = true;
+            }
+        }
+        return hasElement;
+
     }
 }

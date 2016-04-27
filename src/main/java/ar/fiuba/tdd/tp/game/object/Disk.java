@@ -1,19 +1,16 @@
 package ar.fiuba.tdd.tp.game.object;
 
 import ar.fiuba.tdd.tp.engine.Action;
-import ar.fiuba.tdd.tp.game.GameObject;
+import ar.fiuba.tdd.tp.game.SimpleObject;
 
-import java.util.List;
-
-public class Disk extends GameObject {
+public class Disk extends SimpleObject {
 
     private Integer size;
 
-    public Disk(String description, Integer size) {
+/*    public Disk(String description, Integer size) {
         super(description);
         this.size = size;
-    }
-
+    }*/
 
 
     public Integer getSize() {
@@ -26,6 +23,10 @@ public class Disk extends GameObject {
 
     @Override
     public String use(Action action) {
-        return null;
+        return action.execute(this);
+    }
+
+    public String getNoAction() {
+        return "no action";
     }
 }

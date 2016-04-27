@@ -1,14 +1,6 @@
 package ar.fiuba.tdd.tp.loader;
 
 import ar.fiuba.tdd.tp.game.Game;
-import ar.fiuba.tdd.tp.game.GameObject;
-import ar.fiuba.tdd.tp.game.Room;
-import ar.fiuba.tdd.tp.game.object.Box;
-import ar.fiuba.tdd.tp.game.object.Door;
-import ar.fiuba.tdd.tp.game.object.Key;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Abrir Puerta 2
@@ -16,7 +8,7 @@ import java.util.Arrays;
  * Gana al atravesar la puerta y pasar a la siguiente habitación.
  */
 public class AbrirPuerta2 extends Game {
-//    private GameObject character;
+//    private ComplexObject character;
 //    private Key key;
 //    private Box box;
 //    private Door door;
@@ -24,7 +16,7 @@ public class AbrirPuerta2 extends Game {
 //    private Room vault;
 
     public AbrirPuerta2() {
-//        character = new GameObject("character");
+//        character = new ComplexObject("character");
 //        key = new Key("Key");
 //        box = new Box("Box", new ArrayList<>(Arrays.asList(key)), true);
 //        vault = new Room("Vault", new ArrayList<>(Arrays.asList()));

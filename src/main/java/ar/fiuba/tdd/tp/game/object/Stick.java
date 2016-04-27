@@ -1,19 +1,27 @@
 package ar.fiuba.tdd.tp.game.object;
 
 import ar.fiuba.tdd.tp.engine.Action;
-import ar.fiuba.tdd.tp.game.GameObject;
+import ar.fiuba.tdd.tp.game.SimpleObject;
 
-import java.util.List;
+public class Stick extends SimpleObject {
 
-public class Stick extends GameObject {
-
-    public Stick(String description) {
-        super(description);
+/*
+    public Stick(String name) {
+        super(name);
     }
+*/
 
 
     @Override
     public String use(Action action) {
-        return null;
+        return action.execute(this);
+    }
+
+    public void deliverTo(Character character) {
+        character.addElement(this);
+    }
+
+    public String getNoAction() {
+        return "not available";
     }
 }
