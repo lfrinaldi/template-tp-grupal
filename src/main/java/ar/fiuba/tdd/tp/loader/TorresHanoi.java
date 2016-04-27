@@ -1,6 +1,12 @@
 package ar.fiuba.tdd.tp.loader;
 
 import ar.fiuba.tdd.tp.game.Game;
+import ar.fiuba.tdd.tp.game.GameObject;
+import ar.fiuba.tdd.tp.game.Room;
+import ar.fiuba.tdd.tp.game.object.Disk;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Torres de Hanoi
@@ -13,4 +19,29 @@ import ar.fiuba.tdd.tp.game.Game;
  * + Ningun disco se puede apilar sobre otro más pequeño.
  */
 public class TorresHanoi extends Game {
+//    private GameObject character;
+//    private Room torre1;
+//    private Room torre2;
+//    private Room torre3;
+//    private Disk disk1;
+//    private Disk disk2;
+//    private Disk disk3;
+
+    public TorresHanoi() {
+//        character = new GameObject("character");
+//        disk1 = new Disk("Disco1", 10);
+//        disk2 = new Disk("Disco2", 20);
+//        disk3 = new Disk("Disco3", 30);
+//        torre1 = new Room("Torre1", new ArrayList<>(Arrays.asList(disk1, disk2, disk3)));
+//        torre2 = new Room("Torre2", new ArrayList<>(Arrays.asList()));
+//        torre3 = new Room("Torre3", new ArrayList<>(Arrays.asList()));
+//        addRoom(torre1);
+//        addRoom(torre2);
+//        addRoom(torre3);
+    }
+
+//    private boolean checkWinRule() {
+//        // Gana el juego si el todos los discos estan en la Torre 3
+//        return torre3.getObjects().contains(disk1) && torre3.getObjects().contains(disk2) && torre3.getObjects().contains(disk3);
+//    }
 }

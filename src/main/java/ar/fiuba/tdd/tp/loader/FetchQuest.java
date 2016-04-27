@@ -27,11 +27,6 @@ public class FetchQuest extends Game {
         // Gana el juego si el Character tiene el stick
         return character.getObjects().contains(stick);
     }
-
-    private boolean checkLoseRule() {
-        // There's no way you lost this game
-        return false;
-    }
 }
 
 

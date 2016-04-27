@@ -28,10 +28,12 @@ public abstract class Game {
     }
 
     private boolean checkWinRule() {
-        return true;
+        // There's no way you win this game
+        return false;
     }
 
     private boolean checkLoseRule() {
+        // There's no way you lost this game
         return false;
     }
 
@@ -50,5 +52,4 @@ public abstract class Game {
         // }
         return response;
     }
-
 }

@@ -3,7 +3,9 @@ package ar.fiuba.tdd.tp.loader;
 import ar.fiuba.tdd.tp.game.Game;
 import ar.fiuba.tdd.tp.game.GameObject;
 import ar.fiuba.tdd.tp.game.Room;
+import ar.fiuba.tdd.tp.game.object.Box;
 import ar.fiuba.tdd.tp.game.object.Door;
+import ar.fiuba.tdd.tp.game.object.Key;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,14 +17,14 @@ import java.util.Arrays;
  */
 public class AbrirPuerta extends Game {
     private GameObject character;
-    private GameObject key;
+    private Key key;
     private Door door;
     private Room room1;
     private Room room2;
 
     public AbrirPuerta() {
         character = new GameObject("character");
-        key = new GameObject("Key");
+        key = new Key("Key");
         room2 = new Room("Room 2", new ArrayList<>(Arrays.asList()));
         door = new Door("Door", true, true);
         door.addNextRoom(room2);
@@ -34,10 +36,5 @@ public class AbrirPuerta extends Game {
     private boolean checkWinRule() {
         // Gana el juego si el Character esta en el Room 2
         return character.getObjects().contains(key);
-    }
-
-    private boolean checkLoseRule() {
-        // There's no way you lost this game
-        return false;
     }
 }
