@@ -1,9 +1,6 @@
 package ar.fiuba.tdd.tp.engine;
 
-import ar.fiuba.tdd.tp.game.object.Box;
-import ar.fiuba.tdd.tp.game.object.Disk;
-import ar.fiuba.tdd.tp.game.object.Key;
-import ar.fiuba.tdd.tp.game.object.Stick;
+import ar.fiuba.tdd.tp.game.object.*;
 
 public interface Action {
     String getElementName();
@@ -20,7 +17,11 @@ public interface Action {
 
     String execute(Stick stick);
 
+    String execute(Door door);
+
     void setElementName(String word);
+
+
 
 
 /*    String execute(Antipoison antipoison);
@@ -29,7 +30,7 @@ public interface Action {
 
     String execute(Col col);
 
-    String execute(Door door);
+
 
     String execute(Sheep sheep);
 

@@ -2,6 +2,7 @@ package ar.fiuba.tdd.tp.game;
 
 import ar.fiuba.tdd.tp.engine.Action;
 import ar.fiuba.tdd.tp.engine.ActionInterpreter;
+import ar.fiuba.tdd.tp.game.object.Character;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,15 +37,13 @@ public abstract class Game {
         Action action = interpreter.interpret(message);
         // Send action to the current room
         String response = null;
-        if (!this.rooms.isEmpty()) {
-            response = this.rooms.get(0).execute(action);
-        }
+        response = Character.getInstance().getRoom().execute(action);
+
         if (checkWinRule()) {
             response = "You won the game!";
+        } else if (checkLoseRule()) {
+            response = "You lose!";
         }
-        // if (checkLoseRule()) {
-        //     response = "You lose!";
-        // }
         return response;
     }
 }

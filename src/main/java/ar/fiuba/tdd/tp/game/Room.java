@@ -41,10 +41,9 @@ public class Room {
     private String executeOverObjects(Action action) {
         String result = "no action available";
         for (Useable useable : this.objects) {
-            if (action.getElementName().equals(action.getElementName())) {
+            if (useable.getName().equals(action.getElementName())) {
                 result = useable.use(action);
             }
-
         }
         return result;
     }

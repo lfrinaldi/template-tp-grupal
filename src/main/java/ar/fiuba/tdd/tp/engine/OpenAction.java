@@ -27,6 +27,18 @@ public class OpenAction implements Action {
     }
 
     @Override
+    public String execute(Door door) {
+        Character character = Character.getInstance();
+        if (character.hasElement(door.getKey())) {
+            character.removeObject(door.getKey().getName());
+            character.setCurrentRoom(door.getNextRoom());
+            return "You are in " + door.getNextRoom().getName();
+        } else {
+            return "Ey! Where do you go?!" + door.getNextRoom().getName() + "is locked.";
+        }
+    }
+
+    @Override
     public String execute(Box box) {
         box.deliverTo(Character.getInstance().getRoom());
         return "the box is " + OPEN_RESPONSE;

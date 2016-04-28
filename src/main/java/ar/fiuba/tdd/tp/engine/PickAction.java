@@ -54,6 +54,11 @@ public class PickAction implements Action {
     }
 
     @Override
+    public String execute(Door door) {
+        return door.getNoAction();
+    }
+
+    @Override
     public String execute(Box box) {
 
         return box.getNoAction();

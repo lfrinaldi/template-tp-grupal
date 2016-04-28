@@ -15,27 +15,31 @@ import java.util.Arrays;
  * Gana al atravesar la puerta y pasar a la siguiente habitación.
  */
 public class AbrirPuerta extends Game {
-/*    private Character character;
+    private Character character;
     private Key key;
     private Door door;
     private Room room1;
-    private Room room2;*/
+    private Room room2;
 
     public AbrirPuerta() {
-/*        character = Character.getInstance();
+        character = Character.getInstance();
         key = new Key();
-        room2 = new Room("Room 2", new ArrayList<>(Arrays.asList()));
+        key.setName("key");
+        room2 = new Room("Room2", new ArrayList<>());
         door = new Door();
+        door.setName("door");
+        door.setKey(key);
         door.addNextRoom(room2);
-        room1 = new Room("Room 1", new ArrayList<>(Arrays.asList(key, door)));
-        addRoom(room1);
-        addRoom(room2);*/
+        room1 = new Room("Room1", new ArrayList<>(Arrays.asList(key, door)));
+        character.setCurrentRoom(room1);
+        this.addRoom(room1);
+        this.addRoom(room2);
     }
 
     @Override
     protected boolean checkWinRule() {
-        // Gana el juego si el Character tiene el stick
-        return false;
+        // Gana el juego si el Character entra al room 2
+        return character.getRoom().getName().equals("Room2");
     }
 
     @Override
