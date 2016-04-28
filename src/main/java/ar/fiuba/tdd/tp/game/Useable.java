@@ -3,13 +3,11 @@ package ar.fiuba.tdd.tp.game;
 import ar.fiuba.tdd.tp.engine.Action;
 
 /**
- * Created by Adrián on 4/23/2016.
+ * Created by leandro on 27/04/16.
  */
 public interface Useable {
+    String use(Action action);
 
-    public void usar();
+    public String getName();
 
-    public Useable interactuar(Useable useable);
-
-    public String getDescription();
 }

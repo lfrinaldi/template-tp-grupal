@@ -1,21 +1,46 @@
 package ar.fiuba.tdd.tp.engine;
 
-import java.util.ArrayList;
+import ar.fiuba.tdd.tp.game.object.*;
 
-public abstract class Action {
-    private String name;
-    private ArrayList<String> objects;
+public interface Action {
+    String getElementName();
 
-    public Action(String name, ArrayList<String> objects) {
-        this.name = name;
-        this.objects = objects;
-    }
+    String execute(Key key);
 
-    public String getName() {
-        return name;
-    }
+    String execute(Box box);
 
-    public String getPrimaryObject() {
-        return this.objects.get(0);
-    }
+    String execute(Disk disk);
+
+    String execute(Stick stick);
+
+    String execute(Door door);
+
+    void setElementName(String word);
+
+
+
+
+/*    String execute(Antipoison antipoison);
+
+    String execute(Chest chest);
+
+    String execute(Col col);
+
+
+
+    String execute(Sheep sheep);
+
+    String execute(Stack stack);
+
+    String execute(Thief thief);
+
+    String execute(Treasure treasure);
+
+    String execute(Cupboard cupboard);
+
+    String execute(Wolf wolf);
+
+    String execute(Poison poison);*/
+
+
 }

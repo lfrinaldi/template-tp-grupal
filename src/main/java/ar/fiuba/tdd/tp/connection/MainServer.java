@@ -1,5 +1,6 @@
 package ar.fiuba.tdd.tp.connection;
 
+import ar.fiuba.tdd.tp.game.Game;
 import ar.fiuba.tdd.tp.game.Playable;
 
 import java.io.IOException;
@@ -8,7 +9,7 @@ import java.net.Socket;
 
 public class MainServer extends AbstractServer {
 
-    public MainServer(Socket socket, Playable game) throws IOException {
+    public MainServer(Socket socket, Game game) throws IOException {
         super(socket, game);
     }
 

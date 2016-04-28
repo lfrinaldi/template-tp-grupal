@@ -1,56 +1,53 @@
 package ar.fiuba.tdd.tp.engine;
 
-import ar.fiuba.tdd.tp.game.GameObject;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
 public class ActionInterpreter {
     private ArrayList<String> validActions;
     private ArrayList<String> validObjects;
+    private static Map<String, Function<String, Action>> actionMap = new HashMap<>();
+
+    static {
+        actionMap.put("open", value -> new OpenAction());
+        actionMap.put("pick", value -> new PickAction());
+        //TODO: WHAAAAT
+        actionMap.put("look around", value -> new InvalidAction());
+    }
 
     public ActionInterpreter() {
-        this.validActions = new ArrayList<>(Arrays.asList("Usar", "Mirar"));
-        this.validObjects = new ArrayList<>(Arrays.asList("Llave", "Puerta"));
+        this.validActions = new ArrayList<>(Arrays.asList("pick", "open", "look around", "move", "leave"));
+        this.validObjects = new ArrayList<>(Arrays.asList("key", "stick", "sheep", "door", "box", "cupboard", "col", "wolf", "treasure"));
     }
 
     public Action interpret(String string) {
-        String[] words = string.split(" ");
-        if (stringsAreValid(words)) {
-            return createNewAction(words);
-        }
-        return null;
-    }
-
-    private Action createNewAction(String[] words) {
-        ArrayList<String> objects = new ArrayList<>();
-        objects.addAll(Arrays.asList(words).subList(1, words.length));
-        if (isRoomAction(words[0])) {
-            return new RoomAction(words[0], objects);
-        } else {
-            return new ObjectAction(words[0], objects);
-        }
-    }
-
-    private boolean isRoomAction(String word) {
-        //TODO: Clean this mess
-        return word.equals("Lookaround");
-    }
-
-    private boolean stringsAreValid(String[] words) {
-        return actionIsValid(words) && objectsAreValid(words);
-    }
-
-    private boolean actionIsValid(String[] words) {
-        return this.validActions.contains(words[0]);
-    }
-
-    private boolean objectsAreValid(String[] words) {
-        for (int i = 1 ; i < words.length ; ++i) {
-            if (!this.validObjects.contains(words[i])) {
-                return false;
+        Action action = new InvalidAction();
+        for (String actionName: this.validActions) {
+            if (string.matches("^" + actionName + ".*")) {
+                action = createNewAction(string, actionName);
             }
         }
-        return true;
+        return action;
     }
+
+    private Action createNewAction(String string, String action) {
+        String object = "";
+        if (action.length() < string.length()) {
+            object = string.substring(action.length() + 1);
+        }
+        if (this.validObjects.contains(object) || (action.equals("look around") && action.length() == string.length())) {
+            return mapAction(action, object);
+        }
+        return new InvalidAction();
+    }
+
+    private Action mapAction(String actionName, String objectName) {
+        Action action = actionMap.get(actionName).apply(actionName);
+        action.setElementName(objectName);
+        return action;
+    }
+
 }

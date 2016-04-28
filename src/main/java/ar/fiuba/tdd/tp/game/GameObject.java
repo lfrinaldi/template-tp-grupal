@@ -1,46 +1,27 @@
 package ar.fiuba.tdd.tp.game;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Created by Adrian on 4/23/2016.
+ * Created by Adrián on 4/27/2016.
  */
-public class GameObject implements Useable {
+public abstract class GameObject implements Useable {
+    protected String name;
 
-    private String description;
-    private List<Useable> useables;
 
-    public GameObject(String description) {
-        this.description = description;
+/*
+    public GameObject(String name) {
+        this.name = name;
+    }
+*/
+
+    public boolean is(String name) {
+        return this.name.equals(name);
     }
 
-    public GameObject(String description, List<Useable> useables) {
-        this.description = description;
-        this.useables = new ArrayList<Useable>(useables);
+    public String getName() {
+        return this.name;
     }
 
-    public void addUseable(Useable useable) {
-        this.useables.add(useable);
-    }
-
-    public List<Useable> getUseable() {
-        return this.useables;
-    }
-
-    @Override
-    public String getDescription() {
-        return this.description;
-    }
-
-    @Override
-    public void usar() {
-        System.out.print("Usando " + description);
-    }
-
-    @Override
-    public Useable interactuar(Useable useable) {
-        System.out.print("Interactuando " + this.description + "con " + useable.getDescription());
-        return null;
+    public void setName(String name) {
+        this.name = name;
     }
 }

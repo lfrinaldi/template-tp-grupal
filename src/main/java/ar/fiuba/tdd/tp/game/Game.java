@@ -9,45 +9,42 @@ import java.util.List;
 /**
  * Created by Adrian on 4/23/2016.
  */
-public class Game extends BaseGame {
+public abstract class Game {
 
-    private List<Playable> playables;
-    private ActionInterpreter interpreter;
+    private List<Room> rooms;
+    protected ActionInterpreter interpreter;
 
-    public Game(String description) {
-        super.setDescription(description);
+    public Game() {
         interpreter = new ActionInterpreter();
+        rooms = new ArrayList<>();
+        Character.getInstance().clearObjects();
     }
 
-    public Game(String description, List<Playable> playables) {
-        super.setDescription(description);
-        this.playables = new ArrayList<>(playables);
+    public Game(List<Room> rooms) {
+        this.rooms = rooms;
         interpreter = new ActionInterpreter();
+        Character.getInstance().clearObjects();
     }
 
-    public void addPlayable(Playable playable) {
-        this.playables.add(playable);
+    public void addRoom(Room room) {
+        this.rooms.add(room);
     }
 
-    public List<Playable> getPlayables() {
-        return this.playables;
-    }
+    protected abstract boolean checkWinRule();
 
-    @Override
-    public String play(Action action) {
-        System.out.print("Jugando " + super.getDescription());
-        return "Jugando";
-    }
+    protected abstract boolean checkLoseRule();
 
     public String receiveMessage(String message) {
-        //System.out.print("Mensaje: " + message);
         Action action = interpreter.interpret(message);
-        // Send action to the current level
-        String response = null;
-        if (!this.playables.isEmpty()) {
-            response = this.playables.get(0).play(action);
+        // Send action to the current room
+        String response;
+        response = Character.getInstance().getRoom().execute(action);
+
+        if (checkWinRule()) {
+            response = "You won the game!";
+        } else if (checkLoseRule()) {
+            response = "You lose!";
         }
         return response;
     }
-
 }
