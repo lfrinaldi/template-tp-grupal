@@ -39,7 +39,7 @@ public class AbrirPuertaFactory {
         key.setName("key");
         box.addObject(key);
         Room roomUno = cretateRoomAbrirStandard();
-        roomUno.addObjects(Arrays.asList(box));
+        roomUno.addObjects(new ArrayList<>(Arrays.asList(box)));
         return roomUno;
     }
 }

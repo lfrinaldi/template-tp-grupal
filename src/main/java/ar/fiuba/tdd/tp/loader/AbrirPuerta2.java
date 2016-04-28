@@ -25,7 +25,6 @@ public class AbrirPuerta2 extends Game {
         door.addNextRoom(vault);
         bank = new Room("Bank", new ArrayList<>(Arrays.asList(box, door)));*/
         Character.getInstance().setCurrentRoom(AbrirPuertaFactory.createRoomsAbrirPuertaDos());
-
     }
 
     @Override

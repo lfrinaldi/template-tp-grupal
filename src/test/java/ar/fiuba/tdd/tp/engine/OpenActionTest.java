@@ -41,6 +41,23 @@ public class OpenActionTest {
     }
 
     @Test
+    public void openBoxTest() {
+        Box box = new Box();
+        box.setName("box");
+        Key key = new Key();
+        key.setName("key");
+        box.addObject(key);
+        Room room = new Room("Room", new ArrayList<>(Arrays.asList(box)));
+        Character character = Character.getInstance();
+        character.setCurrentRoom(room);
+
+        OpenAction open = new OpenAction();
+        open.setElementName("box");
+        open.execute(box);
+        Assert.assertTrue(character.getRoom().hasElement(key));
+    }
+
+    @Test
     public void openDoorTest() {
         Key key = new Key();
         key.setName("key");

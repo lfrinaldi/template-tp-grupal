@@ -3,6 +3,7 @@ package ar.fiuba.tdd.tp.game;
 import ar.fiuba.tdd.tp.engine.Action;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Room {
@@ -39,11 +40,20 @@ public class Room {
 
     private String executeOverObjects(Action action) {
         String result = "no action available";
-        for (Useable useable : this.objects) {
+
+        Iterator<Useable> iterator = this.objects.iterator();
+        while (iterator.hasNext()) {
+            Useable useable = iterator.next();
             if (useable.getName().equals(action.getElementName())) {
                 result = useable.use(action);
             }
         }
+
+        //for (Useable useable : this.objects) {
+        //    if (useable.getName().equals(action.getElementName())) {
+        //        result = useable.use(action);
+        //    }
+        //}
         return result;
     }
 
