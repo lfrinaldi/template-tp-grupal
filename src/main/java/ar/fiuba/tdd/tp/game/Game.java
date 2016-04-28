@@ -36,7 +36,7 @@ public abstract class Game {
     public String receiveMessage(String message) {
         Action action = interpreter.interpret(message);
         // Send action to the current room
-        String response = null;
+        String response;
         response = Character.getInstance().getRoom().execute(action);
 
         if (checkWinRule()) {
