@@ -24,7 +24,7 @@ public class FetchQuest extends Game {
         stick = new Stick();
         stick.setName("stick");
         room = new Room("room", new ArrayList<>(Arrays.asList(stick)));
-        addRoom(room);
+        character.setCurrentRoom(room);
     }
 
     @Override

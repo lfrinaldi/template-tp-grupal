@@ -14,7 +14,7 @@ public class EngineServer extends AbstractServer {
     }
 
     protected boolean processOutput(PrintWriter out, String input) {
-        out.println(input);
+        //out.println(input);
         return true;
     }
 }
