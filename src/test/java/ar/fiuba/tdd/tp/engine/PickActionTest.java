@@ -32,7 +32,7 @@ public class PickActionTest {
 
         Stick stick = new Stick();
         stick.setName("stick");
-        Assert.assertTrue(pickAction.getCharacter().hasElement(stick));
+        Assert.assertFalse(pickAction.getCharacter().hasElement(stick));
 
         Box box = new Box();
         box.addObject(key);
