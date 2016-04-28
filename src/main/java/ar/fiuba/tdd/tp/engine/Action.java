@@ -5,10 +5,6 @@ import ar.fiuba.tdd.tp.game.object.*;
 public interface Action {
     String getElementName();
 
-/*
-    String execute(Useable useable);
-*/
-
     String execute(Key key);
 
     String execute(Box box);

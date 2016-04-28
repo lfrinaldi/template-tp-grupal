@@ -14,49 +14,40 @@ public class ActionInterpreter {
     static {
         actionMap.put("open", value -> new OpenAction());
         actionMap.put("pick", value -> new PickAction());
+        //TODO: WHAAAAT
+        actionMap.put("look around", value -> new InvalidAction());
     }
 
     public ActionInterpreter() {
-        this.validActions = new ArrayList<>(Arrays.asList("pick", "open", "lookArround", "move", "leave"));
+        this.validActions = new ArrayList<>(Arrays.asList("pick", "open", "look around", "move", "leave"));
         this.validObjects = new ArrayList<>(Arrays.asList("key", "stick", "sheep", "door", "box", "cupboard", "col", "wolf", "treasure"));
     }
 
     public Action interpret(String string) {
-        String[] words = string.split(" ");
-        if (stringsAreValid(words)) {
-            return createNewAction(words);
+        Action action = new InvalidAction();
+        for (String actionName: this.validActions) {
+            if (string.matches("^" + actionName + ".*")) {
+                action = createNewAction(string, actionName);
+            }
         }
-        return null;
-    }
-
-    private Action createNewAction(String[] words) {
-
-        /*ArrayList<String> objects = new ArrayList<>();
-        objects.addAll(Arrays.asList(words).subList(1, words.length));
-        switch (words[0]) {
-            case "pick": return new PickAction(words[0], objects);
-            default: return null;
-        }*/
-        Action action = actionMap.get(words[0]).apply(words[0]);
-        action.setElementName(words[1]);
-
         return action;
     }
 
-    private boolean stringsAreValid(String[] words) {
-        return actionIsValid(words) && objectsAreValid(words);
-    }
-
-    private boolean actionIsValid(String[] words) {
-        return this.validActions.contains(words[0]);
-    }
-
-    private boolean objectsAreValid(String[] words) {
-        for (int i = 1; i < words.length; ++i) {
-            if (!this.validObjects.contains(words[i])) {
-                return false;
-            }
+    private Action createNewAction(String string, String action) {
+        String object = "";
+        if (action.length() < string.length()) {
+            object = string.substring(action.length() + 1);
         }
-        return true;
+        if (this.validObjects.contains(object) || (action.equals("look around") && action.length() == string.length())) {
+            return mapAction(action, object);
+        }
+        return new InvalidAction();
     }
+
+    private Action mapAction(String actionName, String objectName) {
+        Action action = actionMap.get(actionName).apply(actionName);
+        action.setElementName(objectName);
+        return action;
+    }
+
 }
