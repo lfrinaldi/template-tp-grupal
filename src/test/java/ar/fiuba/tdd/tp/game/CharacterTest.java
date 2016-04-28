@@ -1,6 +1,5 @@
 package ar.fiuba.tdd.tp.game;
 
-import ar.fiuba.tdd.tp.game.object.Character;
 import ar.fiuba.tdd.tp.game.object.Stick;
 import org.junit.Assert;
 import org.junit.Test;

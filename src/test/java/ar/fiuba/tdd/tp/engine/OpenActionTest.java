@@ -3,7 +3,7 @@ package ar.fiuba.tdd.tp.engine;
 import ar.fiuba.tdd.tp.game.Room;
 import ar.fiuba.tdd.tp.game.Useable;
 import ar.fiuba.tdd.tp.game.object.Box;
-import ar.fiuba.tdd.tp.game.object.Character;
+import ar.fiuba.tdd.tp.game.Character;
 import ar.fiuba.tdd.tp.game.object.Door;
 import ar.fiuba.tdd.tp.game.object.Key;
 import org.junit.Assert;

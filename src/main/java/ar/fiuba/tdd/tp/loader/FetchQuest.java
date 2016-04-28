@@ -1,9 +1,8 @@
 package ar.fiuba.tdd.tp.loader;
 
+import ar.fiuba.tdd.tp.game.Character;
 import ar.fiuba.tdd.tp.game.Game;
 import ar.fiuba.tdd.tp.game.Room;
-import ar.fiuba.tdd.tp.game.Useable;
-import ar.fiuba.tdd.tp.game.object.Character;
 import ar.fiuba.tdd.tp.game.object.Stick;
 
 import java.util.ArrayList;

@@ -1,7 +1,4 @@
-package ar.fiuba.tdd.tp.game.object;
-
-import ar.fiuba.tdd.tp.game.Room;
-import ar.fiuba.tdd.tp.game.Useable;
+package ar.fiuba.tdd.tp.game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +38,14 @@ public class Character {
         for (Useable element : this.useables) {
             if (element.getName().equals(useable.getName())) {
                 hasElement = true;
+                break;
             }
         }
         return hasElement;
 
     }
+
+
 
     public boolean removeObject(String objectName) {
         return this.useables.removeIf(element -> element.getName().equals(objectName));
@@ -54,5 +54,9 @@ public class Character {
 
     public Room getRoom() {
         return currentRoom;
+    }
+
+    public void clearObjects() {
+        this.useables.clear();
     }
 }

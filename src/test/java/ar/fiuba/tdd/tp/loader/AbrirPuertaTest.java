@@ -18,10 +18,8 @@ public class AbrirPuertaTest {
 
     @Test
     public void abrirPuertaTest() {
-
         abrirPuerta.receiveMessage("pick key");
         Assert.assertTrue(abrirPuerta.receiveMessage("open door").equals("You won the game!"));
-
     }
 
 

@@ -1,7 +1,7 @@
 package ar.fiuba.tdd.tp.engine;
 
+import ar.fiuba.tdd.tp.game.Character;
 import ar.fiuba.tdd.tp.game.object.*;
-import ar.fiuba.tdd.tp.game.object.Character;
 
 public class PickAction implements Action {
 

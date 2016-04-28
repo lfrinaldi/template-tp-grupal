@@ -15,20 +15,16 @@ public class FetchQuestTest {
         fetchQuest = new FetchQuest();
     }
 
-
-    //TODO: No se por que no anda
-    /*@Test
+    @Test
     public void fetchQuestTest() {
-
         Assert.assertTrue(fetchQuest.receiveMessage("pick stick").equals("You won the game!"));
+    }
 
-    }*/
-
-/*    @Test
+    @Test
     public void multipleFetchQuestsTest() {
         FetchQuest f1 = new FetchQuest();
         FetchQuest f2 = new FetchQuest();
         f1.receiveMessage("pick stick");
-        Assert.assertFalse(f2.receiveMessage("open door").equals("You won the game!"));
-    }*/
+        Assert.assertTrue(f2.receiveMessage("open door").equals("You won the game!"));
+    }
 }

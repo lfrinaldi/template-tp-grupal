@@ -14,15 +14,6 @@ public abstract class ComplexObject extends GameObject {
     public void setObjects(List<Useable> objects) {
         this.objects = objects;
     }
-/*    public ComplexObject(String name) {
-        super(name);
-        this.objects = new ArrayList<>();
-    }
-
-    public ComplexObject(String name, List<Useable> objects) {
-        super(name);
-        this.objects = new ArrayList<>(objects);
-    }*/
 
     public void addObject(Useable object) {
         this.objects.add(object);

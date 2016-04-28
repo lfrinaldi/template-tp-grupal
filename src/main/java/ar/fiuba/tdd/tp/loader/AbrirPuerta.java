@@ -1,7 +1,7 @@
 package ar.fiuba.tdd.tp.loader;
 
+import ar.fiuba.tdd.tp.game.Character;
 import ar.fiuba.tdd.tp.game.Game;
-import ar.fiuba.tdd.tp.game.object.Character;
 
 /**
  * Abrir Puerta
@@ -28,6 +28,7 @@ public class AbrirPuerta extends Game {
         character.setCurrentRoom(room1);
         this.addRoom(room1);
         this.addRoom(room2);*/
+        Character.getInstance().clearObjects();
         Character.getInstance().setCurrentRoom(AbrirPuertaFactory.createRoomsAbrirPuertaUno());
 
     }

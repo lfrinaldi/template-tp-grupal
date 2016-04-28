@@ -2,7 +2,6 @@ package ar.fiuba.tdd.tp.game;
 
 import ar.fiuba.tdd.tp.engine.Action;
 import ar.fiuba.tdd.tp.engine.ActionInterpreter;
-import ar.fiuba.tdd.tp.game.object.Character;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +17,13 @@ public abstract class Game {
     public Game() {
         interpreter = new ActionInterpreter();
         rooms = new ArrayList<>();
+        Character.getInstance().clearObjects();
     }
 
     public Game(List<Room> rooms) {
         this.rooms = rooms;
         interpreter = new ActionInterpreter();
+        Character.getInstance().clearObjects();
     }
 
     public void addRoom(Room room) {

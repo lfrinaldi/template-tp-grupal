@@ -1,6 +1,7 @@
 package ar.fiuba.tdd.tp.engine;
 
 import ar.fiuba.tdd.tp.game.object.Box;
+import ar.fiuba.tdd.tp.game.Character;
 import ar.fiuba.tdd.tp.game.object.Key;
 import ar.fiuba.tdd.tp.game.object.Stick;
 import org.junit.Assert;
@@ -18,6 +19,7 @@ public class PickActionTest {
     @Before
     public void setup() {
         pickAction = new PickAction();
+        Character.getInstance().clearObjects();
     }
 
     @Test
@@ -28,17 +30,18 @@ public class PickActionTest {
         key.setName(elementName);
 
         Assert.assertTrue(pickAction.execute(key).equals("PICK key"));
-        Assert.assertTrue(pickAction.getCharacter().hasElement(key));
+        Assert.assertTrue(Character.getInstance().hasElement(key));
 
         Stick stick = new Stick();
         stick.setName("stick");
-        Assert.assertFalse(pickAction.getCharacter().hasElement(stick));
+        Assert.assertFalse(Character.getInstance().hasElement(stick));
 
         Box box = new Box();
         box.addObject(key);
         box.addObject(stick);
-        Assert.assertFalse(pickAction.getCharacter().hasElement(box));
+        Assert.assertFalse(Character.getInstance().hasElement(box));
     }
+
 
 
     @Test
