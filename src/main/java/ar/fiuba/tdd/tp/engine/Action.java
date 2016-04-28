@@ -20,6 +20,9 @@ public interface Action {
 
     String execute(Stick stick);
 
+    void setElementName(String word);
+
+
 /*    String execute(Antipoison antipoison);
 
     String execute(Chest chest);

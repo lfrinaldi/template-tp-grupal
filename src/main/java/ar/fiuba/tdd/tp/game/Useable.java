@@ -9,4 +9,5 @@ public interface Useable {
     String use(Action action);
 
     public String getName();
+
 }

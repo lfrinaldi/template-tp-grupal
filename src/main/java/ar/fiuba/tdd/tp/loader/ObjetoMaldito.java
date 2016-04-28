@@ -43,4 +43,15 @@ public class ObjetoMaldito extends Game {
 //        //return door2.isOpen();
 //        return !character.getObjects().contains(evil);
 //    }
+
+    @Override
+    protected boolean checkWinRule() {
+        // Gana el juego si el Character tiene el stick
+        return false;
+    }
+
+    @Override
+    protected boolean checkLoseRule() {
+        return false;
+    }
 }

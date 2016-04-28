@@ -54,5 +54,11 @@ public class PickActionTest {
 
     }
 
+ /*   @Test
+    public void pickStickTest{
+       *//**//*
+
+    }*/
+
 
 }

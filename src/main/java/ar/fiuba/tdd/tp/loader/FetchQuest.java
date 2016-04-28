@@ -16,19 +16,30 @@ import java.util.Arrays;
  */
 public class FetchQuest extends Game {
     private Character character;
-    private Useable stick;
+    private Stick stick;
     private Room room;
 
     public FetchQuest() {
         character = Character.getInstance();
         stick = new Stick();
+        stick.setName("stick");
         room = new Room("room", new ArrayList<>(Arrays.asList(stick)));
         addRoom(room);
     }
 
-    private boolean checkWinRule() {
+    @Override
+    protected boolean checkWinRule() {
         // Gana el juego si el Character tiene el stick
         return character.hasElement(stick);
+    }
+
+    @Override
+    protected boolean checkLoseRule() {
+        return false;
+    }
+
+    public String execute(String instruction) {
+        return this.room.execute(this.interpreter.interpret(instruction));
     }
 }
 

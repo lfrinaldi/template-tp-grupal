@@ -29,7 +29,24 @@ public class Room {
     }
 
     public String execute(Action action) {
-        return null;
+        String response;
+        if (action.getElementName().equals(this.getName())) {
+            response = "todo";
+        } else {
+            response = this.executeOverObjects(action);
+        }
+        return response;
+    }
+
+    private String executeOverObjects(Action action) {
+        String result = "no action available";
+        for (Useable useable : this.objects) {
+            if (action.getElementName().equals(action.getElementName())) {
+                result = useable.use(action);
+            }
+
+        }
+        return result;
     }
 
     public void addObjects(List<Useable> objects) {

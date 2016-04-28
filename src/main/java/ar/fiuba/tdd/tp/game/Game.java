@@ -12,10 +12,11 @@ import java.util.List;
 public abstract class Game {
 
     private List<Room> rooms;
-    private ActionInterpreter interpreter;
+    protected ActionInterpreter interpreter;
 
     public Game() {
         interpreter = new ActionInterpreter();
+        rooms = new ArrayList<>();
     }
 
     public Game(List<Room> rooms) {
@@ -27,15 +28,9 @@ public abstract class Game {
         this.rooms.add(room);
     }
 
-    private boolean checkWinRule() {
-        // There's no way you win this game
-        return false;
-    }
+    protected abstract boolean checkWinRule();
 
-    private boolean checkLoseRule() {
-        // There's no way you lost this game
-        return false;
-    }
+    protected abstract boolean checkLoseRule();
 
     public String receiveMessage(String message) {
         Action action = interpreter.interpret(message);

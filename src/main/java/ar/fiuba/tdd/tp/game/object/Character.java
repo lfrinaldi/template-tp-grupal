@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Character {
 
-    private static Character character = null;
+    private static Character character = new Character();
 
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
@@ -45,6 +45,10 @@ public class Character {
         }
         return hasElement;
 
+    }
+
+    public boolean removeObject(String objectName) {
+        return this.useables.removeIf(element -> element.getName().equals(objectName));
     }
 
 

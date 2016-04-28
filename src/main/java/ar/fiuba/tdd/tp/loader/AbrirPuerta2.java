@@ -27,8 +27,13 @@ public class AbrirPuerta2 extends Game {
 //        addRoom(vault);
     }
 
-//    private boolean checkWinRule() {
-//        // Gana el juego si el Character esta en el Room 2
-//        return character.getObjects().contains(key);
-//    }
+    @Override
+    protected boolean checkWinRule() {
+        return false;
+    }
+
+    @Override
+    protected boolean checkLoseRule() {
+        return false;
+    }
 }

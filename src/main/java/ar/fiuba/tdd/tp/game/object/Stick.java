@@ -17,6 +17,11 @@ public class Stick extends SimpleObject {
         return action.execute(this);
     }
 
+/*    @Override
+    public Useable getConcreteInstance() {
+        return this;
+    }*/
+
     public void deliverTo(Character character) {
         character.addElement(this);
     }

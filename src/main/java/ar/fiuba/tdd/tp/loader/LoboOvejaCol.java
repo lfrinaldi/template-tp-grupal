@@ -41,4 +41,15 @@ public class LoboOvejaCol extends Game {
 //        // There's no way you lost this game
 //        return false;
 //    }
+
+    @Override
+    protected boolean checkWinRule() {
+        // Gana el juego si el Character tiene el stick
+        return false;
+    }
+
+    @Override
+    protected boolean checkLoseRule() {
+        return false;
+    }
 }
