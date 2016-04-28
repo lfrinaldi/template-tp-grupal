@@ -19,7 +19,6 @@ public class Room {
         this.objects = useables;
     }
 
-
     public List<Useable> getObjects() {
         return this.objects;
     }
@@ -49,7 +48,6 @@ public class Room {
     }
 
     public void addObjects(List<Useable> objects) {
-
         for (Useable useable : objects) {
             this.objects.add(useable);
         }
@@ -63,6 +61,5 @@ public class Room {
             }
         }
         return hasElement;
-
     }
 }

@@ -42,7 +42,6 @@ public class OpenActionTest {
 
     @Test
     public void openDoorTest() {
-        Character character = Character.getInstance();
         Key key = new Key();
         key.setName("key");
         Room room2 = new Room("Room2", new ArrayList<>());
@@ -51,6 +50,7 @@ public class OpenActionTest {
         door.setName("door");
         door.addNextRoom(room2);
         Room room1 = new Room("Room1", new ArrayList<>(Arrays.asList(key, door)));
+        Character character = Character.getInstance();
         character.setCurrentRoom(room1);
         // Simula un pick key
         character.addElement(key);
