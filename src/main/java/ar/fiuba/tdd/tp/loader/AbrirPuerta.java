@@ -1,6 +1,5 @@
 package ar.fiuba.tdd.tp.loader;
 
-import ar.fiuba.tdd.tp.game.Character;
 import ar.fiuba.tdd.tp.game.Game;
 
 /**
@@ -9,14 +8,14 @@ import ar.fiuba.tdd.tp.game.Game;
  * Gana al atravesar la puerta y pasar a la siguiente habitación.
  */
 public class AbrirPuerta extends Game {
-/*    private Character character;
+/*    private Player character;
     private Key key;
     private Door door;
     private Room room1;
     private Room room2;*/
 
     public AbrirPuerta() {
-        /*character = Character.getInstance();
+        /*character = Player.getInstance();
         key = new Key();
         key.setName("key");
         room2 = new Room("Room2", new ArrayList<>());
@@ -28,19 +27,13 @@ public class AbrirPuerta extends Game {
         character.setCurrentRoom(room1);
         this.addRoom(room1);
         this.addRoom(room2);*/
-        Character.getInstance().clearObjects();
-        Character.getInstance().setCurrentRoom(AbrirPuertaFactory.createRoomsAbrirPuertaUno());
-
+        /*Player.getInstance().clearObjects();
+        Player.getInstance().setCurrentRoom(AbrirPuertaFactory.createRoomsAbrirPuertaUno());
+*/
     }
 
     @Override
-    protected boolean checkWinRule() {
-        // Gana el juego si el Character entra al room 2
-        return Character.getInstance().getRoom().getName().equals("Room2");
-    }
-
-    @Override
-    protected boolean checkLoseRule() {
+    public boolean checkEndGame() {
         return false;
     }
 }

@@ -16,7 +16,7 @@ public class GameLoader implements Loader {
         // Don't care about the name, just create fetch quest
         System.out.print(gameName);
         // TODO: invoke method by gameName
-        return fetchQuest();
+        return null;//fetchQuest();
     }
 
     private Game fetchQuest() {

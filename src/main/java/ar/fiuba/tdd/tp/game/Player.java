@@ -6,27 +6,12 @@ import java.util.List;
 /**
  * Created by leandro on 27/04/16.
  */
-public class Character {
-
-    private static Character character = new Character();
-
-    public void setCurrentRoom(Room currentRoom) {
-        this.currentRoom = currentRoom;
-    }
-
-    private Room currentRoom;
+public class Player {
 
     private List<Useable> useables;
 
-    private Character() {
-        this.useables = new ArrayList<Useable>();
-    }
-
-    public static Character getInstance() {
-        if (character == null) {
-            character = new Character();
-        }
-        return character;
+    public Player() {
+        this.useables = new ArrayList<>();
     }
 
     public void addElement(Useable useable) {
@@ -42,21 +27,9 @@ public class Character {
             }
         }
         return hasElement;
-
     }
-
-
 
     public boolean removeObject(String objectName) {
         return this.useables.removeIf(element -> element.getName().equals(objectName));
-    }
-
-
-    public Room getRoom() {
-        return currentRoom;
-    }
-
-    public void clearObjects() {
-        this.useables.clear();
     }
 }

@@ -39,14 +39,9 @@ public class TorresHanoi extends Game {
 //        return torre3.getObjects().contains(disk1) && torre3.getObjects().contains(disk2) && torre3.getObjects().contains(disk3);
 //    }
 
-    @Override
-    protected boolean checkWinRule() {
-        // Gana el juego si el Character tiene el stick
-        return false;
-    }
 
     @Override
-    protected boolean checkLoseRule() {
+    public boolean checkEndGame() {
         return false;
     }
 }

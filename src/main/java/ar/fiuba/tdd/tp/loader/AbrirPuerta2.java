@@ -1,6 +1,5 @@
 package ar.fiuba.tdd.tp.loader;
 
-import ar.fiuba.tdd.tp.game.Character;
 import ar.fiuba.tdd.tp.game.Game;
 
 /**
@@ -12,7 +11,7 @@ public class AbrirPuerta2 extends Game {
 
 
     public AbrirPuerta2() {
-        /*character = Character.getInstance();
+        /*character = Player.getInstance();
         key = new Key();
         key.setName("Key");
         box = new Box();
@@ -24,16 +23,11 @@ public class AbrirPuerta2 extends Game {
         door.setKey(key);
         door.addNextRoom(vault);
         bank = new Room("Bank", new ArrayList<>(Arrays.asList(box, door)));*/
-        Character.getInstance().setCurrentRoom(AbrirPuertaFactory.createRoomsAbrirPuertaDos());
+        //Player.getInstance().setCurrentRoom(AbrirPuertaFactory.createRoomsAbrirPuertaDos());
     }
 
     @Override
-    protected boolean checkWinRule() {
-        return false;
-    }
-
-    @Override
-    protected boolean checkLoseRule() {
+    public boolean checkEndGame() {
         return false;
     }
 }
