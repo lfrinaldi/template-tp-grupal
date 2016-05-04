@@ -33,6 +33,11 @@ public class AbrirPuerta extends Game {
     }
 
     @Override
+    public String receiveMessage(String input) {
+        return null;
+    }
+
+    @Override
     public boolean checkEndGame() {
         return false;
     }

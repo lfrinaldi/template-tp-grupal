@@ -44,6 +44,10 @@ public class ObjetoMaldito extends Game {
 //        return !character.getObjects().contains(evil);
 //    }
 
+    @Override
+    public String receiveMessage(String input) {
+        return null;
+    }
 
     @Override
     public boolean checkEndGame() {

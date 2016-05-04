@@ -47,6 +47,10 @@ public class BusquedaTesoro extends Game {
 //        return character.getObjects().contains(treasure);
 //    }
 
+    @Override
+    public String receiveMessage(String input) {
+        return null;
+    }
 
     @Override
     public boolean checkEndGame() {

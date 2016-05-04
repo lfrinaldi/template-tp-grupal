@@ -1,35 +1,21 @@
 package ar.fiuba.tdd.tp.game;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Created by leandro on 27/04/16.
+ * Created by leandro on 03/05/16.
  */
-public class Player {
+public class Player extends ComplexObject {
 
-    private List<Useable> useables;
+    private int maxItems;
 
-    public Player() {
-        this.useables = new ArrayList<>();
+    public Player(int maxItems) {
+        this.maxItems = maxItems;
     }
 
-    public void addElement(Useable useable) {
-        this.useables.add(useable);
+    public void setMaxItems(int maxItems) {
+        this.maxItems = maxItems;
     }
 
-    public boolean hasElement(Useable useable) {
-        boolean hasElement = false;
-        for (Useable element : this.useables) {
-            if (element.getName().equals(useable.getName())) {
-                hasElement = true;
-                break;
-            }
-        }
-        return hasElement;
-    }
-
-    public boolean removeObject(String objectName) {
-        return this.useables.removeIf(element -> element.getName().equals(objectName));
+    public boolean canPick() {
+        return getObjects().size() < maxItems;
     }
 }

@@ -6,20 +6,20 @@ import java.util.List;
 /**
  * Created by Adrian on 4/23/2016.
  */
-public abstract class ComplexObject extends GameObject {
+public class ComplexObject extends GameObject {
 
 
-    private List<Useable> objects = new ArrayList<Useable>();
+    private List<GameObject> objects = new ArrayList<>();
 
-    public void setObjects(List<Useable> objects) {
+    public void setObjects(List<GameObject> objects) {
         this.objects = objects;
     }
 
-    public void addObject(Useable object) {
+    public void addObject(GameObject object) {
         this.objects.add(object);
     }
 
-    public List<Useable> getObjects() {
+    public List<GameObject> getObjects() {
         return this.objects;
     }
 
@@ -27,5 +27,26 @@ public abstract class ComplexObject extends GameObject {
         return this.name;
     }
 
+    public boolean hasElement(String objectName) {
+        boolean hasElement = false;
+        for (GameObject element : objects) {
+            if (element.getName().equals(objectName)) {
+                hasElement = true;
+                break;
+            }
+        }
+        return hasElement;
+    }
+
+    public GameObject getObject(String elementToPick) {
+        GameObject object = null;
+        for (GameObject element : objects) {
+            if (element.getName().equals(elementToPick)) {
+                object = element;
+                break;
+            }
+        }
+        return object;
+    }
 
 }

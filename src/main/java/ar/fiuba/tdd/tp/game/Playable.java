@@ -10,5 +10,4 @@ public interface Playable {
     String play(Action action);
 
     void addObject(ComplexObject object);
-
 }

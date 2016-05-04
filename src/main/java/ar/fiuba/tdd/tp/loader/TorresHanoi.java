@@ -34,11 +34,15 @@ public class TorresHanoi extends Game {
 //        addRoom(torre3);
     }
 
-//    private boolean checkWinRule() {
+    //    private boolean checkWinRule() {
 //        // Gana el juego si el todos los discos estan en la Torre 3
-//        return torre3.getObjects().contains(disk1) && torre3.getObjects().contains(disk2) && torre3.getObjects().contains(disk3);
+//        return torre3.getObjects().contains(disk1) && torre3.getObjects().contains(disk2) && torre3.getObjects()
+// .contains(disk3);
 //    }
-
+    @Override
+    public String receiveMessage(String input) {
+        return null;
+    }
 
     @Override
     public boolean checkEndGame() {
