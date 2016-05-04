@@ -14,7 +14,9 @@ public class FetchQuestTest {
 
     @Test
     public void fetchQuestTest() {
+        Assert.assertTrue(fetchQuest.lookAround().equals("room has: A stick."));
         Assert.assertTrue(fetchQuest.pick("stick").equals("You picked stick"));
+        Assert.assertTrue(fetchQuest.lookAround().equals("room has:"));
         Assert.assertTrue(fetchQuest.checkEndGame());
     }
 

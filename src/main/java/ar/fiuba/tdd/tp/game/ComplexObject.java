@@ -49,4 +49,7 @@ public class ComplexObject extends GameObject {
         return object;
     }
 
+    public void deleteObject(GameObject item) {
+        objects.remove(item);
+    }
 }

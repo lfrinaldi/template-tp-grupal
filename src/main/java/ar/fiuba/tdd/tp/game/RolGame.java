@@ -37,7 +37,9 @@ public abstract class RolGame extends Game {
         boolean hasElem = currentRoom.hasElement(elementToPick);
 
         if (hasElem && player.canPick()) {
-            player.addObject(currentRoom.getObject(elementToPick));
+            GameObject item = currentRoom.getObject(elementToPick);
+            player.addObject(item);
+            currentRoom.deleteObject(item);
             response = "You picked " + elementToPick;
         } else if (hasElem) {
             response = "Can't carry anymore items.";
