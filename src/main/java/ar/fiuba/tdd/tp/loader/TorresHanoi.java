@@ -1,6 +1,10 @@
 package ar.fiuba.tdd.tp.loader;
 
+import ar.fiuba.tdd.tp.game.ComplexObject;
 import ar.fiuba.tdd.tp.game.Game;
+import ar.fiuba.tdd.tp.game.GameObject;
+
+import java.util.List;
 
 /**
  * Torres de Hanoi
@@ -13,39 +17,167 @@ import ar.fiuba.tdd.tp.game.Game;
  * + Ningun disco se puede apilar sobre otro más pequeño.
  */
 public class TorresHanoi extends Game {
-//    private ComplexObject character;
-//    private Room torre1;
-//    private Room torre2;
-//    private Room torre3;
-//    private Disk disk1;
-//    private Disk disk2;
-//    private Disk disk3;
+
+    private static final int maxStacks = 3;
+    private static final int maxDisks = 2;
+    private ComplexObject board = new ComplexObject();
 
     public TorresHanoi() {
-//        character = new ComplexObject("character");
-//        disk1 = new Disk("Disco1", 10);
-//        disk2 = new Disk("Disco2", 20);
-//        disk3 = new Disk("Disco3", 30);
-//        torre1 = new Room("Torre1", new ArrayList<>(Arrays.asList(disk1, disk2, disk3)));
-//        torre2 = new Room("Torre2", new ArrayList<>(Arrays.asList()));
-//        torre3 = new Room("Torre3", new ArrayList<>(Arrays.asList()));
-//        addRoom(torre1);
-//        addRoom(torre2);
-//        addRoom(torre3);
+
+        ComplexObject stack;
+
+        for (int index = 1; index <= maxStacks; index++) {
+            stack = new ComplexObject();
+            stack.setName("stack " + Integer.toString(index));
+            board.addObject(stack);
+        }
+
+        stack = (ComplexObject) board.getObject("stack 1");
+
+        for (int index = 1; index <= maxDisks; index++) {
+            GameObject disk = new ComplexObject();
+            disk.setName("disk " + Integer.toString(index));
+            disk.getAttributes().put("size", index);
+            stack.addObject(disk);
+        }
     }
 
-    //    private boolean checkWinRule() {
-//        // Gana el juego si el todos los discos estan en la Torre 3
-//        return torre3.getObjects().contains(disk1) && torre3.getObjects().contains(disk2) && torre3.getObjects()
-// .contains(disk3);
-//    }
+    public String lookAround(String name) {
+
+        try {
+
+            ComplexObject stack = (ComplexObject) board.getObject(name);
+            List<GameObject> objects = stack.getObjects();
+            int objectsSize = objects.size();
+            boolean full = (objectsSize == maxDisks);
+            boolean empty = objects.isEmpty();
+
+            if (full) {
+                return "You can check top.";
+            } else if (empty) {
+                return "You can move top.";
+            } else {
+                return "You can check top/move top.";
+            }
+
+        } catch (Exception e) {
+            return error(e);
+        }
+    }
+
+    public String help(String name) {
+
+        try {
+
+            ComplexObject stack = (ComplexObject) board.getObject(name);
+            List<GameObject> objects = stack.getObjects();
+            boolean objectsEmpty = objects.isEmpty();
+            String message;
+
+            if (objectsEmpty) {
+                message = name + " is empty";
+            } else {
+                ComplexObject topDisk = (ComplexObject) objects.get(objects.size() - 1);
+                message = "Size of top from " + name + " is " + topDisk.getAttributes().get("size") + ".";
+            }
+
+            return message;
+
+        } catch (Exception e) {
+            return error(e);
+        }
+    }
+
+    private boolean invalidMovement(ComplexObject topDiskFrom, ComplexObject stackTo) {
+
+        List<GameObject> objectsTo = stackTo.getObjects();
+        boolean objectsToEmpty = objectsTo.isEmpty();
+
+        if (!objectsToEmpty) {
+
+            ComplexObject topDiskTo = (ComplexObject) objectsTo.get(objectsTo.size() - 1);
+
+            if ((Integer) topDiskTo.getAttributes().get("size") > (Integer) topDiskFrom.getAttributes().get("size")) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public String move(String what, String from, String to) {
+
+        try {
+
+            ComplexObject stackFrom = (ComplexObject) board.getObject(from);
+            List<GameObject> objectsFrom = stackFrom.getObjects();
+            boolean objectsFromEmpty = objectsFrom.isEmpty();
+
+            if (objectsFromEmpty) {
+                return from + " is empty";
+            } else {
+
+                return tryToMove(to, objectsFrom);
+            }
+
+        } catch (Exception e) {
+            return error(e);
+        }
+    }
+
+    private String tryToMove(String to, List<GameObject> objectsFrom) {
+
+        ComplexObject topDiskFrom = (ComplexObject) objectsFrom.get(objectsFrom.size() - 1);
+        ComplexObject stackTo = (ComplexObject) board.getObject(to);
+
+        if (invalidMovement(topDiskFrom, stackTo)) {
+            return "invalid movement";
+        } else {
+
+            List<GameObject> objectsTo = stackTo.getObjects();
+            objectsTo.add(topDiskFrom);
+            objectsFrom.remove(objectsFrom.size() - 1);
+
+            if (checkEndGame()) {
+                return "moved! you won!";
+            } else {
+                return "moved!";
+            }
+        }
+    }
+
     @Override
     public String receiveMessage(String input) {
-        return null;
+
+        final String lookAroundInput = "What can I do with ";
+        final String helpInput = "check top ";
+        final String moveInput = "move top ";
+
+        String message = null;
+
+        if (input.startsWith(lookAroundInput)) {
+            String name = input.substring(lookAroundInput.length(), input.length() - 1);
+            message = lookAround(name);
+        } else if (input.startsWith(helpInput)) {
+            String name = input.substring(helpInput.length());
+            message = help(name);
+        } else if (input.startsWith(moveInput)) {
+            String[] tokens = input.split(" ");
+            String from = tokens[2] + " " + tokens[3];
+            String to = tokens[4] + " " + tokens[5];
+            message = move(null, from, to);
+        }
+
+        return message;
     }
 
     @Override
     public boolean checkEndGame() {
-        return false;
+
+        ComplexObject stack = (ComplexObject) board.getObject("stack 3");
+        List<GameObject> objects = stack.getObjects();
+        int objectsSize = objects.size();
+
+        return objectsSize == maxDisks;
     }
 }

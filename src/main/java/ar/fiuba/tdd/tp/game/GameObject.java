@@ -1,10 +1,12 @@
 package ar.fiuba.tdd.tp.game;
 
-/**
- * Created by Adrián on 4/27/2016.
- */
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class GameObject {
+
     protected String name;
+    protected Map<String, Object> attributes = new HashMap<>();
 
     public boolean is(String name) {
         return this.name.equals(name);
@@ -18,4 +20,7 @@ public abstract class GameObject {
         this.name = name;
     }
 
+    public Map<String, Object> getAttributes() {
+        return attributes;
+    }
 }
