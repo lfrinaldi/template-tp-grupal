@@ -24,7 +24,7 @@ public class GameLoader implements Loader {
             game = busquedaTersoro();
         }
 */
-        return torresHanoi();
+        return abrirPuerta();
     }
 
     private Game fetchQuest() {
