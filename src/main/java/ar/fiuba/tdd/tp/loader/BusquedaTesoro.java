@@ -43,18 +43,17 @@ public class BusquedaTesoro extends Game {
     }
 
 //    private boolean checkWinRule() {
-//        // Gana el juego si el Character tiene el Treasure
+//        // Gana el juego si el Player tiene el Treasure
 //        return character.getObjects().contains(treasure);
 //    }
 
     @Override
-    protected boolean checkWinRule() {
-        // Gana el juego si el Character tiene el stick
-        return false;
+    public String receiveMessage(String input) {
+        return null;
     }
 
     @Override
-    protected boolean checkLoseRule() {
+    public boolean checkEndGame() {
         return false;
     }
 }

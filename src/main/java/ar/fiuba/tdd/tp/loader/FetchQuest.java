@@ -1,44 +1,35 @@
 package ar.fiuba.tdd.tp.loader;
 
-import ar.fiuba.tdd.tp.game.Character;
-import ar.fiuba.tdd.tp.game.Game;
-import ar.fiuba.tdd.tp.game.Room;
-import ar.fiuba.tdd.tp.game.object.Stick;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import ar.fiuba.tdd.tp.game.ComplexObject;
+import ar.fiuba.tdd.tp.game.Player;
+import ar.fiuba.tdd.tp.game.RolGame;
+import ar.fiuba.tdd.tp.game.SimpleObject;
 
 /**
  * Fetch Quest
  * El jugador comienza en una habitación, con un palo ubicado en dicha habitación.
  * Es necesario tomar el palo.
  */
-public class FetchQuest extends Game {
-    private Character character;
-    private Stick stick;
-    private Room room;
+public class FetchQuest extends RolGame {
 
     public FetchQuest() {
-        character = Character.getInstance();
-        stick = new Stick();
+        SimpleObject stick = new SimpleObject();
         stick.setName("stick");
-        room = new Room("room", new ArrayList<>(Arrays.asList(stick)));
-        character.setCurrentRoom(room);
+        ComplexObject room = new ComplexObject();
+        room.setName("room");
+        room.addObject(stick);
+        setCurrentRoom(room);
+        player = new Player(1);
     }
 
     @Override
-    protected boolean checkWinRule() {
-        // Gana el juego si el Character tiene el stick
-        return character.hasElement(stick);
+    public boolean checkEndGame() {
+        return player.hasElement("stick");
     }
 
     @Override
-    protected boolean checkLoseRule() {
-        return false;
-    }
-
-    public String execute(String instruction) {
-        return this.room.execute(this.interpreter.interpret(instruction));
+    public String receiveMessage(String input) {
+        return null;
     }
 }
 

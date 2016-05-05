@@ -38,20 +38,19 @@ public class ObjetoMaldito extends Game {
     }
 
 //    private boolean checkWinRule() {
-//        // Gana el juego si el Character esta en el Room 3
+//        // Gana el juego si el Player esta en el Room 3
 //        // es decir si la Door 2 esta abierta
 //        //return door2.isOpen();
 //        return !character.getObjects().contains(evil);
 //    }
 
     @Override
-    protected boolean checkWinRule() {
-        // Gana el juego si el Character tiene el stick
-        return false;
+    public String receiveMessage(String input) {
+        return null;
     }
 
     @Override
-    protected boolean checkLoseRule() {
+    public boolean checkEndGame() {
         return false;
     }
 }

@@ -1,10 +1,8 @@
 package ar.fiuba.tdd.tp.game;
 
 import ar.fiuba.tdd.tp.engine.Action;
-import com.sun.prism.Texture;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Room {
@@ -30,17 +28,17 @@ public class Room {
     }
 
     public String execute(Action action) {
-        String response;
+        /*String response;
         if (action.getElementName().equals(this.getName())) {
             response = "todo";
         } else {
             response = this.executeOverObjects(action);
-        }
-        return response;
+        }*/
+        return null;
     }
 
     private String executeOverObjects(Action action) {
-        String result = "no action available";
+        /*String result = "no action available";
 
         Iterator<Useable> iterator = this.objects.iterator();
         while (iterator.hasNext()) {
@@ -48,29 +46,29 @@ public class Room {
             if (useable.getName().equals(action.getElementName())) {
                 result = useable.use(action);
             }
-        }
+        }*/
 
         //for (Useable useable : this.objects) {
         //    if (useable.getName().equals(action.getElementName())) {
         //        result = useable.use(action);
         //    }
         //}
-        return result;
+        return null;
     }
 
     public void addObjects(List<Useable> objects) {
-        for (Useable useable : objects) {
+        /*for (Useable useable : objects) {
             this.objects.add(useable);
-        }
+        }*/
     }
 
     public boolean hasElement(Useable useable) {
         boolean hasElement = false;
-        for (Useable element : this.objects) {
+        /*for (Useable element : this.objects) {
             if (element.getName().equals(useable.getName())) {
                 hasElement = true;
             }
-        }
+        }*/
         return hasElement;
     }
 }
