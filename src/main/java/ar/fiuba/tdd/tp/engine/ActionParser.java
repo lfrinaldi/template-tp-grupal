@@ -6,19 +6,19 @@ import ar.fiuba.tdd.tp.model.Game;
 import java.util.*;
 
 public class ActionParser {
-    private ArrayList<String> validActionsRegex;
-    private ArrayList<String> validObjectsRegex;
+    private List<String> validActionsRegex;
+    private List<String> validObjectsRegex;
     private Game game;
 
     public ActionParser(Game game) {
         this.game = game;
     }
 
-    public void setValidActionsRegex(ArrayList<String> validActionsRegex) {
+    public void setValidActionsRegex(List<String> validActionsRegex) {
         this.validActionsRegex = validActionsRegex;
     }
 
-    public void setValidObjectsRegex(ArrayList<String> validObjectsRegex) {
+    public void setValidObjectsRegex(List<String> validObjectsRegex) {
         this.validObjectsRegex = validObjectsRegex;
     }
 
@@ -26,9 +26,9 @@ public class ActionParser {
         Action action = interpretAction(command);
 
         if (action != null) {
-            int offset = command.lastIndexOf(action.getName());
-            String objectName = command.substring(offset);
-            if (isValidObject(objectName)) {
+            int length = action.getName().length();
+            String objectName = command.substring(length).trim();
+            if (!isValidObject(objectName)) {
                 action = null;
             }
         }
