@@ -1,13 +1,20 @@
 package ar.fiuba.tdd.tp.model;
 
 import ar.fiuba.tdd.tp.action.Action;
+import ar.fiuba.tdd.tp.engine.ActionParser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
+    private ActionParser actionParser;
     private String name;
     private GameObject stage;
     private List<Action> actions;
+
+    public Game() {
+        this.actions = new ArrayList<>();
+    }
 
     public String getName() {
         return name;
@@ -33,8 +40,16 @@ public class Game {
         this.actions = actions;
     }
 
-    public String doCommand(String command) {
-        return command;
+    public void addAction(Action action) {
+        this.actions.add(action);
+    }
 
+    public String doCommand(String command) {
+        Action action = actionParser.interpret(command);
+        return action.execute(stage.getObjects());
+    }
+
+    public void setActionParser(ActionParser actionParser) {
+        this.actionParser = actionParser;
     }
 }

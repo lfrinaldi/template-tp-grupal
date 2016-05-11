@@ -6,7 +6,7 @@ import java.util.List;
 
 public class SimpleAction extends Action {
     @Override
-    String execute(List<GameObject> objects) {
+    public String execute(List<GameObject> objects) {
         return null;
     }
 }
