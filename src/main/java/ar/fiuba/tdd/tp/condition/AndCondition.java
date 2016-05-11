@@ -19,7 +19,7 @@ public class AndCondition<T> extends AbstractCondition<T> {
         this.cond2 = cond2;
     }
 
-    public boolean isSatisfiedBy(final T t) {
-        return cond1.isSatisfiedBy(t) && cond2.isSatisfiedBy(t);
+    public boolean isSatisfiedBy(final T elementT) {
+        return cond1.isSatisfiedBy(elementT) && cond2.isSatisfiedBy(elementT);
     }
 }

@@ -8,10 +8,10 @@ public interface Condition<T> {
     /**
      * Check if {@code t} is satisfied by the condition.
      *
-     * @param t Object to test.
+     * @param elementT Object to test.
      * @return {@code true} if {@code t} satisfies the condition.
      */
-    boolean isSatisfiedBy(T t);
+    boolean isSatisfiedBy(T elementT);
 
     /**
      * Create a new condition that is the AND operation of {@code this} condition and another condition.

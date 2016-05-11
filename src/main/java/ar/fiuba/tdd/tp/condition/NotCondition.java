@@ -16,7 +16,7 @@ public class NotCondition<T> extends AbstractCondition<T> {
         this.cond1 = cond1;
     }
 
-    public boolean isSatisfiedBy(final T t) {
-        return !cond1.isSatisfiedBy(t);
+    public boolean isSatisfiedBy(final T elementT) {
+        return !cond1.isSatisfiedBy(elementT);
     }
 }
