@@ -1,7 +1,7 @@
 package ar.fiuba.tdd.tp.connection;
 
-import ar.fiuba.tdd.tp.game.Game;
-import ar.fiuba.tdd.tp.game.Playable;
+
+import ar.fiuba.tdd.tp.model.Game;
 
 import java.io.*;
 import java.net.Socket;
@@ -21,7 +21,8 @@ public abstract class AbstractServer extends Thread {
     public void run() {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
-            PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true);
+            PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets
+                    .UTF_8), true);
             processInput(in, out);
         } catch (SocketTimeoutException s) {
             System.out.println("Socket timed out!");
@@ -78,7 +79,7 @@ public abstract class AbstractServer extends Thread {
                     exit = processOutput(out, input);
                 } else {
                     if (game != null) {
-                        String response = game.receiveMessage(input);
+                        String response = game.doCommand(input);
                         out.println(response);
                     } else {
                         out.println(input);
