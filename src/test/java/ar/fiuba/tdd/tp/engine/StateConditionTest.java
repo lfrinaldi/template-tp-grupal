@@ -55,6 +55,7 @@ public class StateConditionTest {
         }});
 
         Assert.assertTrue(!doorIsOpenSpecification.isSatisfiedBy(myDoor));
+        Assert.assertTrue(doorIsOpenSpecification.not(doorIsOpenSpecification).isSatisfiedBy(myDoor));
 
     }
 
