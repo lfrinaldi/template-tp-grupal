@@ -16,11 +16,9 @@ public class StateCondition extends AbstractCondition<GameObject> {
         this.state = state;
     }
 
-
     @Override
     public boolean isSatisfiedBy(GameObject gameObject) {
         return state.equals(gameObject.getState());
-    }
-
+    }\
 
 }
