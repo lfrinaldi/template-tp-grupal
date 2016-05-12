@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public class StateCondition extends AbstractCondition<GameObject> {
 
-    private Map state;
+    private Map<String, String> state;
 
 
     public StateCondition(Map state) {
@@ -18,7 +18,18 @@ public class StateCondition extends AbstractCondition<GameObject> {
 
     @Override
     public boolean isSatisfiedBy(GameObject gameObject) {
-        return state.equals(gameObject.getState());
+
+        Map map = gameObject.getState();
+        boolean isSatisfied = true;
+
+        for (String key : state.keySet()) {
+            if ((map.containsKey(key) && (!state.get(key).equals(map.get(key))))
+                    || !map.containsKey(key)) {
+                isSatisfied = false;
+            }
+        }
+
+        return isSatisfied;
     }
 
 }
