@@ -10,6 +10,10 @@ public class GameObject {
     private Map<String, String> attributes;
     private List<GameObject> objects;
 
+    public GameObject(Map map) {
+        this.attributes = map;
+    }
+
     public GameObject(String name) {
         objects = new ArrayList<>();
         attributes = new HashMap<>();
