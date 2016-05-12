@@ -54,4 +54,8 @@ public class GameObject {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Map getState() {
+        return this.attributes;
+    }
 }
