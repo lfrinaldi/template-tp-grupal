@@ -12,11 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Adrián on 5/12/2016.
- */
 public class ComplexConditionTest {
-
 
     @Test
     public void isSatisfiedBy() {
@@ -34,7 +30,8 @@ public class ComplexConditionTest {
         }});
 
 
-        GameObject myDoor = new GameObject(new HashMap<String, String>() {{
+        GameObject myDoor = new GameObject("");
+        myDoor.getAttributesMap().putAll(new HashMap<String, String>() {{
             put("id", "0");
             put("nombre", "door");
             put("open", "true");
@@ -69,7 +66,8 @@ public class ComplexConditionTest {
         }});
 
 
-        GameObject myDoor = new GameObject(new HashMap<String, String>() {{
+        GameObject myDoor = new GameObject("");
+        myDoor.getAttributesMap().putAll(new HashMap<String, String>() {{
             put("id", "0");
             put("nombre", "door");
             put("open", "true");
@@ -90,7 +88,8 @@ public class ComplexConditionTest {
     public void playerCanOpenSpecification() {
 
 
-        GameObject door = new GameObject(new HashMap<String, String>() {{
+        GameObject door = new GameObject("");
+        door.getAttributesMap().putAll(new HashMap<String, String>() {{
             put("id", "0");
             put("nombre", "puerta");
             put("key", "gold key");
@@ -99,13 +98,15 @@ public class ComplexConditionTest {
         }});
 
 
-        GameObject key = new GameObject(new HashMap<String, String>() {{
+        GameObject key = new GameObject("");
+        key.getAttributesMap().putAll(new HashMap<String, String>() {{
             put("id", "0");
             put("nombre", "key");
             put("key", "gold key");
         }});
 
-        GameObject player = new GameObject(new HashMap<String, String>() {{
+        GameObject player = new GameObject("");
+        player.getAttributesMap().putAll(new HashMap<String, String>() {{
             put("id", "0");
             put("nombre", "player");
             put("lla", "true");
@@ -114,11 +115,11 @@ public class ComplexConditionTest {
         }});
 
 
-        ContainsCondition playerCanOpenDoor = new ContainsCondition(door.getAttributeValue("key"));
+        ContainsCondition playerCanOpenDoor = new ContainsCondition(door.getAttributesMap().get("key"));
 
         Assert.assertFalse(playerCanOpenDoor.isSatisfiedBy(player));
 
-        player.add(key);
+        player.getChildrenMap().put(key.getName(), key);
 
         Assert.assertTrue(playerCanOpenDoor.isSatisfiedBy(player));
 
@@ -127,13 +128,15 @@ public class ComplexConditionTest {
 
     public void playerCanNotOpenSpecification() {
 
-        GameObject incorrectKey = new GameObject(new HashMap<String, String>() {{
+        GameObject incorrectKey = new GameObject("");
+        incorrectKey.getAttributesMap().putAll(new HashMap<String, String>() {{
             put("id", "0");
             put("nombre", "key");
             put("key", "incorrect key");
         }});
 
-        GameObject player = new GameObject(new HashMap<String, String>() {{
+        GameObject player = new GameObject("");
+        player.getAttributesMap().putAll(new HashMap<String, String>() {{
             put("id", "0");
             put("nombre", "player");
             put("lla", "true");
@@ -141,7 +144,8 @@ public class ComplexConditionTest {
             put("size", "big");
         }});
 
-        GameObject door = new GameObject(new HashMap<String, String>() {{
+        GameObject door = new GameObject("");
+        door.getAttributesMap().putAll(new HashMap<String, String>() {{
             put("id", "0");
             put("nombre", "puerta");
             put("key", "gold key");
@@ -149,11 +153,11 @@ public class ComplexConditionTest {
             put("size", "big");
         }});
 
-        ContainsCondition playerCanOpenDoor = new ContainsCondition(door.getAttributeValue("key"));
+        ContainsCondition playerCanOpenDoor = new ContainsCondition(door.getAttributesMap().get("key"));
 
         Assert.assertFalse(playerCanOpenDoor.isSatisfiedBy(player));
 
-        player.add(incorrectKey);
+        player.getChildrenMap().put(incorrectKey.getName(), incorrectKey);
 
         Assert.assertTrue(playerCanOpenDoor.isSatisfiedBy(player));
 

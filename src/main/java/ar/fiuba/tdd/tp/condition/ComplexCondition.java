@@ -4,9 +4,6 @@ import ar.fiuba.tdd.tp.model.GameObject;
 
 import java.util.List;
 
-/**
- * Created by arissola on 11/05/2016.
- */
 public class ComplexCondition extends AbstractCondition<GameObject> {
 
     List<AbstractCondition> conditions;

@@ -1,11 +1,7 @@
 package ar.fiuba.tdd.tp.condition;
 
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
-/**
- * Created by leandro on 10/05/16.
- */
 public class UnaryCondition<T> extends AbstractCondition<T> {
 
     private Condition<T> cond1;

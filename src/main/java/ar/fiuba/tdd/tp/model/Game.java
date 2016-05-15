@@ -1,19 +1,23 @@
 package ar.fiuba.tdd.tp.model;
 
-import ar.fiuba.tdd.tp.action.Action;
-import ar.fiuba.tdd.tp.engine.ActionParser;
+import ar.fiuba.tdd.tp.action.ComplexAction;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    private ActionParser actionParser;
+
+    private GameObject scene;
     private String name;
     private GameObject stage;
-    private List<Action> actions;
+    private List<ComplexAction> actions = new ArrayList<>();
 
-    public Game() {
-        this.actions = new ArrayList<>();
+    public Game(GameObject scene) {
+        this.scene = scene;
+    }
+
+    public GameObject getScene() {
+        return scene;
     }
 
     public String getName() {
@@ -32,24 +36,27 @@ public class Game {
         this.stage = stage;
     }
 
-    public List<Action> getActions() {
+    public List<ComplexAction> getActions() {
         return actions;
     }
 
-    public void setActions(List<Action> actions) {
+    public void setActions(List<ComplexAction> actions) {
         this.actions = actions;
     }
 
-    public void addAction(Action action) {
+    public void addAction(ComplexAction action) {
         this.actions.add(action);
     }
 
     public String doCommand(String command) {
-        Action action = actionParser.interpret(command);
-        return action.execute(stage.getObjects());
-    }
 
-    public void setActionParser(ActionParser actionParser) {
-        this.actionParser = actionParser;
+        for (ComplexAction complexAction : actions) {
+
+            if (command.startsWith(complexAction.getName())) {
+                return complexAction.execute(command);
+            }
+        }
+
+        return null;
     }
 }

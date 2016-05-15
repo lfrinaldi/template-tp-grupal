@@ -1,8 +1,5 @@
 package ar.fiuba.tdd.tp.condition;
 
-/**
- * Created by leandro on 10/05/16.
- */
 public abstract class AbstractCondition<T> implements Condition<T> {
 
     public abstract boolean isSatisfiedBy(T elementT);
@@ -16,6 +13,10 @@ public abstract class AbstractCondition<T> implements Condition<T> {
     }
 
     public Condition<T> not(final Condition<T> condition) {
-        return new UnaryCondition<>(condition, (value) -> !value);
+        return new UnaryCondition<>(this, (value) -> !value);
     }
+
+    /*public Condition<T> not() {
+        return new UnaryCondition<>(this, (value) -> !value);
+    }*/
 }
