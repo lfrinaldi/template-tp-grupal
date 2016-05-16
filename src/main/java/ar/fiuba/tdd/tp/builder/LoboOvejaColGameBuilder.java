@@ -8,9 +8,13 @@ import ar.fiuba.tdd.tp.action.simple.parameter.ExplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitCurrentParentParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
-import ar.fiuba.tdd.tp.condition.*;
-import ar.fiuba.tdd.tp.model.*;
+import ar.fiuba.tdd.tp.condition.ChildrenSizeEqualsCondition;
+import ar.fiuba.tdd.tp.condition.Condition;
+import ar.fiuba.tdd.tp.condition.HasChildCondition;
+import ar.fiuba.tdd.tp.model.Game;
+import ar.fiuba.tdd.tp.model.GameObject;
 
+@SuppressWarnings("CPD-START")
 public class LoboOvejaColGameBuilder implements ar.fiuba.tdd.tp.model.GameBuilder {
 
     @Override
@@ -30,17 +34,17 @@ public class LoboOvejaColGameBuilder implements ar.fiuba.tdd.tp.model.GameBuilde
     }
 
     private GameObject buildScene() {
-        GameObject scene = new GameObject("scene");
         GameObject player = new GameObject("player");
-        GameObject northShore = new GameObject("north-shore");
         GameObject southShore = new GameObject("south-shore");
-        GameObject sheep = new GameObject("sheep");
-        GameObject wolf = new GameObject("wolf");
-        GameObject col = new GameObject("col");
         southShore.addChild(player);
+        GameObject sheep = new GameObject("sheep");
         southShore.addChild(sheep);
+        GameObject wolf = new GameObject("wolf");
         southShore.addChild(wolf);
+        GameObject col = new GameObject("col");
         southShore.addChild(col);
+        GameObject scene = new GameObject("scene");
+        GameObject northShore = new GameObject("north-shore");
         scene.addChild(northShore);
         scene.addChild(southShore);
 
@@ -64,7 +68,8 @@ public class LoboOvejaColGameBuilder implements ar.fiuba.tdd.tp.model.GameBuilde
         Parameter targetParameter = new ImplicitParameter("player");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, targetParameter, 0);
         String result = "Ok";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
+        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter,
+                targetParameter, result);
 
         return simpleAction;
     }
@@ -98,7 +103,8 @@ public class LoboOvejaColGameBuilder implements ar.fiuba.tdd.tp.model.GameBuilde
 
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, playerParameter, 1);
         String result = "Ok";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
+        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter,
+                targetParameter, result);
 
         return simpleAction;
     }
@@ -137,11 +143,14 @@ public class LoboOvejaColGameBuilder implements ar.fiuba.tdd.tp.model.GameBuilde
 
         // Cruza al norte si la costa sur no tiene oveja y lobo o no tiene oveja y col
         // crossCondition !(oveja && lobo) && !(oveja && col)
-        Condition<String> notSheepAndWolf = new HasChildCondition(game, southShore, wolfParameter).and(new HasChildCondition(game, southShore, sheepParameter)).not(null);
-        Condition<String> notSheepAndCol = new HasChildCondition(game, southShore, colParameter).and(new HasChildCondition(game, southShore, sheepParameter)).not(null);
+        Condition<String> notSheepAndWolf = new HasChildCondition(game, southShore, wolfParameter).and(new
+                HasChildCondition(game, southShore, sheepParameter)).not(null);
+        Condition<String> notSheepAndCol = new HasChildCondition(game, southShore, colParameter).and(new
+                HasChildCondition(game, southShore, sheepParameter)).not(null);
 
         String result = "you have crossed!";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, notSheepAndWolf.and(notSheepAndCol), playerParameter, targetParameter, result);
+        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, notSheepAndWolf.and(notSheepAndCol),
+                playerParameter, targetParameter, result);
 
         return simpleAction;
     }
@@ -170,11 +179,14 @@ public class LoboOvejaColGameBuilder implements ar.fiuba.tdd.tp.model.GameBuilde
 
         // Cruza al sur si la costa norte no tiene oveja y lobo o no tiene oveja y col
         // crossCondition !(oveja && lobo) && !(oveja && col)
-        Condition<String> notSheepAndWolf = new HasChildCondition(game, northShore, wolfParameter).and(new HasChildCondition(game, northShore, sheepParameter)).not(null);
-        Condition<String> notSheepAndCol = new HasChildCondition(game, northShore, colParameter).and(new HasChildCondition(game, northShore, sheepParameter)).not(null);
+        Condition<String> notSheepAndWolf = new HasChildCondition(game, northShore, wolfParameter).and(new
+                HasChildCondition(game, northShore, sheepParameter)).not(null);
+        Condition<String> notSheepAndCol = new HasChildCondition(game, northShore, colParameter).and(new
+                HasChildCondition(game, northShore, sheepParameter)).not(null);
 
         String result = "you have crossed!";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, notSheepAndWolf.and(notSheepAndCol), playerParameter, targetParameter, result);
+        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, notSheepAndWolf.and(notSheepAndCol),
+                playerParameter, targetParameter, result);
 
         return simpleAction;
     }
@@ -185,7 +197,8 @@ public class LoboOvejaColGameBuilder implements ar.fiuba.tdd.tp.model.GameBuilde
         Parameter wolfParameter = new ImplicitParameter("wolf");
 
         // No puede cruzar si quedan solos la oveja y el lobo
-        Condition<String> sheepAndWolf = new HasChildCondition(game, northShore, wolfParameter).and(new HasChildCondition(game, northShore, sheepParameter));
+        Condition<String> sheepAndWolf = new HasChildCondition(game, northShore, wolfParameter).and(new
+                HasChildCondition(game, northShore, sheepParameter));
 
         String result = "You can’t do that! The wolf will eat the sheep!";
         SimpleAction simpleAction = new MessageSimpleAction(complexAction, sheepAndWolf, result);
@@ -199,7 +212,8 @@ public class LoboOvejaColGameBuilder implements ar.fiuba.tdd.tp.model.GameBuilde
         Parameter colParameter = new ImplicitParameter("col");
 
         // No puede cruzar si quedan solos la oveja y la col
-        Condition<String> sheepAndCol = new HasChildCondition(game, northShore, colParameter).and(new HasChildCondition(game, northShore, sheepParameter));
+        Condition<String> sheepAndCol = new HasChildCondition(game, northShore, colParameter).and(new
+                HasChildCondition(game, northShore, sheepParameter));
 
         String result = "You can’t do that! The sheep will eat the col!";
         SimpleAction simpleAction = new MessageSimpleAction(complexAction, sheepAndCol, result);
