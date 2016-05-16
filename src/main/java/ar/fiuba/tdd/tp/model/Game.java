@@ -9,7 +9,6 @@ public class Game {
 
     private GameObject scene;
     private String name;
-    private GameObject stage;
     private List<ComplexAction> actions = new ArrayList<>();
 
     public Game(GameObject scene) {
@@ -26,14 +25,6 @@ public class Game {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public GameObject getStage() {
-        return stage;
-    }
-
-    public void setStage(GameObject stage) {
-        this.stage = stage;
     }
 
     public List<ComplexAction> getActions() {
