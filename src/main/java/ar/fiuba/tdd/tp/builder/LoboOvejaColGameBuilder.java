@@ -15,7 +15,7 @@ import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameObject;
 
 @SuppressWarnings("CPD-START")
-public class LoboOvejaColGameBuilder implements ar.fiuba.tdd.tp.model.GameBuilder {
+public class LoboOvejaColGameBuilder implements GameBuilder {
 
     @Override
     public Game build() {

@@ -93,7 +93,7 @@ public class FetchQuestGameBuilder implements GameBuilder {
 
         Parameter whereParameter = new ImplicitParameter("player");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, whereParameter, 1);
-        String result = "There’s nothing in the room. You won the game!";
+        String result = "There's nothing in the room. You won the game!";
         SimpleAction simpleAction = new MessageSimpleAction(complexAction, condition, result);
 
         return simpleAction;
