@@ -9,31 +9,17 @@ public class Game {
 
     private GameObject scene;
     private String name;
-    private GameObject stage;
     private List<ComplexAction> actions = new ArrayList<>();
 
-    public Game(GameObject scene) {
-        this.scene = scene;
-    }
+
 
     public GameObject getScene() {
         return scene;
     }
 
-    public String getName() {
-        return name;
-    }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public GameObject getStage() {
-        return stage;
-    }
-
-    public void setStage(GameObject stage) {
-        this.stage = stage;
     }
 
     public List<ComplexAction> getActions() {
@@ -48,6 +34,10 @@ public class Game {
         this.actions.add(action);
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String doCommand(String command) {
 
         for (ComplexAction complexAction : actions) {
@@ -58,5 +48,9 @@ public class Game {
         }
 
         return null;
+    }
+
+    public Game(GameObject scene) {
+        this.scene = scene;
     }
 }

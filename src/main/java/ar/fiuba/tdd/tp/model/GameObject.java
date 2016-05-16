@@ -8,7 +8,7 @@ import java.util.Map;
 public class GameObject {
 
     private String name;
-    private GameObject parent = null;
+    private GameObject parent;
     private Map<String, GameObject> childrenMap = new HashMap<>();
     private Map<String, String> attributesMap = new HashMap<>();
 
@@ -68,7 +68,7 @@ public class GameObject {
         return attributesMap.get(name);
     }
 
-    public boolean changeAtribute(String name, String value) {
+    public boolean changeAttribute(String name, String value) {
 
         if (attributesMap.containsKey(name)) {
             attributesMap.replace(name, value);
@@ -100,7 +100,7 @@ public class GameObject {
 
         GameObject child = removeChild(childName);
 
-        if (child != null) {
+        if (target != null) {
             target.addChild(child);
             return true;
         }

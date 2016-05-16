@@ -1,33 +1,26 @@
 package ar.fiuba.tdd.tp.action.simple;
 
 import ar.fiuba.tdd.tp.action.ComplexAction;
-import ar.fiuba.tdd.tp.action.SimpleAction;
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
 import ar.fiuba.tdd.tp.condition.Condition;
 import ar.fiuba.tdd.tp.model.GameObject;
 
-public class ChangeAttributeSimpleAction extends SimpleAction {
+public class ChangeAttributeSimpleAction extends UnarySimpleAction {
 
-    private Parameter whichParameter;
     private String attributeName;
     private String attributeValue;
 
-    public ChangeAttributeSimpleAction(ComplexAction parent, Condition<String> condition,
-                                       Parameter whichParameter, String attributeName, String attributeValue, String result) {
-        super(parent, condition, result);
-
-        this.whichParameter = whichParameter;
+    public ChangeAttributeSimpleAction(ComplexAction parent, Condition<String> condition, Parameter
+            parameter, String result, String attributeName, String attributeValue) {
+        super(parent, condition, parameter, result);
         this.attributeName = attributeName;
         this.attributeValue = attributeValue;
     }
 
     @Override
     public String execute(String command) {
-
-        String wichName = whichParameter.value(command);
-        GameObject which = scene.find(wichName);
-        boolean changed = which.changeAtribute(attributeName, attributeValue);
-
+        GameObject which = getObject(command, parameter);
+        which.changeAttribute(attributeName, attributeValue);
         return result;
     }
 }

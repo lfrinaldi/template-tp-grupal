@@ -9,10 +9,10 @@ import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
 import ar.fiuba.tdd.tp.condition.ChildrenSizeEqualsCondition;
 import ar.fiuba.tdd.tp.condition.Condition;
-import ar.fiuba.tdd.tp.condition.SiblingsSizeEqualsCondition;
 import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameObject;
 
+@SuppressWarnings("CPD-START")
 public class FetchQuestGameBuilder implements GameBuilder {
 
     @Override
@@ -70,7 +70,7 @@ public class FetchQuestGameBuilder implements GameBuilder {
     private SimpleAction buildLookAroundSimpleAction(Game game, ComplexAction complexAction) {
 
         Parameter whichParameter = new ImplicitParameter("player");
-        Condition<String> condition = new SiblingsSizeEqualsCondition(game, whichParameter, 0).not(null);
+        Condition<String> condition = new ChildrenSizeEqualsCondition(game, whichParameter, 1).not(null);
         String result = "There’s <siblings> in the room.";
         SimpleAction simpleAction = new LookAroundSimpleAction(complexAction, condition, whichParameter, result);
 
@@ -81,9 +81,10 @@ public class FetchQuestGameBuilder implements GameBuilder {
 
         Parameter childParameter = new ImplicitParameter("stick");
         Parameter targetParameter = new ImplicitParameter("player");
-        Condition<String> condition = new SiblingsSizeEqualsCondition(game, targetParameter, 0).not(null);
+        Condition<String> condition = new ChildrenSizeEqualsCondition(game, targetParameter, 1).not(null);
         String result = "You won the game!";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
+        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter,
+                targetParameter, result);
 
         return simpleAction;
     }

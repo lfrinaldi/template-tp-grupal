@@ -4,28 +4,26 @@ import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
 import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameObject;
 
-public class ChildrenSizeEqualsCondition extends AbstractCondition<String> {
+public class ChildrenSizeEqualsCondition extends GameCondition<String> {
 
-    private Game game;
-    private Parameter parameter;
     private int size;
 
     public ChildrenSizeEqualsCondition(Game game, Parameter parameter, int size) {
-        this.game = game;
-        this.parameter = parameter;
+        super(game, parameter);
         this.size = size;
     }
 
     @Override
     public boolean isSatisfiedBy(String command) {
-
         GameObject scene = game.getScene();
-        String name = parameter.value(command);
-        GameObject gameObject = scene.find(name);
-        int currentSize = gameObject.getChildrenList().size();
-        boolean isSatisfied = (currentSize == size);
+        GameObject parent = getParentOf(scene, command);
+        int currentSize = parent.getChildrenList().size();
+        return (currentSize == size);
+    }
 
-        return isSatisfied;
+    private GameObject getParentOf(GameObject scene, String value) {
+        String name = parameter.value(value);
+        return scene.find(name);
     }
 
 }

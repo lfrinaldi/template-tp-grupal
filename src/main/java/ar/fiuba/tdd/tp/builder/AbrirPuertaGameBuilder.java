@@ -9,15 +9,13 @@ import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
 import ar.fiuba.tdd.tp.condition.ChildrenSizeEqualsCondition;
 import ar.fiuba.tdd.tp.condition.Condition;
-import ar.fiuba.tdd.tp.condition.SiblingsSizeEqualsCondition;
 import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameObject;
 
+@SuppressWarnings("CPD-START")
 public class AbrirPuertaGameBuilder implements GameBuilder {
-
     @Override
     public Game build() {
-
         GameObject scene = buildScene();
         Game game = new Game(scene);
         ComplexAction complexAction = buildLookAroundComplexAction(game);
@@ -26,29 +24,26 @@ public class AbrirPuertaGameBuilder implements GameBuilder {
         game.getActions().add(complexAction);
         complexAction = buildPickKeyComplexAction(game);
         game.getActions().add(complexAction);
-
         return game;
     }
 
     private GameObject buildScene() {
-
-        GameObject scene = new GameObject("scene");
         GameObject room1 = new GameObject("room1");
-        GameObject room2 = new GameObject("room2");
-        GameObject player = new GameObject("player");
         GameObject key = new GameObject("key");
         GameObject door = new GameObject("door");
+        GameObject player = new GameObject("player");
         room1.addChild(player);
         room1.addChild(key);
         room1.addChild(door);
+        GameObject scene = new GameObject("scene");
         scene.addChild(room1);
+        GameObject room2 = new GameObject("room2");
         scene.addChild(room2);
 
         return scene;
     }
 
     private ComplexAction buildLookAroundComplexAction(Game game) {
-
         String name = "look around";
         String command = "look around";
         ComplexAction complexAction = new ComplexAction(name, command, game);
@@ -61,9 +56,8 @@ public class AbrirPuertaGameBuilder implements GameBuilder {
     }
 
     private ComplexAction buildOpenDoorComplexAction(Game game) {
-
-        String name = "open door";
         String command = "open door";
+        String name = "open door";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildOpenLockedDoorSimpleAction(game, complexAction);
         complexAction.getSteps().add(simpleAction);
@@ -87,23 +81,17 @@ public class AbrirPuertaGameBuilder implements GameBuilder {
     }
 
     private SimpleAction buildLookAroundSimpleAction(Game game, ComplexAction complexAction) {
-
         Parameter whichParameter = new ImplicitParameter("player");
-        Condition<String> condition = new SiblingsSizeEqualsCondition(game, whichParameter, 0).not(null);
+        Condition<String> condition = new ChildrenSizeEqualsCondition(game, whichParameter, 1).not(null);
         String result = "There’s <siblings> in the room.";
-        SimpleAction simpleAction = new LookAroundSimpleAction(complexAction, condition, whichParameter, result);
-
-        return simpleAction;
+        return new LookAroundSimpleAction(complexAction, condition, whichParameter, result);
     }
 
     private SimpleAction buildLookAroundNothingSimpleAction(Game game, ComplexAction complexAction) {
-
         Parameter whichParameter = new ImplicitParameter("player");
-        Condition<String> condition = new SiblingsSizeEqualsCondition(game, whichParameter, 0);
+        Condition<String> condition = new ChildrenSizeEqualsCondition(game, whichParameter, 1);
         String result = "There’s nothing in the room.";
-        SimpleAction simpleAction = new LookAroundSimpleAction(complexAction, condition, whichParameter, result);
-
-        return simpleAction;
+        return new LookAroundSimpleAction(complexAction, condition, whichParameter, result);
     }
 
     private SimpleAction buildOpenLockedDoorSimpleAction(Game game, ComplexAction complexAction) {
@@ -122,7 +110,8 @@ public class AbrirPuertaGameBuilder implements GameBuilder {
         Parameter targetParameter = new ImplicitParameter("room2");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, childParameter, 1);
         String result = "You enter room2. You won the game!";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
+        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter,
+                targetParameter, result);
 
         return simpleAction;
     }
@@ -133,7 +122,8 @@ public class AbrirPuertaGameBuilder implements GameBuilder {
         Parameter targetParameter = new ImplicitParameter("player");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, targetParameter, 1).not(null);
         String result = "There you go!";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
+        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter,
+                targetParameter, result);
 
         return simpleAction;
     }

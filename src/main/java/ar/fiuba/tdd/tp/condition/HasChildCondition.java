@@ -4,27 +4,24 @@ import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
 import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameObject;
 
-public class HasChildCondition extends AbstractCondition<String> {
+import java.util.Map;
 
-    private Game game;
-    private Parameter parentParameter;
+public class HasChildCondition extends GameCondition<String> {
     private Parameter childParameter;
 
-    public HasChildCondition(Game game, Parameter parentParameter, Parameter childParameter) {
-        this.game = game;
-        this.parentParameter = parentParameter;
+    public HasChildCondition(Game game, Parameter parameter, Parameter childParameter) {
+        super(game, parameter);
         this.childParameter = childParameter;
     }
 
     @Override
     public boolean isSatisfiedBy(String command) {
-
-        GameObject scene = game.getScene();
-        String parentName = parentParameter.value(command);
-        GameObject parent = scene.find(parentName);
         String childName = childParameter.value(command);
-        boolean isSatisfied = (parent.getChildrenMap().containsKey(childName));
+        return (getParentChildrenMap(command).containsKey(childName));
+    }
 
-        return isSatisfied;
+    private Map<String, GameObject> getParentChildrenMap(String command) {
+        String parentName = parameter.value(command);
+        return game.getScene().find(parentName).getChildrenMap();
     }
 }

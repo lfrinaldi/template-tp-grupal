@@ -1,52 +1,44 @@
 package ar.fiuba.tdd.tp.action.simple;
 
 import ar.fiuba.tdd.tp.action.ComplexAction;
-import ar.fiuba.tdd.tp.action.SimpleAction;
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
 import ar.fiuba.tdd.tp.condition.Condition;
 import ar.fiuba.tdd.tp.model.GameObject;
 
 import java.util.List;
 
-public class LookAroundSimpleAction extends SimpleAction {
+public class LookAroundSimpleAction extends UnarySimpleAction {
 
-    private Parameter whichParameter;
 
-    public LookAroundSimpleAction(ComplexAction parent, Condition<String> condition,
-                                  Parameter whichParameter, String result) {
-        super(parent, condition, result);
-
-        this.whichParameter = whichParameter;
+    public LookAroundSimpleAction(ComplexAction parent, Condition<String> condition, Parameter
+            parameter, String result) {
+        super(parent, condition, parameter, result);
     }
 
     @Override
     public String execute(String command) {
-
-        String whichName = whichParameter.value(command);
-        GameObject which = scene.find(whichName);
+        GameObject which = getObject(command, this.parameter);
         List<GameObject> siblings = which.getSiblingsList();
-        String result = this.result.replaceAll("<siblings>", formatSiblingsResult(siblings));
-
-        return result;
+        return this.result.replaceAll("<siblings>", formatSiblingsResult(siblings));
     }
 
     private String formatSiblingsResult(List<GameObject> siblings) {
 
-        String result = "";
+        StringBuffer result = new StringBuffer();
 
         if (!siblings.isEmpty()) {
 
             int siblingsSize = siblings.size();
 
             for (int index = 0; index < siblingsSize - 1; ++index) {
-                result += "a " + siblings.get(index).getName();
-                result += (index < siblingsSize - 2) ? ", " : "";
+                result.append("a " + siblings.get(index).getName());
+                result.append((index < siblingsSize - 2) ? ", " : "");
             }
 
-            result += (siblingsSize > 1) ? " and " : "";
-            result += "a " + siblings.get(siblingsSize - 1).getName();
+            result.append((siblingsSize > 1) ? " and " : "");
+            result.append("a " + siblings.get(siblingsSize - 1).getName());
         }
 
-        return result;
+        return result.toString();
     }
 }

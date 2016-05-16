@@ -16,7 +16,4 @@ public abstract class AbstractCondition<T> implements Condition<T> {
         return new UnaryCondition<>(this, (value) -> !value);
     }
 
-    /*public Condition<T> not() {
-        return new UnaryCondition<>(this, (value) -> !value);
-    }*/
 }
