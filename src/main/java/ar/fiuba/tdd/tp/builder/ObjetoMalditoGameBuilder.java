@@ -31,7 +31,6 @@ public class ObjetoMalditoGameBuilder implements GameBuilder {
         complexAction = buildLookAroundComplexAction(game);
         game.getActions().add(complexAction);
 
-
         return game;
     }
 
