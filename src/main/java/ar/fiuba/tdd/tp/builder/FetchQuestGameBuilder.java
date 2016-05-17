@@ -21,9 +21,9 @@ public class FetchQuestGameBuilder implements GameBuilder {
         GameObject scene = buildScene();
         Game game = new Game(scene);
         ComplexAction complexAction = buildLookAroundComplexAction(game);
-        game.getActions().add(complexAction);
+        game.addAction(complexAction);
         complexAction = buildPickStickComplexAction(game);
-        game.getActions().add(complexAction);
+        game.addAction(complexAction);
 
         return game;
     }
@@ -47,9 +47,9 @@ public class FetchQuestGameBuilder implements GameBuilder {
         String command = "look around";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildLookAroundSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
         simpleAction = buildYouWonSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
 
         return complexAction;
     }
@@ -60,9 +60,9 @@ public class FetchQuestGameBuilder implements GameBuilder {
         String command = "pick stick";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildPickStickSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
         simpleAction = buildYouWonSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
 
         return complexAction;
     }
