@@ -21,15 +21,15 @@ public class ObjetoMalditoGameBuilder implements GameBuilder {
         GameObject scene = buildScene();
         Game game = new Game(scene);
         ComplexAction complexAction = buildPickComplexAction(game);
-        game.getActions().add(complexAction);
+        game.addAction(complexAction);
         complexAction = buildOpenDoor1ComplexAction(game);
-        game.getActions().add(complexAction);
+        game.addAction(complexAction);
         complexAction = buildOpenDoor2ComplexAction(game);
-        game.getActions().add(complexAction);
+        game.addAction(complexAction);
         complexAction = buildTalkToThiefComplexAction(game);
-        game.getActions().add(complexAction);
+        game.addAction(complexAction);
         complexAction = buildLookAroundComplexAction(game);
-        game.getActions().add(complexAction);
+        game.addAction(complexAction);
 
         return game;
     }
@@ -60,7 +60,7 @@ public class ObjetoMalditoGameBuilder implements GameBuilder {
         String command = "pick <parameter>";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildPickSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
 
         return complexAction;
     }
@@ -80,9 +80,9 @@ public class ObjetoMalditoGameBuilder implements GameBuilder {
         String command = "open door1";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildOpenLockedDoor1SimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
         simpleAction = buildOpenUnlockedDoor1SimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
 
         return complexAction;
     }
@@ -112,9 +112,9 @@ public class ObjetoMalditoGameBuilder implements GameBuilder {
         String command = "open door2";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildOpenLockedDoor2SimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
         simpleAction = buildOpenUnlockedDoor2SimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
 
         return complexAction;
     }
@@ -144,7 +144,7 @@ public class ObjetoMalditoGameBuilder implements GameBuilder {
         String command = "Talk to thief <parameter>";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildTalkToThiefSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
 
         return complexAction;
     }
@@ -165,7 +165,7 @@ public class ObjetoMalditoGameBuilder implements GameBuilder {
         String command = "look around";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildLookAroundSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
 
         return complexAction;
     }

@@ -35,6 +35,10 @@ public class ComplexAction implements Action {
         return steps;
     }
 
+    public void addAction(SimpleAction action) {
+        this.steps.add(action);
+    }
+
     @Override
     public String execute(String command) {
 

@@ -22,13 +22,13 @@ public class LoboOvejaColGameBuilder implements GameBuilder {
         GameObject scene = buildScene();
         Game game = new Game(scene);
         ComplexAction complexAction = buildTakeComplexAction(game);
-        game.getActions().add(complexAction);
+        game.addAction(complexAction);
         complexAction = buildLeaveComplexAction(game);
-        game.getActions().add(complexAction);
+        game.addAction(complexAction);
         complexAction = buildCrossNorthShoreComplexAction(game);
-        game.getActions().add(complexAction);
+        game.addAction(complexAction);
         complexAction = buildCrossSouthShoreComplexAction(game);
-        game.getActions().add(complexAction);
+        game.addAction(complexAction);
 
         return game;
     }
@@ -56,9 +56,9 @@ public class LoboOvejaColGameBuilder implements GameBuilder {
         String command = "take <parametro>";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildFullShipSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
         simpleAction = buildTakeSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
 
         return complexAction;
     }
@@ -88,9 +88,9 @@ public class LoboOvejaColGameBuilder implements GameBuilder {
         String command = "leave <parametro>";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildYouWonSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
         simpleAction = buildLeaveSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
 
         return complexAction;
     }
@@ -124,11 +124,11 @@ public class LoboOvejaColGameBuilder implements GameBuilder {
         String command = "cross north-shore";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildCantCrossWolfSheepSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
         simpleAction = buildCantCrossSheepColSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
         simpleAction = buildCrossNorthShoreSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
 
         return complexAction;
     }
@@ -160,11 +160,11 @@ public class LoboOvejaColGameBuilder implements GameBuilder {
         String command = "cross south-shore";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildCantCrossWolfSheepSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
         simpleAction = buildCantCrossSheepColSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
         simpleAction = buildCrossSouthShoreSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
 
         return complexAction;
     }
