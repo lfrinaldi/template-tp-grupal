@@ -56,10 +56,6 @@ public class GameObject {
         return attributesMap;
     }
 
-    public List<String> getAttributesList() {
-        return (List) attributesMap.values();
-    }
-
     public void addAtribute(String name, String value) {
         attributesMap.put(name, value);
     }
