@@ -1,6 +1,7 @@
 package ar.fiuba.tdd.tp.condition;
 
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
+import ar.fiuba.tdd.tp.condition.core.AbstractCondition;
 import ar.fiuba.tdd.tp.model.Game;
 
 /**

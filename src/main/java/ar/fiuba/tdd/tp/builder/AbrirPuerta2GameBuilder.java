@@ -10,6 +10,7 @@ import ar.fiuba.tdd.tp.action.simple.parameter.ExplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
 import ar.fiuba.tdd.tp.condition.*;
+import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameObject;
 
