@@ -1,7 +1,5 @@
-package ar.fiuba.tdd.tp.engine;
+package ar.fiuba.tdd.tp.condition;
 
-import ar.fiuba.tdd.tp.condition.ContainsCondition;
-import ar.fiuba.tdd.tp.condition.StateCondition;
 import ar.fiuba.tdd.tp.model.GameObject;
 import org.junit.Assert;
 import org.junit.Test;
