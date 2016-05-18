@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
+
 public class Server {
 
     private static final Queue<Integer> ports = new LinkedList<>(Arrays.asList(8001, 8002, 8003, 8004, 8005, 8006, 8006,
@@ -58,7 +59,7 @@ public class Server {
     }
 
     private static Integer getPort() throws Exception {
-        Integer port = null;
+        Integer port;
         if (ports.size() > 0) {
             port = ports.poll();
         } else {

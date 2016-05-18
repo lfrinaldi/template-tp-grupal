@@ -11,8 +11,10 @@ public class GameLoader implements Loader {
     public Game get(String gameName) {
         Game game = null;
         try {
-            GameBuilder gameBuilder = BuilderLoader.load(gameName);
-            game = gameBuilder.build();
+            if (gameName != null) {
+                GameBuilder gameBuilder = BuilderLoader.load(gameName);
+                game = gameBuilder.build();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
