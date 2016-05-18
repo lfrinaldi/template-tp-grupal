@@ -39,9 +39,7 @@ public class ObjetoMalditoGameTest {
         Assert.assertEquals("There's a door2 and a thief in the room.", execute("look around"));
         Assert.assertEquals("Ey! Where do you go?! room3 is locked.", execute("open door2"));
 
-        //command = "What can I do with thief?"; System.out.println(command); result = game.doCommand(command);
-        // System.out.println(result);
-        //Assert.assertEquals("You can talk with thief: \"Hello\", \"Bye\".", result);
+        //Assert.assertEquals("You can talk with thief: \"Hello\", \"Bye\".", execute("What can I do with thief?"));
 
         Assert.assertEquals("Hi!\nThe thief has just stolen your object!", execute("Talk to thief \"Hello\""));
         Assert.assertEquals("You enter room3. You won the game!", execute("open door2"));

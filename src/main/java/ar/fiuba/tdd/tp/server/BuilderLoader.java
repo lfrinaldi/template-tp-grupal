@@ -26,7 +26,7 @@ public class BuilderLoader {
 
     private static String processEntry(JarEntry entry) {
         String name = entry.getName();
-        return escape(name.substring(0,name.lastIndexOf(".class")));
+        return escape(name.substring(0, name.lastIndexOf(".class")));
     }
 
     private static List<String> scanJar(File file) throws IOException, IllegalArgumentException {
@@ -47,7 +47,7 @@ public class BuilderLoader {
             throws ClassNotFoundException, IOException,
             IllegalAccessException, InstantiationException {
         File file = new File(filePath);
-        URL[] urls = { new URL("jar:file:" + filePath + "!/") };
+        URL[] urls = {new URL("jar:file:" + filePath + "!/")};
         ClassLoader loader = URLClassLoader.newInstance(urls);
         for (String classFile : scanJar(file)) {
             Class<?> foundClass;
@@ -58,7 +58,7 @@ public class BuilderLoader {
             }
 
             if (GameBuilder.class.isAssignableFrom(foundClass) && !foundClass.equals(GameBuilder.class)) {
-                return (GameBuilder)foundClass.newInstance();
+                return (GameBuilder) foundClass.newInstance();
             }
         }
         return null;
