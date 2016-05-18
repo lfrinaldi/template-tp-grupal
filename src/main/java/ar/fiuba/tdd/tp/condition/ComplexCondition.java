@@ -1,5 +1,6 @@
 package ar.fiuba.tdd.tp.condition;
 
+import ar.fiuba.tdd.tp.condition.core.AbstractCondition;
 import ar.fiuba.tdd.tp.model.GameObject;
 
 import java.util.List;

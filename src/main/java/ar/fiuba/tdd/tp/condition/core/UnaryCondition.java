@@ -1,4 +1,4 @@
-package ar.fiuba.tdd.tp.condition;
+package ar.fiuba.tdd.tp.condition.core;
 
 import java.util.function.Function;
 

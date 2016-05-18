@@ -2,7 +2,7 @@ package ar.fiuba.tdd.tp.action.simple;
 
 import ar.fiuba.tdd.tp.action.ComplexAction;
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
-import ar.fiuba.tdd.tp.condition.Condition;
+import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.GameObject;
 
 public class MoveChildSimpleAction extends UnarySimpleAction {

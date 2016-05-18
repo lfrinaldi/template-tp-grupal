@@ -9,8 +9,8 @@ import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitCurrentParentParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
 import ar.fiuba.tdd.tp.condition.ChildrenSizeEqualsCondition;
-import ar.fiuba.tdd.tp.condition.Condition;
 import ar.fiuba.tdd.tp.condition.HasChildCondition;
+import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameObject;
 
