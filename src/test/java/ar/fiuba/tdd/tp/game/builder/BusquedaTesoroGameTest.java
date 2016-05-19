@@ -1,7 +1,6 @@
 package ar.fiuba.tdd.tp.game.builder;
 
 import ar.fiuba.tdd.tp.builder.BusquedaTesoroGameBuilder;
-import ar.fiuba.tdd.tp.builder.ObjetoMalditoGameBuilder;
 import ar.fiuba.tdd.tp.model.Game;
 import org.junit.Assert;
 import org.junit.Before;
@@ -52,19 +51,19 @@ public class BusquedaTesoroGameTest {
         Assert.assertEquals("Ok", execute("open closet"));
         Assert.assertEquals("There's a door3, a closet and a trunk in the room.", execute("look around"));
         Assert.assertEquals("Ok", execute("open trunk"));
-        Assert.assertEquals("There's a door3, a closet, a box and a trunk in the room.", execute("look around"));
+        Assert.assertEquals("There's a door3, a closet, a trunk and a box in the room.", execute("look around"));
         Assert.assertEquals("Ok", execute("open box"));
-        Assert.assertEquals("There's a door3, a closet, a box, a trunk and a golden-key in the room.",
+        Assert.assertEquals("There's a door3, a closet, a trunk, a box and a golden-key in the room.",
                 execute("look around"));
         Assert.assertEquals("There you go!", execute("pick golden-key"));
         Assert.assertEquals("You enter room4.", execute("open door3"));
     }
 
     public void busquedaTesoroRoom4Test() {
-        Assert.assertEquals("There's a green-box, a door4 and a red-box in the room.", execute("look around"));
+        Assert.assertEquals("There's a door4, a red-box and a green-box in the room.", execute("look around"));
         Assert.assertEquals("You've been poisoned!", execute("open red-box"));
         Assert.assertEquals("Ok", execute("open green-box"));
-        Assert.assertEquals("There's a green-box, a door4, a red-box and a anti-poison in the room.",
+        Assert.assertEquals("There's a door4, a red-box, a green-box and a anti-poison in the room.",
                 execute("look around"));
         Assert.assertEquals("Ey! Where do you go?! You are poisoned!", execute("open door4"));
         Assert.assertEquals("You can drink the potion.", execute("What can I do with anti-poison ?"));

@@ -9,7 +9,9 @@ import ar.fiuba.tdd.tp.action.simple.MoveChildSimpleAction;
 import ar.fiuba.tdd.tp.action.simple.parameter.ExplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
-import ar.fiuba.tdd.tp.condition.*;
+import ar.fiuba.tdd.tp.condition.ChildrenSizeEqualsCondition;
+import ar.fiuba.tdd.tp.condition.HasAttributeCondition;
+import ar.fiuba.tdd.tp.condition.HasChildCondition;
 import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameObject;
@@ -132,7 +134,7 @@ public class  AbrirPuerta2GameBuilder implements GameBuilder {
     private SimpleAction buildLookAroundSimpleAction(Game game, ComplexAction complexAction) {
         Parameter whichParameter = new ImplicitParameter("player");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, whichParameter, 1).not(null);
-        String result = "There’s <siblings> in the room.";
+        String result = "There's <siblings> in the room.";
         return new LookAroundSimpleAction(complexAction, condition, whichParameter, result);
     }
 

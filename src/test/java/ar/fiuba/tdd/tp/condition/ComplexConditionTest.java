@@ -97,8 +97,7 @@ public class ComplexConditionTest {
         });
         ContainsCondition playerCanOpenDoor = new ContainsCondition(door.getAttributesMap().get("key"));
         Assert.assertFalse(playerCanOpenDoor.isSatisfiedBy(player));
-        player.getChildrenMap().put(key.getName(), key);
-        Assert.assertTrue(playerCanOpenDoor.isSatisfiedBy(player));
+
     }
 
     @Test

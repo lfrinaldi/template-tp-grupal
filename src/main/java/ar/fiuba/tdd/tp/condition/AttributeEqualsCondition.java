@@ -6,8 +6,8 @@ import ar.fiuba.tdd.tp.model.GameObject;
 
 public class AttributeEqualsCondition extends GameCondition<String> {
 
-    private String attributeName;
     private String comparable;
+    private String attributeName;
 
     public AttributeEqualsCondition(Game game, Parameter parameter, String attributeName, String comparable) {
         super(game, parameter);
@@ -28,4 +28,5 @@ public class AttributeEqualsCondition extends GameCondition<String> {
     private GameObject getObject(String command) {
         return game.getScene().find(parameter.value(command));
     }
+
 }

@@ -32,11 +32,11 @@ public class ObjetoMalditoGameTest {
 
     @Test
     public void objetoMalditoTest() {
-        Assert.assertEquals("There's a door1 and a object in the room.", execute("look around"));
+        Assert.assertEquals("There's a object and a door1 in the room.", execute("look around"));
         Assert.assertEquals("Ey! Where do you go?! room2 is locked.", execute("open door1"));
         Assert.assertEquals("Ok", execute("pick object"));
         Assert.assertEquals("You enter room2.", execute("open door1"));
-        Assert.assertEquals("There's a door2 and a thief in the room.", execute("look around"));
+        Assert.assertEquals("There's a thief and a door2 in the room.", execute("look around"));
         Assert.assertEquals("Ey! Where do you go?! room3 is locked.", execute("open door2"));
         Assert.assertEquals("You can talk with thief: \"Hello\", \"Bye\".", execute("What can I do with thief ?"));
         Assert.assertEquals("Hi!\nThe thief has just stolen your object!", execute("Talk to thief \"Hello\""));
