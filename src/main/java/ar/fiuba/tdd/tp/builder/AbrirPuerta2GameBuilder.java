@@ -19,21 +19,14 @@ public class  AbrirPuerta2GameBuilder implements GameBuilder {
 
     @Override
     public Game build() {
-
         GameObject scene = buildScene();
         Game game = new Game(scene);
-        ComplexAction complexAction = buildLookAroundComplexAction(game);
-        game.addAction(complexAction);
-        complexAction = buildOpenDoorComplexAction(game);
-        game.addAction(complexAction);
-        complexAction = buildHelpComplexAction(game);
-        game.addAction(complexAction);
-        complexAction = buildOpenBoxComplexAction(game);
-        game.addAction(complexAction);
-        complexAction = buildCloseBoxComplexAction(game);
-        game.addAction(complexAction);
-        complexAction = buildPickKeyComplexAction(game);
-        game.addAction(complexAction);
+        game.addAction(buildLookAroundComplexAction(game));
+        game.addAction(buildOpenDoorComplexAction(game));
+        game.addAction(buildHelpComplexAction(game));
+        game.addAction(buildOpenBoxComplexAction(game));
+        game.addAction(buildCloseBoxComplexAction(game));
+        game.addAction(buildPickKeyComplexAction(game));
 
         return game;
     }

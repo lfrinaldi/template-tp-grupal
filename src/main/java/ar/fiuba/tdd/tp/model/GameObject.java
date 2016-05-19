@@ -69,6 +69,8 @@ public class GameObject {
         if (attributesMap.containsKey(name)) {
             attributesMap.replace(name, value);
             return true;
+        } else {
+            attributesMap.put(name, value);
         }
 
         return false;

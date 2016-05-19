@@ -7,14 +7,9 @@ import ar.fiuba.tdd.tp.action.simple.parameter.ExplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitCurrentParentParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
-import ar.fiuba.tdd.tp.condition.ChildrenSizeEqualsCondition;
-import ar.fiuba.tdd.tp.condition.HasAttributeCondition;
-import ar.fiuba.tdd.tp.condition.HasChildCondition;
-import ar.fiuba.tdd.tp.condition.StateCondition;
+import ar.fiuba.tdd.tp.condition.*;
 import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.*;
-
-import java.util.HashMap;
 
 @SuppressWarnings("CPD-START")
 public class BusquedaTesoroGameBuilder implements GameBuilder {
@@ -23,6 +18,12 @@ public class BusquedaTesoroGameBuilder implements GameBuilder {
     public Game build() {
         GameObject scene = buildScene();
         Game game = new Game(scene);
+        addActions(game);
+
+        return game;
+    }
+
+    private void addActions(Game game) {
         game.addAction(buildLookAroundComplexAction(game));
         game.addAction(buildOpenDoor1ComplexAction(game));
         game.addAction(buildOpenDoor2ComplexAction(game));
@@ -33,16 +34,13 @@ public class BusquedaTesoroGameBuilder implements GameBuilder {
         game.addAction(buildPickGoldenKeyComplexAction(game));
         game.addAction(buildOpenRedBoxComplexAction(game));
         game.addAction(buildOpenGreenBoxComplexAction(game));
-        //game.addAction(); //"What can I do with anti-poison?"
-        //game.addAction(); //"Drink anti-poison"
+        game.addAction(buildHelpComplexAction(game));
+        game.addAction(buildDrinkComplexAction(game));
         game.addAction(buildPickTreasureComplexAction(game));
         game.addAction(buildLeaveComplexAction(game));
-        //game.addAction();
         game.addAction(buildOpenDoor3ComplexAction(game));
         game.addAction(buildOpenDoor4ComplexAction(game));
         game.addAction(buildOpenDoor5ComplexAction(game));
-
-        return game;
     }
 
     private GameObject buildScene() {
@@ -101,6 +99,7 @@ public class BusquedaTesoroGameBuilder implements GameBuilder {
         redBox.addChild(poison);
         room4.addChild(redBox);
         GameObject antiPoison = new GameObject("anti-poison");
+        antiPoison.getAttributesMap().put("help", "You can drink the potion.");
         GameObject greenBox = new GameObject("green-box");
         greenBox.addChild(antiPoison);
         room4.addChild(greenBox);
@@ -113,6 +112,7 @@ public class BusquedaTesoroGameBuilder implements GameBuilder {
         GameObject door5 = new GameObject("door5");
         room5.addChild(door5);
         GameObject treasure = new GameObject("treasure");
+        treasure.getAttributesMap().put("help", "You can pick the treasure.");
         room5.addChild(treasure);
 
         return room5;
@@ -130,12 +130,9 @@ public class BusquedaTesoroGameBuilder implements GameBuilder {
 
     private SimpleAction buildLookAroundSimpleAction(Game game, ComplexAction complexAction) {
         Parameter whichParameter = new ImplicitParameter("player");
-        // TODO: Always true condition
-        Parameter trueParameter = new ImplicitParameter("treasure");
-        Condition<String> condition = new ChildrenSizeEqualsCondition(game, trueParameter, 0);
 
         String result = "There's <siblings> in the room.";
-        SimpleAction simpleAction = new LookAroundSimpleAction(complexAction, condition, whichParameter, result);
+        SimpleAction simpleAction = new LookAroundSimpleAction(complexAction, new TrueCondition(), whichParameter, result);
 
         return simpleAction;
     }
@@ -227,6 +224,52 @@ public class BusquedaTesoroGameBuilder implements GameBuilder {
         return simpleAction;
     }
 
+    private ComplexAction buildHelpComplexAction(Game game) {
+        String name = "What can I do with";
+        String command = "What can I do with ?";
+        ComplexAction complexAction = new ComplexAction(name, command, game);
+        SimpleAction simpleAction = buildHelpSimpleAction(game, complexAction);
+        complexAction.getSteps().add(simpleAction);
+        simpleAction = buildNoHelpSimpleAction(game, complexAction);
+        complexAction.getSteps().add(simpleAction);
+
+        return complexAction;
+    }
+
+    private SimpleAction buildHelpSimpleAction(Game game, ComplexAction complexAction) {
+        Parameter whichParameter = new ExplicitParameter(5);
+        String attributeName = "help";
+        Condition<String> condition = new HasAttributeCondition(game, whichParameter, attributeName);
+        String result = "<attribute>";
+        return new GetAttributeSimpleAction(complexAction, condition, whichParameter,
+                attributeName, result);
+    }
+
+    private SimpleAction buildNoHelpSimpleAction(Game game, ComplexAction complexAction) {
+        Parameter whichParameter = new ExplicitParameter(5);
+        String attributeName = "help";
+        Condition<String> condition = new HasAttributeCondition(game, whichParameter, attributeName).not(null);
+        String result = "No help available";
+        return new MessageSimpleAction(complexAction, condition, result);
+    }
+
+    private ComplexAction buildDrinkComplexAction(Game game) {
+        String name = "drink anti-poison";
+        String command = "drink anti-poison";
+        ComplexAction complexAction = new ComplexAction(name, command, game);
+        complexAction.addAction(buildDrinkSimpleAction(game, complexAction));
+
+        return complexAction;
+    }
+
+    private SimpleAction buildDrinkSimpleAction(Game game, ComplexAction complexAction) {
+        Parameter player = new ImplicitParameter("player");
+
+        String result = "You are now healthy";
+        return new ChangeAttributeSimpleAction(complexAction, new TrueCondition(), player, result, "poisoned",
+                "false");
+    }
+
     private ComplexAction buildOpenClosetComplexAction(Game game) {
         String name = "open closet";
         String command = "open closet";
@@ -239,12 +282,9 @@ public class BusquedaTesoroGameBuilder implements GameBuilder {
     private SimpleAction buildOpenClosetSimpleAction(Game game, ComplexAction complexAction) {
         Parameter childParameter = new ImplicitParameter("trunk");
         Parameter targetParameter = new ImplicitParameter("room3");
-        // TODO: Always true condition
-        Parameter trueParameter = new ImplicitParameter("treasure");
-        Condition<String> condition = new ChildrenSizeEqualsCondition(game, trueParameter, 0);
 
         String result = "Ok";
-        return new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter,
+        return new MoveChildSimpleAction(complexAction, new TrueCondition(), childParameter, targetParameter,
                 result);
     }
 
@@ -260,12 +300,9 @@ public class BusquedaTesoroGameBuilder implements GameBuilder {
     private SimpleAction buildOpenTrunkSimpleAction(Game game, ComplexAction complexAction) {
         Parameter childParameter = new ImplicitParameter("box");
         Parameter targetParameter = new ImplicitParameter("room3");
-        // TODO: Always true condition
-        Parameter trueParameter = new ImplicitParameter("treasure");
-        Condition<String> condition = new ChildrenSizeEqualsCondition(game, trueParameter, 0);
 
         String result = "Ok";
-        return new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter,
+        return new MoveChildSimpleAction(complexAction, new TrueCondition(), childParameter, targetParameter,
                 result);
     }
 
@@ -281,12 +318,9 @@ public class BusquedaTesoroGameBuilder implements GameBuilder {
     private SimpleAction buildOpenBoxSimpleAction(Game game, ComplexAction complexAction) {
         Parameter childParameter = new ImplicitParameter("golden-key");
         Parameter targetParameter = new ImplicitParameter("room3");
-        // TODO: Always true condition
-        Parameter trueParameter = new ImplicitParameter("treasure");
-        Condition<String> condition = new ChildrenSizeEqualsCondition(game, trueParameter, 0);
 
         String result = "Ok";
-        return new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter,
+        return new MoveChildSimpleAction(complexAction, new TrueCondition(), childParameter, targetParameter,
                 result);
     }
 
@@ -301,12 +335,9 @@ public class BusquedaTesoroGameBuilder implements GameBuilder {
 
     private SimpleAction buildOpenRedBoxSimpleAction(Game game, ComplexAction complexAction) {
         Parameter player = new ImplicitParameter("player");
-        // TODO: Always true condition
-        Parameter trueParameter = new ImplicitParameter("treasure");
-        Condition<String> condition = new ChildrenSizeEqualsCondition(game, trueParameter, 0);
 
         String result = "You've been poisoned!";
-        return new ChangeAttributeSimpleAction(complexAction, condition, player, result, "poisoned",
+        return new ChangeAttributeSimpleAction(complexAction, new TrueCondition(), player, result, "poisoned",
                 "true");
     }
 
@@ -322,12 +353,9 @@ public class BusquedaTesoroGameBuilder implements GameBuilder {
     private SimpleAction buildOpenGreenBoxSimpleAction(Game game, ComplexAction complexAction) {
         Parameter childParameter = new ImplicitParameter("anti-poison");
         Parameter targetParameter = new ImplicitParameter("room4");
-        // TODO: Always true condition
-        Parameter trueParameter = new ImplicitParameter("treasure");
-        Condition<String> condition = new ChildrenSizeEqualsCondition(game, trueParameter, 0);
 
         String result = "Ok";
-        return new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter,
+        return new MoveChildSimpleAction(complexAction, new TrueCondition(), childParameter, targetParameter,
                 result);
     }
 
@@ -343,12 +371,9 @@ public class BusquedaTesoroGameBuilder implements GameBuilder {
     private SimpleAction buildOpenUnlockedDoor1SimpleAction(Game game, ComplexAction complexAction) {
         Parameter childParameter = new ImplicitParameter("player");
         Parameter targetParameter = new ImplicitParameter("room2");
-        // TODO: Always true condition
-        Parameter trueParameter = new ImplicitParameter("treasure");
-        Condition<String> condition = new ChildrenSizeEqualsCondition(game, trueParameter, 0);
 
         String result = "You enter room2.";
-        return new MoveChildSimpleAction(complexAction, condition, childParameter,
+        return new MoveChildSimpleAction(complexAction, new TrueCondition(), childParameter,
                 targetParameter, result);
     }
 
@@ -407,19 +432,15 @@ public class BusquedaTesoroGameBuilder implements GameBuilder {
         String name = "open door4";
         String command = "open door4";
         ComplexAction complexAction = new ComplexAction(name, command, game);
-        //complexAction.getSteps().add(buildOpenLockedDoor4SimpleAction(game, complexAction));
+        complexAction.getSteps().add(buildOpenLockedDoor4SimpleAction(game, complexAction));
         complexAction.getSteps().add(buildOpenUnlockedDoor4SimpleAction(game, complexAction));
 
         return complexAction;
     }
 
     private SimpleAction buildOpenLockedDoor4SimpleAction(Game game, ComplexAction complexAction) {
-        //Parameter player = new ImplicitParameter("player");
-        Condition condition = new StateCondition(new HashMap<String, String>() {
-            {
-                put("poisoned", "true");
-            }
-        });
+        Parameter player = new ImplicitParameter("player");
+        Condition<String> condition = new AttributeEqualsCondition(game, player, "poisoned", "true");
 
         String result = "Ey! Where do you go?! You are poisoned!";
         return new MessageSimpleAction(complexAction, condition, result);
@@ -428,12 +449,9 @@ public class BusquedaTesoroGameBuilder implements GameBuilder {
     private SimpleAction buildOpenUnlockedDoor4SimpleAction(Game game, ComplexAction complexAction) {
         Parameter childParameter = new ImplicitParameter("player");
         Parameter targetParameter = new ImplicitParameter("room5");
-        // TODO: Always true condition
-        Parameter trueParameter = new ImplicitParameter("treasure");
-        Condition<String> condition = new ChildrenSizeEqualsCondition(game, trueParameter, 0);
 
         String result = "You enter room5.";
-        return new MoveChildSimpleAction(complexAction, condition, childParameter,
+        return new MoveChildSimpleAction(complexAction, new TrueCondition(), childParameter,
                 targetParameter, result);
     }
 
@@ -453,20 +471,16 @@ public class BusquedaTesoroGameBuilder implements GameBuilder {
         // Gana si el player entra al room1 con el treasure
         Condition<String> condition = new HasChildCondition(game, player, treasure);
         String result = "You won the game!";
-        SimpleAction simpleAction = new MessageSimpleAction(complexAction, condition, result);
 
-        return simpleAction;
+        return new MessageSimpleAction(complexAction, condition, result);
     }
 
     private SimpleAction buildOpenUnlockedDoor5SimpleAction(Game game, ComplexAction complexAction) {
         Parameter childParameter = new ImplicitParameter("player");
         Parameter targetParameter = new ImplicitParameter("room1");
-        // TODO: Always true condition
-        Parameter trueParameter = new ImplicitParameter("treasure");
-        Condition<String> condition = new ChildrenSizeEqualsCondition(game, trueParameter, 0);
 
         String result = "You enter room1.";
-        return new MoveChildSimpleAction(complexAction, condition, childParameter,
+        return new MoveChildSimpleAction(complexAction, new TrueCondition(), childParameter,
                 targetParameter, result);
     }
 

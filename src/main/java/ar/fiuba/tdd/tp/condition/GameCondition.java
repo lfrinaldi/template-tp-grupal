@@ -11,6 +11,11 @@ public abstract class GameCondition<T> extends AbstractCondition<T> {
     protected Game game;
     protected Parameter parameter;
 
+    public GameCondition() {
+        this.game = null;
+        this.parameter = null;
+    }
+
     public GameCondition(Game game, Parameter parameter) {
         this.game = game;
         this.parameter = parameter;
