@@ -1,2 +1,10 @@
 rootProject.name = 'tp-tp-grupal'
+include 'core'
+include 'FetchQuest'
+include 'OpenDoor'
+include 'OpenDoor2'
+include 'Hanoi'
+include 'BusquedaTesoro'
+include 'LoboOvejaCol'
+include 'ObjetoMaldito'
 
