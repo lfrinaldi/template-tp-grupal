@@ -10,6 +10,7 @@ public class GameObject {
     private String name;
     private GameObject parent;
     private Map<String, GameObject> childrenMap = new HashMap<>();
+    private List<GameObject> childrenList = new ArrayList<>();
     private Map<String, String> attributesMap = new HashMap<>();
 
     public GameObject(String name) {
@@ -33,13 +34,14 @@ public class GameObject {
     }
 
     public List<GameObject> getChildrenList() {
-        return new ArrayList<>(childrenMap.values());
+        return childrenList;
     }
 
     public void addChild(GameObject gameObject) {
         String name = gameObject.getName();
         gameObject.setParent(this);
         childrenMap.put(name, gameObject);
+        childrenList.add(gameObject);
     }
 
     public GameObject getChild(String name) {
@@ -48,6 +50,7 @@ public class GameObject {
 
     public GameObject removeChild(String name) {
         GameObject gameObject = childrenMap.remove(name);
+        childrenList.remove(gameObject);
         gameObject.setParent(null);
         return gameObject;
     }

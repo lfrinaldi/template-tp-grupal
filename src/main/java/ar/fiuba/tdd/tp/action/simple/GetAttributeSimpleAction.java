@@ -17,7 +17,7 @@ public class GetAttributeSimpleAction extends UnarySimpleAction {
 
     @Override
     public String execute(String command) {
-        return getResponse(getObjectAttribute(command));
+        return getResponse(getObjectAttribute(command), command);
     }
 
     private String getObjectAttribute(String command) {
@@ -25,7 +25,8 @@ public class GetAttributeSimpleAction extends UnarySimpleAction {
         return which.getAttribute(attributeName);
     }
 
-    private String getResponse(String attributeValue) {
-        return result.replaceAll("<attribute>", attributeValue);
+    private String getResponse(String attributeValue, String command) {
+        GameObject which = getObject(command, parameter);
+        return result.replaceAll("<attribute>", attributeValue).replaceAll("<parent>", which.getParent().getName());
     }
 }
