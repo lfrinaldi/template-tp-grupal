@@ -15,6 +15,10 @@ public class AttributeEqualsCondition extends GameCondition<String> {
         this.comparable = comparable;
     }
 
+    private GameObject getObject(String command) {
+        return game.getScene().find(parameter.value(command));
+    }
+
     @Override
     public boolean isSatisfiedBy(String command) {
         String attribute = getObject(command).getAttribute(attributeName);
@@ -25,8 +29,6 @@ public class AttributeEqualsCondition extends GameCondition<String> {
         return booleanResult;
     }
 
-    private GameObject getObject(String command) {
-        return game.getScene().find(parameter.value(command));
-    }
+
 
 }
