@@ -1,6 +1,6 @@
 package ar.fiuba.tdd.tp.action;
 
-import ar.fiuba.tdd.tp.condition.Condition;
+import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.Game;
 
 import java.util.ArrayList;
@@ -33,6 +33,10 @@ public class ComplexAction implements Action {
 
     public List<SimpleAction> getSteps() {
         return steps;
+    }
+
+    public void addAction(SimpleAction action) {
+        this.steps.add(action);
     }
 
     @Override

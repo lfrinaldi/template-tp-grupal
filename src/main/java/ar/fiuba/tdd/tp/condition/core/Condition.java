@@ -1,4 +1,4 @@
-package ar.fiuba.tdd.tp.condition;
+package ar.fiuba.tdd.tp.condition.core;
 
 /**
  * Created by leandro on 10/05/16.

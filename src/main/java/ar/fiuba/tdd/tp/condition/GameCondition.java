@@ -1,6 +1,7 @@
 package ar.fiuba.tdd.tp.condition;
 
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
+import ar.fiuba.tdd.tp.condition.core.AbstractCondition;
 import ar.fiuba.tdd.tp.model.Game;
 
 /**
@@ -9,6 +10,11 @@ import ar.fiuba.tdd.tp.model.Game;
 public abstract class GameCondition<T> extends AbstractCondition<T> {
     protected Game game;
     protected Parameter parameter;
+
+    public GameCondition() {
+        this.game = null;
+        this.parameter = null;
+    }
 
     public GameCondition(Game game, Parameter parameter) {
         this.game = game;

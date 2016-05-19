@@ -1,6 +1,6 @@
 package ar.fiuba.tdd.tp.action;
 
-import ar.fiuba.tdd.tp.condition.Condition;
+import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameObject;
 

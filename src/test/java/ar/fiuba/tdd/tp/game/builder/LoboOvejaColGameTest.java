@@ -1,44 +1,37 @@
 package ar.fiuba.tdd.tp.game.builder;
 
 import ar.fiuba.tdd.tp.builder.LoboOvejaColGameBuilder;
-
 import ar.fiuba.tdd.tp.model.Game;
-import ar.fiuba.tdd.tp.model.GameObject;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Map;
-
 public class LoboOvejaColGameTest {
+    private Game game;
+
+    @Before
+    public void setup() {
+        LoboOvejaColGameBuilder loboOvejaColGameBuilder = new LoboOvejaColGameBuilder();
+        game = loboOvejaColGameBuilder.build();
+    }
 
     @Test
     public void buildLoboOvejaColTest() {
-        LoboOvejaColGameBuilder loboOvejaColGameBuilder = new LoboOvejaColGameBuilder();
-        Game game = loboOvejaColGameBuilder.build();
+        Assert.assertEquals("Ok", executeCommand("take sheep"));
+        Assert.assertEquals("You can’t do that! The boat is full.", executeCommand("take wolf"));
+        Assert.assertEquals("you have crossed!", executeCommand("cross north-shore"));
+        Assert.assertEquals("Ok", executeCommand("leave sheep"));
+        Assert.assertEquals("you have crossed!", executeCommand("cross south-shore"));
+        Assert.assertEquals("Ok", executeCommand("take wolf"));
+        Assert.assertEquals("you have crossed!", executeCommand("cross north-shore"));
+        Assert.assertEquals("Ok", executeCommand("leave wolf"));
+        Assert.assertEquals("You can’t do that! The wolf will eat the sheep!", executeCommand("cross south-shore"));
+    }
 
-        Map<String,GameObject> costaSur = game.getScene().getChild("south-shore").getChildrenMap();
-        Map<String,GameObject> costaNorte = game.getScene().getChild("north-shore").getChildrenMap();
-        Map<String,GameObject> player = game.getScene().getChild("south-shore").getChild("player").getChildrenMap();
-
-        String command = "take sheep"; System.out.println(command); String result = game.doCommand(command); System.out.println(result);
-        Assert.assertEquals(result, "Ok");
-        command = "take wolf"; System.out.println(command); result = game.doCommand(command); System.out.println(result);
-        Assert.assertEquals(result, "You can’t do that! The boat is full.");
-        command = "cross north-shore"; System.out.println(command); result = game.doCommand(command); System.out.println(result);
-        Assert.assertEquals(result, "you have crossed!");
-        command = "leave sheep"; System.out.println(command); result = game.doCommand(command); System.out.println(result);
-        Assert.assertEquals(result, "Ok");
-        command = "cross south-shore"; System.out.println(command); result = game.doCommand(command); System.out.println(result);
-        Assert.assertEquals(result, "you have crossed!");
-        command = "take wolf"; System.out.println(command); result = game.doCommand(command); System.out.println(result);
-        Assert.assertEquals(result, "Ok");
-        command = "cross north-shore"; System.out.println(command); result = game.doCommand(command); System.out.println(result);
-        Assert.assertEquals(result, "you have crossed!");
-        command = "leave wolf"; System.out.println(command); result = game.doCommand(command); System.out.println(result);
-        Assert.assertEquals(result, "Ok");
-        command = "cross south-shore"; System.out.println(command); result = game.doCommand(command); System.out.println(result);
-        Assert.assertEquals(result, "You can’t do that! The wolf will eat the sheep!");
-
-        //System.out.println(costaSur); System.out.println(costaNorte); System.out.println(player);
+    private String executeCommand(String command) {
+        System.out.println(command);
+        String result = game.doCommand(command);
+        System.out.println(result);
+        return result;
     }
 }

@@ -59,10 +59,6 @@ public class GameObject {
         return attributesMap;
     }
 
-    public List<String> getAttributesList() {
-        return (List) attributesMap.values();
-    }
-
     public void addAtribute(String name, String value) {
         attributesMap.put(name, value);
     }
@@ -76,6 +72,8 @@ public class GameObject {
         if (attributesMap.containsKey(name)) {
             attributesMap.replace(name, value);
             return true;
+        } else {
+            attributesMap.put(name, value);
         }
 
         return false;

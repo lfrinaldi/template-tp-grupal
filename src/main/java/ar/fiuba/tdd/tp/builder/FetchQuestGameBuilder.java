@@ -8,7 +8,7 @@ import ar.fiuba.tdd.tp.action.simple.MoveChildSimpleAction;
 import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
 import ar.fiuba.tdd.tp.condition.ChildrenSizeEqualsCondition;
-import ar.fiuba.tdd.tp.condition.Condition;
+import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameObject;
 
@@ -21,9 +21,9 @@ public class FetchQuestGameBuilder implements GameBuilder {
         GameObject scene = buildScene();
         Game game = new Game(scene);
         ComplexAction complexAction = buildLookAroundComplexAction(game);
-        game.getActions().add(complexAction);
+        game.addAction(complexAction);
         complexAction = buildPickStickComplexAction(game);
-        game.getActions().add(complexAction);
+        game.addAction(complexAction);
 
         return game;
     }
@@ -47,9 +47,9 @@ public class FetchQuestGameBuilder implements GameBuilder {
         String command = "look around";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildLookAroundSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
         simpleAction = buildYouWonSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
 
         return complexAction;
     }
@@ -60,9 +60,9 @@ public class FetchQuestGameBuilder implements GameBuilder {
         String command = "pick stick";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildPickStickSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
         simpleAction = buildYouWonSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
 
         return complexAction;
     }
@@ -93,7 +93,7 @@ public class FetchQuestGameBuilder implements GameBuilder {
 
         Parameter whereParameter = new ImplicitParameter("player");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, whereParameter, 1);
-        String result = "There’s nothing in the room. You won the game!";
+        String result = "There's nothing in the room. You won the game!";
         SimpleAction simpleAction = new MessageSimpleAction(complexAction, condition, result);
 
         return simpleAction;

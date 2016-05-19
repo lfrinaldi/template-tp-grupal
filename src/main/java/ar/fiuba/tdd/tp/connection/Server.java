@@ -3,32 +3,15 @@ package ar.fiuba.tdd.tp.connection;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+
 
 public class Server {
 
-    private static final Map<String, Integer> serverMap = new HashMap<>();
-
-    static {
-        serverMap.put("fetch quest", 8001);
-        serverMap.put("abrir puerta", 8002);
-        serverMap.put("abrir puerta 2", 8003);
-        serverMap.put("objeto maldito", 8004);
-        serverMap.put("acertijo del lobo, la oveja y la col", 8005);
-        serverMap.put("torres de hanoi", 8006);
-        serverMap.put("busqueda del tesoro", 8007);
-    }
-
-    public static String getKeyByValue(Integer value) {
-        for (Map.Entry<String, Integer> entry : serverMap.entrySet()) {
-            if (Objects.equals(value, entry.getValue())) {
-                return entry.getKey();
-            }
-        }
-        return null;
-    }
+    private static final Queue<Integer> ports = new LinkedList<>(Arrays.asList(8001, 8002, 8003, 8004, 8005, 8006, 8006,
+            8007, 8008));
 
     public static void main(String[] args) {
         try {
@@ -45,10 +28,8 @@ public class Server {
                 if (command != null) {
                     if (command.startsWith("load game ")) {
                         String game = command.replace("load game ", "");
-                        if (serverMap.containsKey(game)) {
-                            int port = serverMap.get(game);
-                            instanceEngineGameServer(game, port);
-                        }
+                        int port = getPort();
+                        instanceEngineGameServer(game, port);
                     }
                 }
             }
@@ -75,6 +56,16 @@ public class Server {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static Integer getPort() throws Exception {
+        Integer port;
+        if (ports.size() > 0) {
+            port = ports.poll();
+        } else {
+            throw new Exception("There is no port available");
+        }
+        return port;
     }
 
 }

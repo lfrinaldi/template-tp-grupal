@@ -8,7 +8,7 @@ import ar.fiuba.tdd.tp.action.simple.MoveChildSimpleAction;
 import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
 import ar.fiuba.tdd.tp.condition.ChildrenSizeEqualsCondition;
-import ar.fiuba.tdd.tp.condition.Condition;
+import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameObject;
 
@@ -19,11 +19,11 @@ public class AbrirPuertaGameBuilder implements GameBuilder {
         GameObject scene = buildScene();
         Game game = new Game(scene);
         ComplexAction complexAction = buildLookAroundComplexAction(game);
-        game.getActions().add(complexAction);
+        game.addAction(complexAction);
         complexAction = buildOpenDoorComplexAction(game);
-        game.getActions().add(complexAction);
+        game.addAction(complexAction);
         complexAction = buildPickKeyComplexAction(game);
-        game.getActions().add(complexAction);
+        game.addAction(complexAction);
         return game;
     }
 
@@ -48,9 +48,9 @@ public class AbrirPuertaGameBuilder implements GameBuilder {
         String command = "look around";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildLookAroundSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
         simpleAction = buildLookAroundNothingSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
 
         return complexAction;
     }
@@ -60,9 +60,9 @@ public class AbrirPuertaGameBuilder implements GameBuilder {
         String name = "open door";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildOpenLockedDoorSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
         simpleAction = buildOpenUnlockedDoorSimpleAction(game, complexAction);
-        complexAction.getSteps().add(simpleAction);
+        complexAction.addAction(simpleAction);
 
         return complexAction;
     }
@@ -73,9 +73,9 @@ public class AbrirPuertaGameBuilder implements GameBuilder {
         String command = "pick key";
         ComplexAction pickKeyComplexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildPickKeySimpleAction(game, pickKeyComplexAction);
-        pickKeyComplexAction.getSteps().add(simpleAction);
+        pickKeyComplexAction.addAction(simpleAction);
         simpleAction = buildKeyAlreadyPickedSimpleAction(game, pickKeyComplexAction);
-        pickKeyComplexAction.getSteps().add(simpleAction);
+        pickKeyComplexAction.addAction(simpleAction);
 
         return pickKeyComplexAction;
     }

@@ -3,30 +3,34 @@ package ar.fiuba.tdd.tp.game.builder;
 import ar.fiuba.tdd.tp.builder.AbrirPuerta2GameBuilder;
 import ar.fiuba.tdd.tp.model.Game;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class AbrirPuerta2GameTest {
 
+    private Game game;
+
+    @Before
+    public void setup() {
+        AbrirPuerta2GameBuilder abrirPuerta2GameBuilder = new AbrirPuerta2GameBuilder();
+        game = abrirPuerta2GameBuilder.build();
+    }
+
+    private String execute(String command) {
+        System.out.println(command);
+        String result = game.doCommand(command);
+        System.out.println(result);
+        return result;
+    }
+
     @Test
     public void buildFetchQuestTest() {
-
-        AbrirPuerta2GameBuilder abrirPuerta2GameBuilder = new AbrirPuerta2GameBuilder();
-        Game game = abrirPuerta2GameBuilder.build();
-        String result = game.doCommand("look around");
-        System.out.println(result);
-        result = game.doCommand("open door");
-        System.out.println(result);
-        result = game.doCommand("What can I do with box ?");
-        System.out.println(result);
-        result = game.doCommand("open box");
-        System.out.println(result);
-        result = game.doCommand("look around");
-        System.out.println(result);
-        result = game.doCommand("pick key");
-        System.out.println(result);
-        result = game.doCommand("open door");
-        System.out.println(result);
-
-        Assert.assertTrue(true);
+        Assert.assertEquals("There’s a door and a box in the room.", execute("look around"));
+        Assert.assertEquals("Ey! Where do you go?! room2 is locked.", execute("open door"));
+        Assert.assertEquals("You can open/close the box.", execute("What can I do with box ?"));
+        Assert.assertEquals("The box is opened!.", execute("open box"));
+        Assert.assertEquals("There’s a door, a box and a key in the room.", execute("look around"));
+        Assert.assertEquals("There you go!", execute("pick key"));
+        Assert.assertEquals("You enter room2. You won the game!", execute("open door"));
     }
 }

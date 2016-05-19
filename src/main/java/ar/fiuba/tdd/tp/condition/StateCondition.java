@@ -1,5 +1,6 @@
 package ar.fiuba.tdd.tp.condition;
 
+import ar.fiuba.tdd.tp.condition.core.AbstractCondition;
 import ar.fiuba.tdd.tp.model.GameObject;
 
 import java.util.Map;
@@ -16,7 +17,7 @@ public class StateCondition extends AbstractCondition<GameObject> {
     @Override
     public boolean isSatisfiedBy(GameObject gameObject) {
 
-        Map map = gameObject.getAttributesMap();
+        Map<String, String> map = gameObject.getAttributesMap();
         boolean isSatisfied = true;
 
         for (String key : state.keySet()) {
