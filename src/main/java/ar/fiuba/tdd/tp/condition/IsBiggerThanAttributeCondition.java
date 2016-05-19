@@ -5,6 +5,7 @@ import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameObject;
 
 public class IsBiggerThanAttributeCondition extends GameCondition<String> {
+
     private String attributeName;
     private Parameter parameter2;
 
@@ -34,6 +35,5 @@ public class IsBiggerThanAttributeCondition extends GameCondition<String> {
     private GameObject getObject2(String command) {
         return game.getScene().find(parameter2.value(command));
     }
-
 
 }

@@ -9,12 +9,13 @@ import ar.fiuba.tdd.tp.action.simple.parameter.ExplicitCurrentLastChildParameter
 import ar.fiuba.tdd.tp.action.simple.parameter.ExplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
 import ar.fiuba.tdd.tp.condition.ChildrenSizeEqualsCondition;
-import ar.fiuba.tdd.tp.condition.Condition;
 import ar.fiuba.tdd.tp.condition.HasAttributeCondition;
 import ar.fiuba.tdd.tp.condition.IsBiggerThanAttributeCondition;
+import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameObject;
 
+@SuppressWarnings("CPD-START")
 public class TorresHanoiGameBuilder implements GameBuilder {
 
     @Override
@@ -62,7 +63,6 @@ public class TorresHanoiGameBuilder implements GameBuilder {
     }
 
     private SimpleAction buildCheckEmptySimpleAction(Game game, ComplexAction complexAction) {
-        Parameter childParameter = new ExplicitCurrentLastChildParameter(2, game);
         Parameter whichParameter = new ExplicitParameter(2);
         String attributeName = "size";
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, whichParameter, 0);
@@ -75,7 +75,6 @@ public class TorresHanoiGameBuilder implements GameBuilder {
 
     private GameObject buildScene() {
 
-        GameObject scene = new GameObject("scene");
         GameObject stack1 = new GameObject("stack1");
         GameObject stack2 = new GameObject("stack2");
         GameObject stack3 = new GameObject("stack3");
@@ -95,6 +94,7 @@ public class TorresHanoiGameBuilder implements GameBuilder {
         stack1.addChild(disc2);
         stack1.addChild(disc1);
 
+        GameObject scene = new GameObject("scene");
         scene.addChild(stack1);
         scene.addChild(stack2);
         scene.addChild(stack3);
