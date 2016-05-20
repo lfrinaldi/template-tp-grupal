@@ -41,10 +41,10 @@ public class EscapeGameBuilder implements GameBuilder {
         GameObject scene = new GameObject("scene");
         GameObject pasillo = new GameObject("Pasillo");
         scene.addChild(buildRoom1());
-        scene.addChild(buildRoom2(pasillo));
-        scene.addChild(buildRoom3(pasillo));
-        scene.addChild(buildRoom4(pasillo));
-        scene.addChild(buildRoom5(pasillo));
+        scene.addChild(buildRoom2());
+        scene.addChild(buildRoom3());
+        scene.addChild(buildRoom4());
+        scene.addChild(buildRoom5());
         scene.addChild(buildRoom6());
         scene.addChild(buildRoom7());
         scene.addChild(buildRoom8());
@@ -66,7 +66,7 @@ public class EscapeGameBuilder implements GameBuilder {
         return pasillo;
     }
 
-    private GameObject buildRoom2(GameObject pasillo) {
+    private GameObject buildRoom2() {
         GameObject salon1 = new GameObject("Salon1");
         GameObject mesa = new GameObject("Mesa");
         GameObject botella = new GameObject("Botella");
@@ -94,7 +94,7 @@ public class EscapeGameBuilder implements GameBuilder {
         return salon1;
     }
 
-    private GameObject buildRoom3(GameObject pasillo) {
+    private GameObject buildRoom3() {
         GameObject salon2 = new GameObject("Salon2");
         GameObject martillo = new GameObject("Martillo");
         GameObject destornillador1 = new GameObject("Destornillador1");
@@ -106,7 +106,7 @@ public class EscapeGameBuilder implements GameBuilder {
         return salon2;
     }
 
-    private GameObject buildRoom4(GameObject pasillo) {
+    private GameObject buildRoom4() {
         GameObject salon3 = new GameObject("Salon3");
         GameObject llave = new GameObject("Llave");
         salon3.addChild(llave);
@@ -114,11 +114,10 @@ public class EscapeGameBuilder implements GameBuilder {
         return salon3;
     }
 
-    private GameObject buildRoom5(GameObject pasillo) {
+    private GameObject buildRoom5() {
         GameObject bibliotecaAcceso = new GameObject("BibliotecaAcceso");
         GameObject bibliotecario = new GameObject("Bibliotecario");
         bibliotecaAcceso.addChild(bibliotecario);
-        bibliotecaAcceso.addChild(pasillo);
 
         return bibliotecaAcceso;
     }
@@ -189,7 +188,7 @@ public class EscapeGameBuilder implements GameBuilder {
         Parameter credencial = new ImplicitParameter("Credencial");
         Condition<String> condition = new HasChildCondition(game, bibliotecario, credencial).not(null);
 
-        String result = "No puede entrar";
+        String result = "Entro";
         return new MessageSimpleAction(complexAction, condition, result);
     }
 
@@ -213,39 +212,6 @@ public class EscapeGameBuilder implements GameBuilder {
         return new MoveChildSimpleAction(complexAction, new TrueCondition(), childParameter,
                 targetParameter, result);
     }
-
-    /*private ComplexAction buildGotoBibliotecaComplexAction(Game game) {
-        String name = "goto Biblioteca";
-        String command = "goto Biblioteca";
-        ComplexAction complexAction = new ComplexAction(name, command, game);
-        SimpleAction simpleAction = buildCantGotoBibliotecaSimpleAction(game, complexAction);
-        complexAction.addAction(simpleAction);
-        simpleAction = buildGotoBibliotecaSimpleAction(game, complexAction);
-        complexAction.addAction(simpleAction);
-
-        return complexAction;
-    }
-
-    private SimpleAction buildGotoBibliotecaSimpleAction(Game game, ComplexAction complexAction) {
-        Parameter childParameter = new ImplicitParameter("player");
-        Parameter targetParameter = new ImplicitParameter("Biblioteca");
-        Parameter bibliotecario = new ImplicitParameter("Bibliotecario");
-        Parameter credencial = new ImplicitParameter("Credencial");
-        Condition<String> condition = new HasChildCondition(game, bibliotecario, credencial);
-
-        String result = "EntroBiblioteca";
-        return new MoveChildSimpleAction(complexAction, new TrueCondition(), childParameter,
-                targetParameter, result);
-    }
-
-    private SimpleAction buildCantGotoBibliotecaSimpleAction(Game game, ComplexAction complexAction) {
-        Parameter bibliotecario = new ImplicitParameter("Bibliotecario");
-        Parameter credencial = new ImplicitParameter("Credencial");
-        Condition<String> condition = new HasChildCondition(game, bibliotecario, credencial).not(null);
-
-        String result = "No puede entrar";
-        return new MessageSimpleAction(complexAction, new FalseCondition(), result);
-    }*/
 
     private ComplexAction buildPickComplexAction(Game game) {
         String name = "pick";
