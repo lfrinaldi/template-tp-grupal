@@ -44,5 +44,6 @@ public class EscapeGameTest {
         Assert.assertEquals("Mostro", execute("show Credencial in Bibliotecario"));
         Assert.assertEquals("Entro", execute("goto Biblioteca"));
         Assert.assertEquals("Aparece pasaje al Sotano", execute("move LibroViejo"));
+        Assert.assertEquals("Entro", execute("goto Sotano"));
     }
 }
