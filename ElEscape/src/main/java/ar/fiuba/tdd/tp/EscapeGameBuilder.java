@@ -2,6 +2,7 @@ package ar.fiuba.tdd.tp;
 
 import ar.fiuba.tdd.tp.action.ComplexAction;
 import ar.fiuba.tdd.tp.action.SimpleAction;
+import ar.fiuba.tdd.tp.action.simple.ChangeAttributeSimpleAction;
 import ar.fiuba.tdd.tp.action.simple.MessageSimpleAction;
 import ar.fiuba.tdd.tp.action.simple.MoveChildSimpleAction;
 import ar.fiuba.tdd.tp.action.simple.parameter.ExplicitParameter;
@@ -28,6 +29,16 @@ public class EscapeGameBuilder implements GameBuilder {
     }
 
     private void addActions(Game game) {
+        addGotoActions(game);
+        game.addAction(buildPickComplexAction(game));
+        game.addAction(buildMoveCuadroBarcoComplexAction(game));
+        game.addAction(buildMoveLibroViejoComplexAction(game));
+        game.addAction(buildOpenComplexAction(game));
+        game.addAction(buildPutComplexAction(game));
+        game.addAction(buildShowComplexAction(game));
+    }
+
+    private void addGotoActions(Game game) {
         game.addAction(buildGotoComplexAction(game, "Salon1"));
         game.addAction(buildGotoComplexAction(game, "Salon2"));
         game.addAction(buildGotoComplexAction(game, "Salon3"));
@@ -36,12 +47,6 @@ public class EscapeGameBuilder implements GameBuilder {
         game.addAction(buildGotoComplexAction(game, "BibliotecaAcceso"));
         game.addAction(buildGotoComplexAction(game, "Sotano"));
         game.addAction(buildGotoBibliotecaComplexAction(game));
-
-        game.addAction(buildPickComplexAction(game));
-        game.addAction(buildMoveCuadroBarcoComplexAction(game));
-        game.addAction(buildOpenComplexAction(game));
-        game.addAction(buildPutComplexAction(game));
-        game.addAction(buildShowComplexAction(game));
     }
 
     private GameObject buildScene() {
@@ -62,11 +67,10 @@ public class EscapeGameBuilder implements GameBuilder {
     private GameObject buildRoom1() {
         GameObject pasillo = new GameObject("Pasillo");
         GameObject foto = new GameObject("Foto");
-        // TODO: Add lapicera
-        //GameObject lapicera = new GameObject("Lapicera");
+        GameObject lapicera = new GameObject("Lapicera");
         GameObject player = new GameObject("player");
         player.addChild(foto);
-        //player.addChild(lapicera);
+        player.addChild(lapicera);
 
         pasillo.addChild(player);
 
@@ -161,9 +165,9 @@ public class EscapeGameBuilder implements GameBuilder {
     private GameObject buildRoom7() {
         GameObject sotano = new GameObject("Sotano");
         GameObject escalera = new GameObject("Escalera");
-        //GameObject baranda = new GameObject("Baranda");
+        GameObject baranda = new GameObject("Baranda");
         sotano.addChild(escalera);
-        //sotano.addChild(baranda);
+        sotano.addChild(baranda);
 
         return sotano;
     }
@@ -233,9 +237,9 @@ public class EscapeGameBuilder implements GameBuilder {
         String name = "pick";
         String command = "pick <parameter>";
         ComplexAction complexAction = new ComplexAction(name, command, game);
-        SimpleAction simpleAction = buildCantPickSimpleAction(game, complexAction);
-        complexAction.addAction(simpleAction);
-        simpleAction = buildPickSimpleAction(game, complexAction);
+        //SimpleAction simpleAction = buildCantPickSimpleAction(game, complexAction);
+        //complexAction.addAction(simpleAction);
+        SimpleAction simpleAction = buildPickSimpleAction(game, complexAction);
         complexAction.addAction(simpleAction);
 
         return complexAction;
@@ -244,20 +248,20 @@ public class EscapeGameBuilder implements GameBuilder {
     private SimpleAction buildPickSimpleAction(Game game, ComplexAction complexAction) {
         Parameter childParameter = new ExplicitParameter(1);
         Parameter targetParameter = new ImplicitParameter("player");
-        Condition<String> condition = new ChildrenSizeEqualsCondition(game, targetParameter, 0).or(new ChildrenSizeEqualsCondition(game, targetParameter, 1)).or(new ChildrenSizeEqualsCondition(game, targetParameter, 2)).or(new ChildrenSizeEqualsCondition(game, targetParameter, 3));
+        //Condition<String> condition = new ChildrenSizeEqualsCondition(game, targetParameter, 0).or(new ChildrenSizeEqualsCondition(game, targetParameter, 1)).or(new ChildrenSizeEqualsCondition(game, targetParameter, 2)).or(new ChildrenSizeEqualsCondition(game, targetParameter, 3));
 
         String result = "Agarro";
-        return new MoveChildSimpleAction(complexAction, condition, childParameter,
+        return new MoveChildSimpleAction(complexAction, new TrueCondition(), childParameter,
                 targetParameter, result);
     }
 
-    private SimpleAction buildCantPickSimpleAction(Game game, ComplexAction complexAction) {
-        Parameter targetParameter = new ImplicitParameter("player");
-        Condition<String> condition = new ChildrenSizeEqualsCondition(game, targetParameter, 0).or(new ChildrenSizeEqualsCondition(game, targetParameter, 1)).or(new ChildrenSizeEqualsCondition(game, targetParameter, 2)).or(new ChildrenSizeEqualsCondition(game, targetParameter, 3)).not(null);
-        String result = "Ya tenes muchas cosas";
-
-        return new MessageSimpleAction(complexAction, condition, result);
-    }
+//    private SimpleAction buildCantPickSimpleAction(Game game, ComplexAction complexAction) {
+//        Parameter targetParameter = new ImplicitParameter("player");
+//        Condition<String> condition = new ChildrenSizeEqualsCondition(game, targetParameter, 0).or(new ChildrenSizeEqualsCondition(game, targetParameter, 1)).or(new ChildrenSizeEqualsCondition(game, targetParameter, 2)).or(new ChildrenSizeEqualsCondition(game, targetParameter, 3)).not(null);
+//        String result = "Ya tenes muchas cosas";
+//
+//        return new MessageSimpleAction(complexAction, condition, result);
+//    }
 
     private ComplexAction buildMoveCuadroBarcoComplexAction(Game game) {
         String name = "move CuadroBarco";
@@ -265,7 +269,15 @@ public class EscapeGameBuilder implements GameBuilder {
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildMoveCuadroBarcoSimpleAction(game, complexAction);
         complexAction.addAction(simpleAction);
+        return complexAction;
+    }
 
+    private ComplexAction buildMoveLibroViejoComplexAction(Game game) {
+        String name = "move LibroViejo";
+        String command = "move LibroViejo";
+        ComplexAction complexAction = new ComplexAction(name, command, game);
+        SimpleAction simpleAction = buildMoveLibroViejoSimpleAction(game, complexAction);
+        complexAction.addAction(simpleAction);
         return complexAction;
     }
 
@@ -276,6 +288,14 @@ public class EscapeGameBuilder implements GameBuilder {
         String result = "Movio";
         return new MoveChildSimpleAction(complexAction, new TrueCondition(), keyParameter, room1Parameter,
                 result);
+    }
+
+    private SimpleAction buildMoveLibroViejoSimpleAction(Game game, ComplexAction complexAction) {
+        Parameter player = new ImplicitParameter("LibroViejo");
+
+        String result = "Aparece pasaje al Sotano";
+        return new ChangeAttributeSimpleAction(complexAction, new TrueCondition(), player, result, "moved",
+                "true");
     }
 
     private ComplexAction buildOpenComplexAction(Game game) {
