@@ -15,7 +15,7 @@ import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameBuilder;
 import ar.fiuba.tdd.tp.model.GameObject;
-
+@SuppressWarnings("CPD-START")
 public class EscapeGameBuilder implements GameBuilder {
 
     @Override
@@ -28,8 +28,15 @@ public class EscapeGameBuilder implements GameBuilder {
     }
 
     private void addActions(Game game) {
-        //game.addAction(buildGotoBibliotecaComplexAction(game));
-        game.addAction(buildGotoComplexAction(game));
+        game.addAction(buildGotoComplexAction(game, "Salon1"));
+        game.addAction(buildGotoComplexAction(game, "Salon2"));
+        game.addAction(buildGotoComplexAction(game, "Salon3"));
+        game.addAction(buildGotoComplexAction(game, "Salon4"));
+        game.addAction(buildGotoComplexAction(game, "Pasillo"));
+        game.addAction(buildGotoComplexAction(game, "BibliotecaAcceso"));
+        game.addAction(buildGotoComplexAction(game, "Sotano"));
+        game.addAction(buildGotoBibliotecaComplexAction(game));
+
         game.addAction(buildPickComplexAction(game));
         game.addAction(buildMoveCuadroBarcoComplexAction(game));
         game.addAction(buildOpenComplexAction(game));
@@ -169,8 +176,8 @@ public class EscapeGameBuilder implements GameBuilder {
         return baranda;
     }
 
-    private ComplexAction buildGotoComplexAction(Game game) {
-        String name = "goto";
+    private ComplexAction buildGotoBibliotecaComplexAction(Game game) {
+        String name = "goto Biblioteca";
         String command = "goto <parameter>";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildGotoCantBibliotecaSimpleAction(game, complexAction);
@@ -180,6 +187,15 @@ public class EscapeGameBuilder implements GameBuilder {
         simpleAction = buildGotoSimpleAction(game, complexAction);
         complexAction.addAction(simpleAction);
 
+        return complexAction;
+    }
+
+    private ComplexAction buildGotoComplexAction(Game game, String roomName) {
+        String name = "goto "  + roomName;
+        String command = "goto <parameter>";
+        ComplexAction complexAction = new ComplexAction(name, command, game);
+        SimpleAction simpleAction =  buildGotoSimpleAction(game, complexAction);
+        complexAction.addAction(simpleAction);
         return complexAction;
     }
 
