@@ -7,4 +7,5 @@ include 'Hanoi'
 include 'BusquedaTesoro'
 include 'LoboOvejaCol'
 include 'ObjetoMaldito'
+include 'ElEscape'
 
