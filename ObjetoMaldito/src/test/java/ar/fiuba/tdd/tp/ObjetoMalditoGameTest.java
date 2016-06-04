@@ -14,13 +14,6 @@ public class ObjetoMalditoGameTest {
     public void setup() {
         ObjetoMalditoGameBuilder objetoMalditoGameBuilder = new ObjetoMalditoGameBuilder();
         game = objetoMalditoGameBuilder.build();
-        /*Map<String, GameObject> player = game.getScene().find("player").getChildrenMap();
-        Map<String, GameObject> thief = game.getScene().find("thief").getChildrenMap();
-        Map<String, GameObject> room1 = game.getScene().find("room1").getChildrenMap();
-        Map<String, GameObject> room2 = game.getScene().find("room2").getChildrenMap();
-        Map<String, GameObject> room3 = game.getScene().find("room3").getChildrenMap();*/
-        //System.out.println(player); System.out.println(thief); System.out.println(room1); System.out.println(room2)
-        // ; System.out.println(room3);
     }
 
     private String execute(String command) {

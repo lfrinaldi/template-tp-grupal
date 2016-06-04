@@ -9,7 +9,6 @@ public class GameObject {
 
     private String name;
     private GameObject parent;
-    private Map<String, GameObject> childrenMap = new HashMap<>();
     private List<GameObject> childrenList = new ArrayList<>();
     private Map<String, String> attributesMap = new HashMap<>();
 
@@ -29,27 +28,17 @@ public class GameObject {
         this.parent = parent;
     }
 
-    public Map<String, GameObject> getChildrenMap() {
-        return childrenMap;
-    }
-
     public List<GameObject> getChildrenList() {
         return childrenList;
     }
 
     public void addChild(GameObject gameObject) {
-        String name = gameObject.getName();
         gameObject.setParent(this);
-        childrenMap.put(name, gameObject);
         childrenList.add(gameObject);
     }
 
-    public GameObject getChild(String name) {
-        return childrenMap.get(name);
-    }
-
     public GameObject removeChild(String name) {
-        GameObject gameObject = childrenMap.remove(name);
+        GameObject gameObject = find(name);
         childrenList.remove(gameObject);
         gameObject.setParent(null);
         return gameObject;
@@ -133,5 +122,9 @@ public class GameObject {
         }
 
         return null;
+    }
+
+    public boolean hasChildNamed(final String name){
+        return childrenList.stream().map(GameObject::getName).filter(name::equals).findFirst().isPresent();
     }
 }
