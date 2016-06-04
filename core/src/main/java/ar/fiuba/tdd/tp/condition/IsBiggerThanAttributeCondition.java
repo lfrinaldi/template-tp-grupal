@@ -19,11 +19,11 @@ public class IsBiggerThanAttributeCondition extends GameCondition<String> {
     public boolean isSatisfiedBy(String command) {
         int first = 0;
         if (getObject(command) != null) {
-            first = Integer.parseInt(getObject(command).getAttributesMap().get(attributeName));
+            first = Integer.parseInt(getObject(command).getAttributes().get(attributeName));
         }
         int second = 0;
         if (getObject2(command) != null) {
-            second = Integer.parseInt(getObject2(command).getAttributesMap().get(attributeName));
+            second = Integer.parseInt(getObject2(command).getAttributes().get(attributeName));
         }
         return first > second;
     }

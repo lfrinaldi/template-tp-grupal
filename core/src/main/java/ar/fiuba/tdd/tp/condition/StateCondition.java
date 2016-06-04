@@ -17,7 +17,7 @@ public class StateCondition extends AbstractCondition<GameObject> {
     @Override
     public boolean isSatisfiedBy(GameObject gameObject) {
 
-        Map<String, String> map = gameObject.getAttributesMap();
+        Map<String, String> map = gameObject.getAttributes();
         boolean isSatisfied = true;
 
         for (String key : state.keySet()) {

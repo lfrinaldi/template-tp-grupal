@@ -46,7 +46,7 @@ public class ObjetoMalditoGameBuilder implements GameBuilder {
         room1.addChild(new GameObject("object"));
         room1.addChild(door1);
         GameObject thief = new GameObject("thief");
-        thief.getAttributesMap().put("help", "You can talk with thief: \"Hello\", \"Bye\".");
+        thief.getAttributes().put("help", "You can talk with thief: \"Hello\", \"Bye\".");
         room2.addChild(thief);
         room2.addChild(door2);
         GameObject scene = new GameObject("scene");

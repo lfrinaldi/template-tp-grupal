@@ -82,15 +82,15 @@ public class TorresHanoiGameBuilder implements GameBuilder {
 
         String helpText = "You can check top/move top.";
 
-        stack1.getAttributesMap().put("help", helpText);
-        stack2.getAttributesMap().put("help", helpText);
-        stack3.getAttributesMap().put("help", helpText);
+        stack1.getAttributes().put("help", helpText);
+        stack2.getAttributes().put("help", helpText);
+        stack3.getAttributes().put("help", helpText);
 
         GameObject disc1 = new GameObject("disc1");
         GameObject disc2 = new GameObject("disc2");
 
-        disc1.getAttributesMap().put("size", "1");
-        disc2.getAttributesMap().put("size", "2");
+        disc1.getAttributes().put("size", "1");
+        disc2.getAttributes().put("size", "2");
 
         stack1.addChild(disc2);
         stack1.addChild(disc1);

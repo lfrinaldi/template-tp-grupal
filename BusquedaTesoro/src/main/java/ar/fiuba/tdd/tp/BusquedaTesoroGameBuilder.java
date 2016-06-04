@@ -7,7 +7,6 @@ import ar.fiuba.tdd.tp.action.simple.parameter.ExplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitCurrentParentParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
-import ar.fiuba.tdd.tp.builder.*;
 import ar.fiuba.tdd.tp.condition.*;
 import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.*;
@@ -100,7 +99,7 @@ public class BusquedaTesoroGameBuilder implements ar.fiuba.tdd.tp.builder.GameBu
         redBox.addChild(poison);
         room4.addChild(redBox);
         GameObject antiPoison = new GameObject("anti-poison");
-        antiPoison.getAttributesMap().put("help", "You can drink the potion.");
+        antiPoison.getAttributes().put("help", "You can drink the potion.");
         GameObject greenBox = new GameObject("green-box");
         greenBox.addChild(antiPoison);
         room4.addChild(greenBox);
@@ -113,7 +112,7 @@ public class BusquedaTesoroGameBuilder implements ar.fiuba.tdd.tp.builder.GameBu
         GameObject door5 = new GameObject("door5");
         room5.addChild(door5);
         GameObject treasure = new GameObject("treasure");
-        treasure.getAttributesMap().put("help", "You can pick the treasure.");
+        treasure.getAttributes().put("help", "You can pick the treasure.");
         room5.addChild(treasure);
 
         return room5;

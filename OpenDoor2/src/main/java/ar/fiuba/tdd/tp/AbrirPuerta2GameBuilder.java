@@ -38,7 +38,7 @@ public class  AbrirPuerta2GameBuilder implements GameBuilder {
         GameObject room1 = new GameObject("room1");
         GameObject player = new GameObject("player");
         GameObject box = new GameObject("box");
-        box.getAttributesMap().put("help", "You can open/close the box.");
+        box.getAttributes().put("help", "You can open/close the box.");
         GameObject key = new GameObject("key");
         box.addChild(key);
         GameObject door = new GameObject("door");
