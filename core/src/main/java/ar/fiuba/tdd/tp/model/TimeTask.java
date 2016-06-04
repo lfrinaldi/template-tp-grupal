@@ -26,7 +26,7 @@ public class TimeTask {
                 }
             };
 
-            executor.scheduleWithFixedDelay(task, 0, this.delay, TimeUnit.SECONDS);
+            executor.scheduleWithFixedDelay(task, 0, this.delay, timeUnit);
         }
     }
 
