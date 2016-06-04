@@ -124,7 +124,7 @@ public class ComplexConditionTest {
         GameObject door = this.buildDoor();
         ContainsCondition playerCanOpenDoor = new ContainsCondition(door.getAttributesMap().get("key"));
         Assert.assertFalse(playerCanOpenDoor.isSatisfiedBy(player));
-        player.getChildrenList().add(incorrectKey);
+        player.getChildren().add(incorrectKey);
         Assert.assertTrue(!playerCanOpenDoor.isSatisfiedBy(player));
     }
 

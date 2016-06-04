@@ -9,7 +9,7 @@ public class GameObject {
 
     private String name;
     private GameObject parent;
-    private List<GameObject> childrenList = new ArrayList<>();
+    private List<GameObject> children = new ArrayList<>();
     private Map<String, String> attributesMap = new HashMap<>();
 
     public GameObject(String name) {
@@ -28,18 +28,18 @@ public class GameObject {
         this.parent = parent;
     }
 
-    public List<GameObject> getChildrenList() {
-        return childrenList;
+    public List<GameObject> getChildren() {
+        return children;
     }
 
     public void addChild(GameObject gameObject) {
         gameObject.setParent(this);
-        childrenList.add(gameObject);
+        children.add(gameObject);
     }
 
     public GameObject removeChild(String name) {
         GameObject gameObject = find(name);
-        childrenList.remove(gameObject);
+        children.remove(gameObject);
         gameObject.setParent(null);
         return gameObject;
     }
@@ -75,7 +75,7 @@ public class GameObject {
     public List<GameObject> getSiblingsList() {
 
         List<GameObject> siblingsList = new ArrayList<>();
-        List<GameObject> parentChildren = parent.getChildrenList();
+        List<GameObject> parentChildren = parent.getChildren();
 
         for (GameObject sibling : parentChildren) {
             if (!sibling.getName().equals(name)) {
@@ -104,7 +104,7 @@ public class GameObject {
             return this;
         } else {
 
-            for (GameObject gameObject : getChildrenList()) {
+            for (GameObject gameObject : getChildren()) {
 
                 String gameObjectName = gameObject.getName();
 
@@ -125,6 +125,6 @@ public class GameObject {
     }
 
     public boolean hasChildNamed(final String name){
-        return childrenList.stream().map(GameObject::getName).filter(name::equals).findFirst().isPresent();
+        return children.stream().map(GameObject::getName).filter(name::equals).findFirst().isPresent();
     }
 }
