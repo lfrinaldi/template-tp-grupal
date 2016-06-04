@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 @SuppressWarnings("CPD-START")
-public class EscapeGameTest1 {
+public class ItShouldLostIfDownloadUsingStairs {
 
     private Game game;
 
@@ -25,7 +25,7 @@ public class EscapeGameTest1 {
     }
 
     @Test
-    public void escapeGameTest1() {
+    public void it_should_lost_if_download_using_stairs() {
         Assert.assertEquals("Entro", execute("goto BibliotecaAcceso"));
         Assert.assertEquals("Entro", execute("goto Pasillo"));
         Assert.assertEquals("Entro", execute("goto Salon3"));

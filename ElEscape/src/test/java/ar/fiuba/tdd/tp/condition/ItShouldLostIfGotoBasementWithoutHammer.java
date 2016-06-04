@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 @SuppressWarnings("CPD-START")
-public class EscapeGameTest3 {
+public class ItShouldLostIfGotoBasementWithoutHammer {
 
     private Game game;
 
@@ -25,14 +25,11 @@ public class EscapeGameTest3 {
     }
 
     @Test
-    public void escapeGameTest3() {
+    public void it_should_lost_if_goto_basement_without_hammer() {
         Assert.assertEquals("Entro", execute("goto BibliotecaAcceso"));
         Assert.assertEquals("Entro", execute("goto Pasillo"));
         Assert.assertEquals("Entro", execute("goto Salon3"));
         Assert.assertEquals("Agarro", execute("pick Llave"));
-        Assert.assertEquals("Entro", execute("goto Pasillo"));
-        Assert.assertEquals("Entro", execute("goto Salon2"));
-        Assert.assertEquals("Agarro", execute("pick Martillo"));
         Assert.assertEquals("Entro", execute("goto Pasillo"));
         Assert.assertEquals("Entro", execute("goto Salon1"));
         Assert.assertEquals("Movio", execute("move CuadroBarco"));
@@ -45,8 +42,7 @@ public class EscapeGameTest3 {
         Assert.assertEquals("Entro", execute("goto Biblioteca"));
         Assert.assertEquals("Aparece pasaje al Sotano", execute("move LibroViejo"));
         Assert.assertEquals("Entro", execute("goto Sotano"));
-        Assert.assertEquals("Uso", execute("use Baranda"));
-        Assert.assertEquals("Rompio" , execute("break Ventana using Martillo"));
-        Assert.assertEquals("Gano" , execute("goto Afuera"));
+        Assert.assertEquals("Perdio", execute("use Baranda"));
+
     }
 }
