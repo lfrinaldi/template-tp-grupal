@@ -1,7 +1,5 @@
 package ar.fiuba.tdd.tp.loader;
 
-
-import ar.fiuba.tdd.tp.EscapeGameBuilder;
 import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameBuilder;
 import ar.fiuba.tdd.tp.server.BuilderLoader;
@@ -13,10 +11,10 @@ public class GameLoader implements Loader {
         Game game = null;
         try {
             if (gameName != null) {
-                //GameBuilder gameBuilder = BuilderLoader.load(gameName);
-                //game = gameBuilder.build();
-                EscapeGameBuilder escape = new EscapeGameBuilder();
-                game = escape.build();
+                GameBuilder gameBuilder = BuilderLoader.load(gameName);
+                if (gameBuilder != null) {
+                    game = gameBuilder.build();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
