@@ -32,6 +32,17 @@ public class GameObject {
         return children;
     }
 
+    public GameObject findPlayer(int playerId) {
+        String playerNameId = name + playerId;
+        if (this.hasChildNamed(playerNameId)) {
+            for (GameObject gameObject : this.getChildren()) {
+                if (gameObject.getName().equals(playerNameId)) return gameObject;
+            }
+        }
+
+        return null;
+    }
+
     public void addChild(GameObject gameObject) {
         gameObject.setParent(this);
         children.add(gameObject);
@@ -124,7 +135,8 @@ public class GameObject {
         return null;
     }
 
-    public boolean hasChildNamed(final String name){
+
+    public boolean hasChildNamed(final String name) {
         return children.stream().map(GameObject::getName).filter(name::equals).findFirst().isPresent();
     }
 }

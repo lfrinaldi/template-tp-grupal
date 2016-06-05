@@ -14,15 +14,15 @@ public class TorreHanoiGameTest {
         Game game = torresHanoiGameBuilder.build();
 
 
-        String result = game.doCommand("What can I do with stack1 ?");
+        String result = game.doCommand("What can I do with stack1 ?", 123);
         System.out.println(result);
-        result = game.doCommand("check top stack1");
+        result = game.doCommand("check top stack1", 123);
         System.out.println(result);
-        result = game.doCommand("move top stack1 stack2");
+        result = game.doCommand("move top stack1 stack2", 123);
         System.out.println(result);
-        result = game.doCommand("move top stack1 stack3");
+        result = game.doCommand("move top stack1 stack3", 123);
         System.out.println(result);
-        result = game.doCommand("move top stack2 stack3");
+        result = game.doCommand("move top stack2 stack3", 123);
         System.out.println(result);
         Assert.assertTrue(true);
     }

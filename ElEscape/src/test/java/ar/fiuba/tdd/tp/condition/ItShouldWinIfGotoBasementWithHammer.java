@@ -19,7 +19,7 @@ public class ItShouldWinIfGotoBasementWithHammer {
 
     private String execute(String command) {
         System.out.println("> " + command);
-        String result = game.doCommand(command);
+        String result = game.doCommand(command, 123);
         System.out.println(result);
         return result;
     }
@@ -46,7 +46,7 @@ public class ItShouldWinIfGotoBasementWithHammer {
         Assert.assertEquals("Aparece pasaje al Sotano", execute("move LibroViejo"));
         Assert.assertEquals("Entro", execute("goto Sotano"));
         Assert.assertEquals("Uso", execute("use Baranda"));
-        Assert.assertEquals("Rompio" , execute("break Ventana using Martillo"));
-        Assert.assertEquals("Gano" , execute("goto Afuera"));
+        Assert.assertEquals("Rompio", execute("break Ventana using Martillo"));
+        Assert.assertEquals("Gano", execute("goto Afuera"));
     }
 }

@@ -19,7 +19,7 @@ public class ItShouldLostIfDownloadUsingStairs {
 
     private String execute(String command) {
         System.out.println("> " + command);
-        String result = game.doCommand(command);
+        String result = game.doCommand(command, 123);
         System.out.println(result);
         return result;
     }

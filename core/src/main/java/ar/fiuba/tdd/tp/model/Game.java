@@ -12,11 +12,9 @@ public class Game {
     private List<ComplexAction> actions = new ArrayList<>();
 
 
-
     public GameObject getScene() {
         return scene;
     }
-
 
     public void setName(String name) {
         this.name = name;
@@ -38,7 +36,9 @@ public class Game {
         return name;
     }
 
-    public String doCommand(String command) {
+    public String doCommand(String command, int playerId) {
+
+        GameObject player = this.scene.findPlayer(playerId);
 
         for (ComplexAction complexAction : actions) {
 

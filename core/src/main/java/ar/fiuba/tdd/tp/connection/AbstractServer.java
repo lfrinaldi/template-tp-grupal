@@ -79,7 +79,7 @@ public abstract class AbstractServer extends Thread {
                     exit = processOutput(out, input);
                 } else {
                     if (game != null) {
-                        String response = game.doCommand(input);
+                        String response = game.doCommand(input, 123);
                         out.println(response);
                     } else {
                         out.println(input);
