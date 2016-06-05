@@ -18,7 +18,7 @@ public class AbrirPuertaGameBuilder implements GameBuilder {
     @Override
     public Game build() {
         GameObject scene = buildScene();
-        Game game = new Game(scene);
+        Game game = new Game(scene, "Abrir Puerta");
         ComplexAction complexAction = buildLookAroundComplexAction(game);
         game.addAction(complexAction);
         complexAction = buildOpenDoorComplexAction(game);
@@ -100,9 +100,7 @@ public class AbrirPuertaGameBuilder implements GameBuilder {
         Parameter whereParameter = new ImplicitParameter("player");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, whereParameter, 1).not(null);
         String result = "Ey! Where do you go?! room2 is locked.";
-        SimpleAction simpleAction = new MessageSimpleAction(complexAction, condition, result);
-
-        return simpleAction;
+        return new MessageSimpleAction(complexAction, condition, result);
     }
 
     private SimpleAction buildOpenUnlockedDoorSimpleAction(Game game, ComplexAction complexAction) {
@@ -111,10 +109,7 @@ public class AbrirPuertaGameBuilder implements GameBuilder {
         Parameter targetParameter = new ImplicitParameter("room2");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, childParameter, 1);
         String result = "You enter room2. You won the game!";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter,
-                targetParameter, result);
-
-        return simpleAction;
+        return new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
     }
 
     private SimpleAction buildPickKeySimpleAction(Game game, ComplexAction complexAction) {
@@ -123,10 +118,7 @@ public class AbrirPuertaGameBuilder implements GameBuilder {
         Parameter targetParameter = new ImplicitParameter("player");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, targetParameter, 1).not(null);
         String result = "There you go!";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter,
-                targetParameter, result);
-
-        return simpleAction;
+        return new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
     }
 
     private SimpleAction buildKeyAlreadyPickedSimpleAction(Game game, ComplexAction complexAction) {
@@ -134,8 +126,6 @@ public class AbrirPuertaGameBuilder implements GameBuilder {
         Parameter whereParameter = new ImplicitParameter("player");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, whereParameter, 1);
         String result = "Key already picked!";
-        SimpleAction simpleAction = new MessageSimpleAction(complexAction, condition, result);
-
-        return simpleAction;
+        return new MessageSimpleAction(complexAction, condition, result);
     }
 }

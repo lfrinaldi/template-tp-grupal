@@ -17,7 +17,7 @@ public class BusquedaTesoroGameBuilder implements ar.fiuba.tdd.tp.builder.GameBu
     @Override
     public Game build() {
         GameObject scene = buildScene();
-        Game game = new Game(scene);
+        Game game = new Game(scene, "Busqueda del Tesoro");
         addActions(game);
 
         return game;
@@ -132,9 +132,7 @@ public class BusquedaTesoroGameBuilder implements ar.fiuba.tdd.tp.builder.GameBu
         Parameter whichParameter = new ImplicitParameter("player");
 
         String result = "There's <siblings> in the room.";
-        SimpleAction simpleAction = new LookAroundSimpleAction(complexAction, new TrueCondition(), whichParameter, result);
-
-        return simpleAction;
+        return new LookAroundSimpleAction(complexAction, new TrueCondition(), whichParameter, result);
     }
 
     private ComplexAction buildPickSilverKeyComplexAction(Game game) {
@@ -218,10 +216,7 @@ public class BusquedaTesoroGameBuilder implements ar.fiuba.tdd.tp.builder.GameBu
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, playerParameter, 1)
                 .or(new ChildrenSizeEqualsCondition(game, playerParameter, 2));
         String result = "Ok";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter,
-                targetParameter, result);
-
-        return simpleAction;
+        return new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
     }
 
     private ComplexAction buildHelpComplexAction(Game game) {

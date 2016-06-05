@@ -21,7 +21,7 @@ public class LoboOvejaColGameBuilder implements GameBuilder {
     @Override
     public Game build() {
         GameObject scene = buildScene();
-        Game game = new Game(scene);
+        Game game = new Game(scene, "Lobo, Oveja y Col");
         ComplexAction complexAction = buildTakeComplexAction(game);
         game.addAction(complexAction);
         complexAction = buildLeaveComplexAction(game);
@@ -69,19 +69,14 @@ public class LoboOvejaColGameBuilder implements GameBuilder {
         Parameter targetParameter = new ImplicitParameter("player");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, targetParameter, 0);
         String result = "Ok";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter,
-                targetParameter, result);
-
-        return simpleAction;
+        return new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
     }
 
     private SimpleAction buildFullShipSimpleAction(Game game, ComplexAction complexAction) {
         Parameter targetParameter = new ImplicitParameter("player");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, targetParameter, 1);
         String result = "You can’t do that! The boat is full.";
-        SimpleAction simpleAction = new MessageSimpleAction(complexAction, condition, result);
-
-        return simpleAction;
+        return new MessageSimpleAction(complexAction, condition, result);
     }
 
     private ComplexAction buildLeaveComplexAction(Game game) {
@@ -104,10 +99,7 @@ public class LoboOvejaColGameBuilder implements GameBuilder {
 
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, playerParameter, 1);
         String result = "Ok";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter,
-                targetParameter, result);
-
-        return simpleAction;
+        return new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
     }
 
     private SimpleAction buildYouWonSimpleAction(Game game, ComplexAction complexAction) {
@@ -115,9 +107,7 @@ public class LoboOvejaColGameBuilder implements GameBuilder {
         // Gana si la costa norte tiene 4 elementos, player, wolf, sheep y col
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, targetParameter, 4);
         String result = "You won the game!";
-        SimpleAction simpleAction = new MessageSimpleAction(complexAction, condition, result);
-
-        return simpleAction;
+        return new MessageSimpleAction(complexAction, condition, result);
     }
 
     private ComplexAction buildCrossNorthShoreComplexAction(Game game) {
@@ -150,10 +140,8 @@ public class LoboOvejaColGameBuilder implements GameBuilder {
                 HasChildCondition(game, southShore, sheepParameter)).not(null);
 
         String result = "you have crossed!";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, notSheepAndWolf.and(notSheepAndCol),
+        return new MoveChildSimpleAction(complexAction, notSheepAndWolf.and(notSheepAndCol),
                 playerParameter, targetParameter, result);
-
-        return simpleAction;
     }
 
     private ComplexAction buildCrossSouthShoreComplexAction(Game game) {
@@ -186,10 +174,8 @@ public class LoboOvejaColGameBuilder implements GameBuilder {
                 HasChildCondition(game, northShore, sheepParameter)).not(null);
 
         String result = "you have crossed!";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, notSheepAndWolf.and(notSheepAndCol),
+        return new MoveChildSimpleAction(complexAction, notSheepAndWolf.and(notSheepAndCol),
                 playerParameter, targetParameter, result);
-
-        return simpleAction;
     }
 
     private SimpleAction buildCantCrossWolfSheepSimpleAction(Game game, ComplexAction complexAction) {
@@ -202,9 +188,7 @@ public class LoboOvejaColGameBuilder implements GameBuilder {
                 HasChildCondition(game, northShore, sheepParameter));
 
         String result = "You can’t do that! The wolf will eat the sheep!";
-        SimpleAction simpleAction = new MessageSimpleAction(complexAction, sheepAndWolf, result);
-
-        return simpleAction;
+        return new MessageSimpleAction(complexAction, sheepAndWolf, result);
     }
 
     private SimpleAction buildCantCrossSheepColSimpleAction(Game game, ComplexAction complexAction) {
@@ -217,8 +201,6 @@ public class LoboOvejaColGameBuilder implements GameBuilder {
                 HasChildCondition(game, northShore, sheepParameter));
 
         String result = "You can’t do that! The sheep will eat the col!";
-        SimpleAction simpleAction = new MessageSimpleAction(complexAction, sheepAndCol, result);
-
-        return simpleAction;
+        return new MessageSimpleAction(complexAction, sheepAndCol, result);
     }
 }

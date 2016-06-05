@@ -50,7 +50,8 @@ public class Game {
         return null;
     }
 
-    public Game(GameObject scene) {
+    public Game(GameObject scene, String name) {
         this.scene = scene;
+        this.name = name;
     }
 }

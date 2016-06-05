@@ -23,6 +23,7 @@ public abstract class AbstractGameServer extends Thread {
             ServerSocket listener = new ServerSocket(port);
             Loader loader = new GameLoader();
             Game gameInstance = loader.get(gameName);
+            System.out.println(gameInstance.getName());
             //noinspection InfiniteLoopStatement
             while (true) {
                 AbstractServer server = makeServer(listener.accept(), gameInstance);

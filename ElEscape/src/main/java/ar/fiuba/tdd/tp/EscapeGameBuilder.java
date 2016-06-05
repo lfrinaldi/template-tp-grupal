@@ -23,7 +23,7 @@ public class EscapeGameBuilder implements GameBuilder {
     @Override
     public Game build() {
         GameObject scene = buildScene();
-        Game game = new Game(scene);
+        Game game = new Game(scene, "El Escape");
         addActions(game);
 
         return game;

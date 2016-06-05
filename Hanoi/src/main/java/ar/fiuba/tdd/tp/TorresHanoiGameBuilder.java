@@ -23,7 +23,7 @@ public class TorresHanoiGameBuilder implements GameBuilder {
     public Game build() {
 
         GameObject scene = buildScene();
-        Game game = new Game(scene);
+        Game game = new Game(scene, "Torres de Hanoi");
         ComplexAction complexAction = buildMoveTopComplexAction(game);
         game.getActions().add(complexAction);
         complexAction = buildHelpComplexAction(game);
@@ -57,10 +57,7 @@ public class TorresHanoiGameBuilder implements GameBuilder {
         String result = "Size of top from <parent> is <attribute>";
         String attributeName = "size";
 
-        SimpleAction simpleAction = new GetAttributeSimpleAction(complexAction, condition, childParameter,
-                attributeName, result);
-
-        return simpleAction;
+        return new GetAttributeSimpleAction(complexAction, condition, childParameter, attributeName, result);
     }
 
     private SimpleAction buildCheckEmptySimpleAction(Game game, ComplexAction complexAction) {
@@ -161,10 +158,7 @@ public class TorresHanoiGameBuilder implements GameBuilder {
                 new IsBiggerThanAttributeCondition(game, childParameter, childTargetParameter, "size"));
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, fromParameter, 0).not(null).and(targetCondition).not(null);
         String result = "you win!";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter,
-                targetParameter, result);
-
-        return simpleAction;
+        return new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
     }
 
     private SimpleAction buildMoveTopSimpleAction(Game game, ComplexAction complexAction) {
@@ -177,10 +171,7 @@ public class TorresHanoiGameBuilder implements GameBuilder {
                 new IsBiggerThanAttributeCondition(game, childParameter, childTargetParameter, "size"));
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, fromParameter, 0).not(null).and(targetCondition);
         String result = "moved!";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter,
-                targetParameter, result);
-
-        return simpleAction;
+        return new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
     }
 
     private SimpleAction buildMoveTopEmptySimpleAction(Game game, ComplexAction complexAction) {
