@@ -9,8 +9,9 @@ public class Game {
 
     private GameObject scene;
     private String name;
+    private boolean isMultiPlayer = false;
     private List<ComplexAction> actions = new ArrayList<>();
-    private List<String> playersId = new ArrayList<String>();
+    private List<String> playersId = new ArrayList<>();
 
     public GameObject getScene() {
         return scene;
@@ -66,5 +67,13 @@ public class Game {
             return playersId.get(playersId.size()-1);
         }
         return null;
+    }
+
+    public boolean isMultiPlayer() {
+        return isMultiPlayer;
+    }
+
+    public void setMultiPlayer() {
+        this.isMultiPlayer = true;
     }
 }
