@@ -32,7 +32,7 @@ public class GameObject {
         return children;
     }
 
-    public GameObject findPlayer(int playerId) {
+    public GameObject findPlayer(String playerId) {
         String playerNameId = name + playerId;
         if (this.hasChildNamed(playerNameId)) {
             for (GameObject gameObject : this.getChildren()) {

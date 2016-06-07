@@ -10,7 +10,7 @@ public class Game {
     private GameObject scene;
     private String name;
     private List<ComplexAction> actions = new ArrayList<>();
-
+    private List<String> playersId = new ArrayList<String>();
 
     public GameObject getScene() {
         return scene;
@@ -36,7 +36,13 @@ public class Game {
         return name;
     }
 
-    public String doCommand(String command, int playerId) {
+    public void addNewPlayerId(String playerId){
+        if(!playersId.contains(playerId)) playersId.add(playerId);
+    }
+
+    public String doCommand(String command, String playerId) {
+
+        this.addNewPlayerId(playerId);
 
         GameObject player = this.scene.findPlayer(playerId);
 
@@ -53,5 +59,12 @@ public class Game {
     public Game(GameObject scene, String name) {
         this.scene = scene;
         this.name = name;
+    }
+
+    public String getCurrentPlayerId() {
+        if (!playersId.isEmpty()) {
+            return playersId.get(playersId.size()-1);
+        }
+        return null;
     }
 }

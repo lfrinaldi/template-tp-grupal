@@ -18,7 +18,7 @@ public class AbrirPuerta2GameTest {
 
     private String execute(String command) {
         System.out.println(command);
-        String result = game.doCommand(command, 123);
+        String result = game.doCommand(command, "123");
         System.out.println(result);
         return result;
     }

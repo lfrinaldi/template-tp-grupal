@@ -12,15 +12,15 @@ public class AbrirPuertaGameTest {
 
         AbrirPuertaGameBuilder abrirPuertaGameBuilder = new AbrirPuertaGameBuilder();
         Game game = abrirPuertaGameBuilder.build();
-        String result = game.doCommand("look around", 123);
+        String result = game.doCommand("look around", "123");
         System.out.println(result);
-        result = game.doCommand("open door", 123);
+        result = game.doCommand("open door", "123");
         System.out.println(result);
-        result = game.doCommand("pick key", 123);
+        result = game.doCommand("pick key", "123");
         System.out.println(result);
-        result = game.doCommand("pick key", 123);
+        result = game.doCommand("pick key", "123");
         System.out.println(result);
-        result = game.doCommand("open door", 123);
+        result = game.doCommand("open door", "123");
         System.out.println(result);
 
         Assert.assertTrue(true);
