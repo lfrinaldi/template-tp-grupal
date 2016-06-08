@@ -12,7 +12,7 @@ public class EngineGameServer extends AbstractGameServer {
         super(port, gameName, gameManager);
     }
 
-    protected AbstractServer makeServer(Socket socket, Game gameInstance) throws IOException {
-        return new EngineServer(socket, gameInstance);
+    protected AbstractServer makeServer(Socket socket, Game gameInstance, ClientManager clientManager) throws IOException {
+        return new EngineServer(socket, gameInstance, clientManager);
     }
 }

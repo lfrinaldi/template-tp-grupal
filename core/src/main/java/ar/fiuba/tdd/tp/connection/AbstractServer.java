@@ -12,10 +12,12 @@ public abstract class AbstractServer extends Thread {
 
     protected Socket socket;
     protected Game game;
+    protected ClientManager clientManager;
 
-    public AbstractServer(Socket socket, Game game) throws IOException {
+    public AbstractServer(Socket socket, Game game, ClientManager clientManager) throws IOException {
         this.socket = socket;
         this.game = game;
+        this.clientManager = clientManager;
     }
 
     public void run() {
@@ -81,6 +83,9 @@ public abstract class AbstractServer extends Thread {
                     if (game != null) {
                         String response = game.doCommand(input, this.getName());
                         out.println(response);
+                        if (game.isMultiPlayer()) {
+                            this.clientManager.broadcastButMe(this, response);
+                        }
                     } else {
                         out.println(input);
                     }
@@ -90,4 +95,14 @@ public abstract class AbstractServer extends Thread {
     }
 
     protected abstract boolean processOutput(PrintWriter out, String input);
+
+    public void print(String string) {
+        try {
+            PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets
+                    .UTF_8), true);
+            out.println(string);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
