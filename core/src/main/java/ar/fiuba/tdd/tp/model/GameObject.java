@@ -32,16 +32,6 @@ public class GameObject {
         return children;
     }
 
-    public GameObject findPlayer(String playerId) {
-        if (this.hasChildNamed(playerId)) {
-            for (GameObject gameObject : this.getChildren()) {
-                if (gameObject.getName().equals(playerId)) return gameObject;
-            }
-        }
-
-        return null;
-    }
-
     public void addChild(GameObject gameObject) {
         gameObject.setParent(this);
         children.add(gameObject);

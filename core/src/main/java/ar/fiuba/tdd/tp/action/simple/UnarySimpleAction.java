@@ -13,7 +13,7 @@ public abstract class UnarySimpleAction extends SimpleAction {
 
     protected Parameter parameter;
 
-    public  UnarySimpleAction(ComplexAction parent, Condition<String> condition, Parameter parameter, String result) {
+    public UnarySimpleAction(ComplexAction parent, Condition<String> condition, Parameter parameter, String result) {
         super(parent, condition, result);
         this.parameter = parameter;
     }
@@ -22,6 +22,17 @@ public abstract class UnarySimpleAction extends SimpleAction {
 
     protected GameObject getObject(String command, Parameter parameter) {
         String whichName = parameter.value(command);
-        return scene.find(whichName);
+        return scene.find(this.getIdentifierName(whichName));
+    }
+
+    private String getIdentifierName(String whichName) {
+        String identifierName = whichName;
+        if (this.game.isMultiPlayer() && this.isPlayer(whichName))
+            identifierName = whichName + game.getCurrentPlayerId();
+        return identifierName;
+    }
+
+    private boolean isPlayer(String whichName) {
+        return whichName.equals("player");
     }
 }

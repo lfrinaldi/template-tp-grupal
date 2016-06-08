@@ -91,7 +91,7 @@ public class Game {
         this.isMultiPlayer = true;
     }
 
-    public String getCurrentPlayer() {
+    public String getCurrentPlayerId() {
         return this.players.get(this.players.size() - 1).getName();
     }
 }
