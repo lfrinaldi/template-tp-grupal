@@ -21,7 +21,7 @@ public class GameManager {
         } else {
             Loader loader = new GameLoader();
             Game game = loader.get(gameName);
-            if (game.isMultiPlayer()) {
+            if (game != null && game.isMultiPlayer()) {
                 this.loadedMultiPlayerGames.add(game);
             }
             return game;
