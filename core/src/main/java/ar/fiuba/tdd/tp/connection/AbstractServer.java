@@ -57,7 +57,7 @@ public abstract class AbstractServer extends Thread {
         new Client(socket, out);
         OutputStream outputStream = socket.getOutputStream();
         PrintStream printStream = new PrintStream(outputStream, true, "UTF-8");
-        out.println("Welcome to " + game.getName());
+        //out.println("Welcome to " + game.getName());
         while (true) {
             String line = in.readLine();
             if (line != null) {
