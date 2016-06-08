@@ -12,18 +12,18 @@ public abstract class AbstractGameServer extends Thread {
 
     protected int port;
     protected String gameName;
+    protected GameManager gameManager;
 
-    public AbstractGameServer(int port, String gameName) {
+    public AbstractGameServer(int port, String gameName, GameManager gameManager) {
         this.port = port;
         this.gameName = gameName;
+        this.gameManager = gameManager;
     }
 
     public void run() {
         try {
             ServerSocket listener = new ServerSocket(port);
-            Loader loader = new GameLoader();
-            Game gameInstance = loader.get(gameName);
-            System.out.println(gameInstance.getName());
+            Game gameInstance = this.gameManager.loadGame(gameName);
             //noinspection InfiniteLoopStatement
             while (true) {
                 AbstractServer server = makeServer(listener.accept(), gameInstance);
