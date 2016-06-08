@@ -33,6 +33,6 @@ public abstract class UnarySimpleAction extends SimpleAction {
     }
 
     private boolean isPlayer(String whichName) {
-        return whichName.contains("player");
+        return whichName.toLowerCase().contains("player");
     }
 }
