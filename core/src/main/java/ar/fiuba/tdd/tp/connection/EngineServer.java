@@ -9,8 +9,8 @@ import java.net.Socket;
 
 public class EngineServer extends AbstractServer {
 
-    public EngineServer(Socket socket, Game game) throws IOException {
-        super(socket, game);
+    public EngineServer(Socket socket, Game game, ClientManager clientManager) throws IOException {
+        super(socket, game, clientManager);
     }
 
     protected boolean processOutput(PrintWriter out, String input) {
