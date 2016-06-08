@@ -53,7 +53,7 @@ public class Server {
 
     private static void instanceGameServer(int serverPort) {
         try {
-            Thread gameServer = new MainGameServer(serverPort, null, gameManager);
+            Thread gameServer = new MainGameServer(serverPort, null);
             gameServer.start();
         } catch (Exception e) {
             e.printStackTrace();
