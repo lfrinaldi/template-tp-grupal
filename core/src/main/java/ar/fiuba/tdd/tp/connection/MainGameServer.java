@@ -9,7 +9,7 @@ import java.net.Socket;
 public class MainGameServer extends AbstractGameServer {
 
     public MainGameServer(int port, String gameName) {
-        super(port, gameName);
+        super(port, gameName, null);
     }
 
     protected AbstractServer makeServer(Socket socket, Game gameInstance) throws IOException {

@@ -8,8 +8,8 @@ import java.net.Socket;
 
 public class EngineGameServer extends AbstractGameServer {
 
-    public EngineGameServer(int port, String gameName) {
-        super(port, gameName);
+    public EngineGameServer(int port, String gameName, GameManager gameManager) {
+        super(port, gameName, gameManager);
     }
 
     protected AbstractServer makeServer(Socket socket, Game gameInstance) throws IOException {
