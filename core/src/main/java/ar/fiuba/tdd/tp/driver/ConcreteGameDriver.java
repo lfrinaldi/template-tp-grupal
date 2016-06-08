@@ -12,7 +12,7 @@ public class ConcreteGameDriver implements GameDriver {
     }
 
     public String sendCommand(String cmd) {
-        return game.doCommand(cmd, game.getCurrentPlayerId());
+        return game.doCommand(cmd, game.getCurrentPlayer());
     }
 
     public GameState getCurrentState() {

@@ -33,10 +33,9 @@ public class GameObject {
     }
 
     public GameObject findPlayer(String playerId) {
-        String playerNameId = name + playerId;
-        if (this.hasChildNamed(playerNameId)) {
+        if (this.hasChildNamed(playerId)) {
             for (GameObject gameObject : this.getChildren()) {
-                if (gameObject.getName().equals(playerNameId)) return gameObject;
+                if (gameObject.getName().equals(playerId)) return gameObject;
             }
         }
 
