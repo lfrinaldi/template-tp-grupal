@@ -22,13 +22,10 @@ public abstract class AbstractGameServer extends Thread {
         try {
             ServerSocket listener = new ServerSocket(port);
             Game gameInstance = this.gameManager.loadGame(gameName);
-            if (gameInstance != null) {
-                System.out.println(gameInstance.getName());
-                //noinspection InfiniteLoopStatement
-                while (true) {
-                    AbstractServer server = makeServer(listener.accept(), gameInstance);
-                    server.start();
-                }
+            //noinspection InfiniteLoopStatement
+            while (true) {
+                AbstractServer server = makeServer(listener.accept(), gameInstance);
+                server.start();
             }
         } catch (Exception e) {
             e.printStackTrace();
