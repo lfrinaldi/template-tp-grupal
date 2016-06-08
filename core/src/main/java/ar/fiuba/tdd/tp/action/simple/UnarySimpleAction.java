@@ -28,11 +28,11 @@ public abstract class UnarySimpleAction extends SimpleAction {
     private String getIdentifierName(String whichName) {
         String identifierName = whichName;
         if (this.game.isMultiPlayer() && this.isPlayer(whichName))
-            identifierName = whichName + game.getCurrentPlayerId();
+            identifierName = game.getCurrentPlayerId();
         return identifierName;
     }
 
     private boolean isPlayer(String whichName) {
-        return whichName.equals("player");
+        return whichName.contains("player");
     }
 }
