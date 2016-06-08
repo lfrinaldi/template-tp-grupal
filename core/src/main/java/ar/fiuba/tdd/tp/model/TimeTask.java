@@ -1,5 +1,7 @@
 package ar.fiuba.tdd.tp.model;
 
+import ar.fiuba.tdd.tp.action.Action;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -28,6 +30,10 @@ public class TimeTask {
 
             executor.scheduleWithFixedDelay(task, 0, this.delay, timeUnit);
         }
+    }
+
+    public void run(Action action, String command) {
+        run(() -> action.execute(command));
     }
 
     public void shutDown() {

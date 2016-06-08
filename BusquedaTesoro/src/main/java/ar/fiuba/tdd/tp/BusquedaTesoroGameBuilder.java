@@ -12,7 +12,7 @@ import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.*;
 
 @SuppressWarnings("CPD-START")
-public class BusquedaTesoroGameBuilder implements ar.fiuba.tdd.tp.builder.GameBuilder {
+public class BusquedaTesoroGameBuilder implements GameBuilder {
 
     @Override
     public Game build() {
