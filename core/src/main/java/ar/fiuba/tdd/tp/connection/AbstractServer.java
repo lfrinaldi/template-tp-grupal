@@ -81,7 +81,7 @@ public abstract class AbstractServer extends Thread {
                     exit = processOutput(out, input);
                 } else {
                     if (game != null) {
-                        String response = game.doCommand(input, this.getName());
+                        String response = game.doCommand(input, "player" + this.getName());
                         out.println(response);
                         if (game.isMultiPlayer()) {
                             this.clientManager.broadcastButMe(this, response);

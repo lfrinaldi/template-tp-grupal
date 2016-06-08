@@ -11,7 +11,12 @@ public class Game {
     private String name;
     private boolean isMultiPlayer = false;
     private List<ComplexAction> actions = new ArrayList<>();
-    private List<String> playersId = new ArrayList<>();
+    private List<GameObject> players = new ArrayList<>();
+
+    public Game(GameObject scene, String name) {
+        this.scene = scene;
+        this.name = name;
+    }
 
     public GameObject getScene() {
         return scene;
@@ -37,15 +42,10 @@ public class Game {
         return name;
     }
 
-    public void addNewPlayerId(String playerId){
-        if(!playersId.contains(playerId)) playersId.add(playerId);
-    }
-
     public String doCommand(String command, String playerId) {
 
-        this.addNewPlayerId(playerId);
-
-        GameObject player = this.scene.findPlayer(playerId);
+        GameObject currentPlayer =
+                (this.existPlayer(playerId)) ? this.getPlayer(playerId) : this.addNewPlayer(playerId);
 
         for (ComplexAction complexAction : actions) {
 
@@ -57,16 +57,30 @@ public class Game {
         return null;
     }
 
-    public Game(GameObject scene, String name) {
-        this.scene = scene;
-        this.name = name;
-    }
-
-    public String getCurrentPlayerId() {
-        if (!playersId.isEmpty()) {
-            return playersId.get(playersId.size()-1);
+    private GameObject getPlayer(String playerId) {
+        for (GameObject player : this.players) {
+            if (player.getName() != null && player.getName().equals(playerId))
+                return player;
         }
         return null;
+    }
+
+    private boolean existPlayer(String playerId) {
+        for (GameObject player : this.players) {
+            if (player.getName() != null && player.getName().equals(playerId))
+                return true;
+        }
+        return false;
+    }
+
+    private GameObject addNewPlayer(String playerId) {
+        GameObject newPlayer = null;
+        if (!this.existPlayer(playerId)) {
+            newPlayer = new GameObject(playerId);
+            this.players.add(newPlayer);
+            this.scene.addChild(newPlayer);
+        }
+        return newPlayer;
     }
 
     public boolean isMultiPlayer() {
@@ -75,5 +89,9 @@ public class Game {
 
     public void setMultiPlayer() {
         this.isMultiPlayer = true;
+    }
+
+    public String getCurrentPlayerId() {
+        return this.players.get(this.players.size() - 1).getName();
     }
 }
