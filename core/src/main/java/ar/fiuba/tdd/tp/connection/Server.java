@@ -13,6 +13,8 @@ public class Server {
     private static final Queue<Integer> ports = new LinkedList<>(Arrays.asList(8001, 8002, 8003, 8004, 8005, 8006, 8006,
             8007, 8008));
 
+    private static GameManager gameManager = new GameManager();
+
     public static void main(String[] args) {
         try {
             System.out.println("Welcome MainServer");
@@ -41,7 +43,7 @@ public class Server {
 
     private static void instanceEngineGameServer(String game, int port) {
         try {
-            Thread gameServer = new EngineGameServer(port, game);
+            Thread gameServer = new EngineGameServer(port, game, gameManager);
             gameServer.start();
             System.out.println(String.format("%s loaded and listening on port %s", game, port));
         } catch (Exception e) {
@@ -51,7 +53,7 @@ public class Server {
 
     private static void instanceGameServer(int serverPort) {
         try {
-            Thread gameServer = new MainGameServer(serverPort, null);
+            Thread gameServer = new EngineGameServer(serverPort, null, gameManager);
             gameServer.start();
         } catch (Exception e) {
             e.printStackTrace();

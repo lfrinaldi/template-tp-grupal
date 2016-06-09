@@ -23,7 +23,7 @@ public class ObjetoMalditoGameBuilder implements GameBuilder {
     @Override
     public Game build() {
         GameObject scene = buildScene();
-        Game game = new Game(scene);
+        Game game = new Game(scene, "Objeto Maldito");
         game.addAction(buildPickComplexAction(game));
         game.addAction(buildOpenDoor1ComplexAction(game));
         game.addAction(buildOpenDoor2ComplexAction(game));
@@ -46,7 +46,7 @@ public class ObjetoMalditoGameBuilder implements GameBuilder {
         room1.addChild(new GameObject("object"));
         room1.addChild(door1);
         GameObject thief = new GameObject("thief");
-        thief.getAttributesMap().put("help", "You can talk with thief: \"Hello\", \"Bye\".");
+        thief.getAttributes().put("help", "You can talk with thief: \"Hello\", \"Bye\".");
         room2.addChild(thief);
         room2.addChild(door2);
         GameObject scene = new GameObject("scene");
@@ -72,9 +72,7 @@ public class ObjetoMalditoGameBuilder implements GameBuilder {
         Parameter targetParameter = new ImplicitParameter("player");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, targetParameter, 0);
         String result = "Ok";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
-
-        return simpleAction;
+        return new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
     }
 
     private ComplexAction buildHelpComplexAction(Game game) {
@@ -122,9 +120,7 @@ public class ObjetoMalditoGameBuilder implements GameBuilder {
         Parameter whereParameter = new ImplicitParameter("player");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, whereParameter, 0);
         String result = "Ey! Where do you go?! room2 is locked.";
-        SimpleAction simpleAction = new MessageSimpleAction(complexAction, condition, result);
-
-        return simpleAction;
+        return new MessageSimpleAction(complexAction, condition, result);
     }
 
     private SimpleAction buildOpenUnlockedDoor1SimpleAction(Game game, ComplexAction complexAction) {
@@ -132,10 +128,7 @@ public class ObjetoMalditoGameBuilder implements GameBuilder {
         Parameter targetParameter = new ImplicitParameter("room2");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, childParameter, 1);
         String result = "You enter room2.";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter,
-                targetParameter, result);
-
-        return simpleAction;
+        return new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
     }
 
     private ComplexAction buildOpenDoor2ComplexAction(Game game) {
@@ -154,9 +147,7 @@ public class ObjetoMalditoGameBuilder implements GameBuilder {
         Parameter whereParameter = new ImplicitParameter("player");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, whereParameter, 1);
         String result = "Ey! Where do you go?! room3 is locked.";
-        SimpleAction simpleAction = new MessageSimpleAction(complexAction, condition, result);
-
-        return simpleAction;
+        return new MessageSimpleAction(complexAction, condition, result);
     }
 
     private SimpleAction buildOpenUnlockedDoor2SimpleAction(Game game, ComplexAction complexAction) {
@@ -164,10 +155,7 @@ public class ObjetoMalditoGameBuilder implements GameBuilder {
         Parameter targetParameter = new ImplicitParameter("room3");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, childParameter, 0);
         String result = "You enter room3. You won the game!";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter,
-                targetParameter, result);
-
-        return simpleAction;
+        return new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
     }
 
     private ComplexAction buildTalkToThiefComplexAction(Game game) {
@@ -185,10 +173,7 @@ public class ObjetoMalditoGameBuilder implements GameBuilder {
         Parameter targetParameter = new ImplicitParameter("thief");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, targetParameter, 0);
         String result = "Hi!\nThe thief has just stolen your object!";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter,
-                targetParameter, result);
-
-        return simpleAction;
+        return new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
     }
 
     private ComplexAction buildLookAroundComplexAction(Game game) {
@@ -204,8 +189,6 @@ public class ObjetoMalditoGameBuilder implements GameBuilder {
     private SimpleAction buildLookAroundSimpleAction(Game game, ComplexAction complexAction) {
         Parameter whichParameter = new ImplicitParameter("player");
         String result = "There's <siblings> in the room.";
-        SimpleAction simpleAction = new LookAroundSimpleAction(complexAction, new TrueCondition(), whichParameter, result);
-
-        return simpleAction;
+        return new LookAroundSimpleAction(complexAction, new TrueCondition(), whichParameter, result);
     }
 }

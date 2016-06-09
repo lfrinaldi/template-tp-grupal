@@ -17,7 +17,7 @@ public class ChildrenSizeEqualsCondition extends GameCondition<String> {
     public boolean isSatisfiedBy(String command) {
         GameObject scene = game.getScene();
         GameObject parent = getParentOf(scene, command);
-        int currentSize = parent.getChildrenList().size();
+        int currentSize = parent.getChildren().size();
         return (currentSize == size);
     }
 

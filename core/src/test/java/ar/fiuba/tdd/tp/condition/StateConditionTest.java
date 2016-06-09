@@ -22,7 +22,7 @@ public class StateConditionTest {
 
 
         myDoor = new GameObject("");
-        myDoor.getAttributesMap().putAll(new HashMap<String, String>() {
+        myDoor.getAttributes().putAll(new HashMap<String, String>() {
             {
                 put("id", "0");
                 put("name", "door");
@@ -46,7 +46,7 @@ public class StateConditionTest {
 
 
         myDoor = new GameObject("");
-        myDoor.getAttributesMap().putAll(new HashMap<String, String>() {
+        myDoor.getAttributes().putAll(new HashMap<String, String>() {
             {
                 put("id", "0");
                 put("name", "door");
@@ -73,7 +73,7 @@ public class StateConditionTest {
 
 
         myDoor = new GameObject("");
-        myDoor.getAttributesMap().putAll(new HashMap<String, String>() {
+        myDoor.getAttributes().putAll(new HashMap<String, String>() {
             {
                 put("id", "0");
                 put("name", "door");
@@ -99,7 +99,7 @@ public class StateConditionTest {
 
 
         myDoor = new GameObject("");
-        myDoor.getAttributesMap().putAll(new HashMap<String, String>() {
+        myDoor.getAttributes().putAll(new HashMap<String, String>() {
             {
                 put("id", "0");
                 put("name", "door");
@@ -125,7 +125,7 @@ public class StateConditionTest {
         });
 
         myDoor = new GameObject("");
-        myDoor.getAttributesMap().putAll(new HashMap<String, String>() {
+        myDoor.getAttributes().putAll(new HashMap<String, String>() {
             {
                 put("open", "true");
             }
@@ -159,7 +159,7 @@ public class StateConditionTest {
 
 
         myDoor = new GameObject("");
-        myDoor.getAttributesMap().putAll(new HashMap<String, String>() {
+        myDoor.getAttributes().putAll(new HashMap<String, String>() {
             {
                 put("id", "0");
                 put("nombre", "door");

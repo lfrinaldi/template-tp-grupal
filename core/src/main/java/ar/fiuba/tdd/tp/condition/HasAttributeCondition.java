@@ -15,7 +15,7 @@ public class HasAttributeCondition extends GameCondition<String> {
 
     @Override
     public boolean isSatisfiedBy(String command) {
-        return (getObject(command).getAttributesMap().containsKey(attributeName));
+        return (getObject(command).getAttributes().containsKey(attributeName));
     }
 
     private GameObject getObject(String command) {

@@ -4,8 +4,6 @@ import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
 import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameObject;
 
-import java.util.Map;
-
 public class HasChildCondition extends GameCondition<String> {
     private Parameter childParameter;
 
@@ -17,11 +15,11 @@ public class HasChildCondition extends GameCondition<String> {
     @Override
     public boolean isSatisfiedBy(String command) {
         String childName = childParameter.value(command);
-        return (getParentChildrenMap(command).containsKey(childName));
+        return (getParent(command).hasChildNamed(childName));
     }
 
-    private Map<String, GameObject> getParentChildrenMap(String command) {
+    private GameObject getParent(String command) {
         String parentName = parameter.value(command);
-        return game.getScene().find(parentName).getChildrenMap();
+        return game.getScene().find(parentName);
     }
 }

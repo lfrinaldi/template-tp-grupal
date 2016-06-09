@@ -3,19 +3,20 @@ package ar.fiuba.tdd.tp;
 import ar.fiuba.tdd.tp.action.ComplexAction;
 import ar.fiuba.tdd.tp.action.SimpleAction;
 import ar.fiuba.tdd.tp.action.simple.ChangeAttributeSimpleAction;
+import ar.fiuba.tdd.tp.action.simple.LookAroundSimpleAction;
 import ar.fiuba.tdd.tp.action.simple.MessageSimpleAction;
 import ar.fiuba.tdd.tp.action.simple.MoveChildSimpleAction;
 import ar.fiuba.tdd.tp.action.simple.parameter.ExplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
-import ar.fiuba.tdd.tp.condition.AttributeEqualsCondition;
-import ar.fiuba.tdd.tp.condition.ChildrenSizeEqualsCondition;
-import ar.fiuba.tdd.tp.condition.HasChildCondition;
-import ar.fiuba.tdd.tp.condition.TrueCondition;
+import ar.fiuba.tdd.tp.condition.*;
 import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameBuilder;
 import ar.fiuba.tdd.tp.model.GameObject;
+import ar.fiuba.tdd.tp.model.TimeTask;
+
+import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings("CPD-START")
 public class EscapeGameBuilder implements GameBuilder {
@@ -23,10 +24,16 @@ public class EscapeGameBuilder implements GameBuilder {
     @Override
     public Game build() {
         GameObject scene = buildScene();
-        Game game = new Game(scene);
+        Game game = new Game(scene, "El Escape 2");
+        game.setMultiPlayer();
         addActions(game);
-
         return game;
+    }
+
+    private void createTimeTask(Game game) {
+        TimeTask timeTask = new TimeTask(10, TimeUnit.SECONDS);
+        timeTask.setExecute(buildGotoToRandomComplexAction(game), "goto random Bibliotecario");
+        game.addTimeTask(timeTask);
     }
 
     private void addActions(Game game) {
@@ -38,6 +45,13 @@ public class EscapeGameBuilder implements GameBuilder {
         game.addAction(buildOpenComplexAction(game));
         game.addAction(buildPutComplexAction(game));
         game.addAction(buildShowComplexAction(game));
+        game.addAction(buildLookAroundComplexAction(game));
+
+        game.addAction(buildAddPlayerComplexAction(game));
+        game.addAction(buildInitPlayerComplexAction(game));
+
+        game.addAction(buildGotoToRandomComplexAction(game));
+        createTimeTask(game);
     }
 
     private void addGotoActions(Game game) {
@@ -65,18 +79,20 @@ public class EscapeGameBuilder implements GameBuilder {
         scene.addChild(buildRoom7());
         scene.addChild(buildRoom8());
 
+        GameObject foto = new GameObject("Foto");
+        scene.addChild(foto);
+
         return scene;
     }
 
     private GameObject buildRoom1() {
         GameObject pasillo = new GameObject("Pasillo");
-        GameObject player = new GameObject("player");
-        GameObject foto = new GameObject("Foto");
-        player.addChild(foto);
-        //GameObject lapicera = new GameObject("Lapicera");
-        //player.addChild(lapicera);
+        //GameObject player = new GameObject("player");
 
-        pasillo.addChild(player);
+        GameObject lapicera = new GameObject("Lapicera");
+        pasillo.addChild(lapicera);
+
+        //pasillo.addChild(player);
 
         return pasillo;
     }
@@ -184,9 +200,43 @@ public class EscapeGameBuilder implements GameBuilder {
         return baranda;
     }
 
+    private ComplexAction buildAddPlayerComplexAction(Game game) {
+        String name = "add player";
+        String command = "add player <parameter>";
+        ComplexAction complexAction = new ComplexAction(name, command, game);
+        complexAction.addAction(buildAddPlayerSimpleAction(game, complexAction));
+
+        return complexAction;
+    }
+
+    private SimpleAction buildAddPlayerSimpleAction(Game game, ComplexAction complexAction) {
+        Parameter childParameter = new ExplicitParameter(2); //player
+        Parameter targetParameter = new ImplicitParameter("Pasillo");
+
+        return new MoveChildSimpleAction(complexAction, new TrueCondition(), childParameter,
+                targetParameter, "New player added");
+    }
+
+    private ComplexAction buildInitPlayerComplexAction(Game game) {
+        String name = "init player";
+        String command = "init player <parameter>";
+        ComplexAction complexAction = new ComplexAction(name, command, game);
+        complexAction.addAction(buildInitPlayerSimpleAction(game, complexAction));
+
+        return complexAction;
+    }
+
+    private SimpleAction buildInitPlayerSimpleAction(Game game, ComplexAction complexAction) {
+        Parameter targetParameter = new ExplicitParameter(2); //player
+        Parameter childParameter = new ImplicitParameter("Foto");
+
+        return new MoveChildSimpleAction(complexAction, new TrueCondition(), childParameter,
+                targetParameter, "Ok");
+    }
+
     private ComplexAction buildGotoBibliotecaComplexAction(Game game) {
         String name = "goto Biblioteca";
-        String command = "goto <parameter>";
+        String command = "goto <parameter> <player>";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildGotoCantBibliotecaSimpleAction(game, complexAction);
         complexAction.addAction(simpleAction);
@@ -197,7 +247,6 @@ public class EscapeGameBuilder implements GameBuilder {
 
         return complexAction;
     }
-
 
     private ComplexAction buildGotoSotanoComplexAction(Game game) {
         String name = "goto Sotano";
@@ -213,7 +262,7 @@ public class EscapeGameBuilder implements GameBuilder {
 
     private ComplexAction buildGotoComplexAction(Game game, String roomName) {
         String name = "goto " + roomName;
-        String command = "goto <parameter>";
+        String command = "goto <parameter> <player>";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildGotoSimpleAction(game, complexAction, "Entro");
         complexAction.addAction(simpleAction);
@@ -223,7 +272,7 @@ public class EscapeGameBuilder implements GameBuilder {
 
     private ComplexAction buildUseBarandaComplexAction(Game game) {
         String name = "use Baranda";
-        String command = "use <parameter>";
+        String command = "use <parameter> <player>";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildUseBarandaSinMartilloSimpleAction(game, complexAction);
         complexAction.addAction(simpleAction);
@@ -235,7 +284,7 @@ public class EscapeGameBuilder implements GameBuilder {
 
     private SimpleAction buildUseBarandaSinMartilloSimpleAction(Game game, ComplexAction complexAction) {
         // Si usa la baranda, sin el martillo, pierde.
-        Parameter player = new ImplicitParameter("player");
+        Parameter player = new ExplicitParameter(2);
         Parameter martillo = new ImplicitParameter("Martillo");
         Condition<String> condition = new HasChildCondition(game, player, martillo).not(null);
         Parameter scene = new ImplicitParameter("scene");
@@ -282,7 +331,7 @@ public class EscapeGameBuilder implements GameBuilder {
     }
 
     private SimpleAction buildGotoBibliotecaSimpleAction(Game game, ComplexAction complexAction) {
-        Parameter childParameter = new ImplicitParameter("player");
+        Parameter childParameter = new ExplicitParameter(2); //player
         Parameter targetParameter = new ImplicitParameter("Biblioteca");
         Parameter bibliotecario = new ImplicitParameter("Bibliotecario");
         Parameter credencial = new ImplicitParameter("Credencial");
@@ -294,7 +343,7 @@ public class EscapeGameBuilder implements GameBuilder {
     }
 
     private SimpleAction buildGotoSimpleAction(Game game, ComplexAction complexAction, String result) {
-        Parameter childParameter = new ImplicitParameter("player");
+        Parameter childParameter = new ExplicitParameter(2); //player
         Parameter targetParameter = new ExplicitParameter(1);
 
         return new MoveChildSimpleAction(complexAction, new TrueCondition(), childParameter,
@@ -333,7 +382,7 @@ public class EscapeGameBuilder implements GameBuilder {
 
     private ComplexAction buildPickComplexAction(Game game) {
         String name = "pick";
-        String command = "pick <parameter>";
+        String command = "pick <parameter> <player>";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildCantPickSimpleAction(game, complexAction);
         complexAction.addAction(simpleAction);
@@ -345,7 +394,7 @@ public class EscapeGameBuilder implements GameBuilder {
 
     private SimpleAction buildPickSimpleAction(Game game, ComplexAction complexAction) {
         Parameter childParameter = new ExplicitParameter(1);
-        Parameter targetParameter = new ImplicitParameter("player");
+        Parameter targetParameter = new ExplicitParameter(2); //player
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, targetParameter, 0).or(new
                 ChildrenSizeEqualsCondition(game, targetParameter, 1)).or(new ChildrenSizeEqualsCondition(game,
                 targetParameter, 2)).or(new ChildrenSizeEqualsCondition(game, targetParameter, 3));
@@ -356,7 +405,7 @@ public class EscapeGameBuilder implements GameBuilder {
     }
 
     private SimpleAction buildCantPickSimpleAction(Game game, ComplexAction complexAction) {
-        Parameter targetParameter = new ImplicitParameter("player");
+        Parameter targetParameter = new ExplicitParameter(2); //player
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, targetParameter, 0).or(new
                 ChildrenSizeEqualsCondition(game, targetParameter, 1)).or(new ChildrenSizeEqualsCondition(game,
                 targetParameter, 2)).or(new ChildrenSizeEqualsCondition(game, targetParameter, 3)).not(null);
@@ -419,7 +468,7 @@ public class EscapeGameBuilder implements GameBuilder {
 
     private ComplexAction buildOpenComplexAction(Game game) {
         String name = "open CajaFuerte using";
-        String command = "open CajaFuerte using <parameter>";
+        String command = "open CajaFuerte using <parameter> <player>";
         ComplexAction complexAction = new ComplexAction(name, command, game);
         SimpleAction simpleAction = buildOpenLockedDoorSimpleAction(game, complexAction);
         complexAction.getSteps().add(simpleAction);
@@ -432,7 +481,7 @@ public class EscapeGameBuilder implements GameBuilder {
     private SimpleAction buildOpenUnlockedDoorSimpleAction(Game game, ComplexAction complexAction) {
         Parameter childParameter = new ImplicitParameter("Credencial");
         Parameter targetParameter = new ImplicitParameter("Salon1");
-        Parameter player = new ImplicitParameter("player");
+        Parameter player = new ExplicitParameter(4); //player
         Parameter llave = new ExplicitParameter(3);
         Condition<String> condition = new HasChildCondition(game, player, llave);
 
@@ -442,7 +491,7 @@ public class EscapeGameBuilder implements GameBuilder {
     }
 
     private SimpleAction buildOpenLockedDoorSimpleAction(Game game, ComplexAction complexAction) {
-        Parameter player = new ImplicitParameter("player");
+        Parameter player = new ExplicitParameter(4); //player
         Parameter llave = new ExplicitParameter(3);
         Condition<String> condition = new HasChildCondition(game, player, llave).not(null);
 
@@ -486,5 +535,65 @@ public class EscapeGameBuilder implements GameBuilder {
         String result = "Mostro";
         return new MoveChildSimpleAction(complexAction, new TrueCondition(), childParameter,
                 targetParameter, result);
+    }
+
+    private ComplexAction buildLookAroundComplexAction(Game game) {
+        String name = "look around";
+        String command = "look around <player>";
+        ComplexAction complexAction = new ComplexAction(name, command, game);
+        SimpleAction simpleAction = buildLookAroundSimpleAction(game, complexAction);
+        complexAction.addAction(simpleAction);
+
+        return complexAction;
+    }
+
+    private SimpleAction buildLookAroundSimpleAction(Game game, ComplexAction complexAction) {
+        Parameter whichParameter = new ExplicitParameter(2);
+        String result = "There’s <siblings> in the room.";
+        return new LookAroundSimpleAction(complexAction, new TrueCondition(), whichParameter, result);
+    }
+
+    private ComplexAction buildGotoToRandomComplexAction(Game game) {
+        String name = "goto random";
+        String command = "goto random <parameter>";
+        Parameter childParameter = new ExplicitParameter(2);
+        ComplexAction complexAction = new ComplexAction(name, command, game);
+
+        /*Parameter targetParameter1 = new ImplicitParameter("Pasillo");
+        Condition condition1 = new RandomCondition(70);
+        SimpleAction simpleAction1 = new MoveChildSimpleAction(complexAction, condition1, childParameter,
+                targetParameter1, "Bibliotecario entro a Pasillo");
+        complexAction.addAction(simpleAction1);
+
+        Parameter targetParameter2 = new ImplicitParameter("Salon4");
+        Condition condition2 = new RandomCondition(80);
+        SimpleAction simpleAction2 = new MoveChildSimpleAction(complexAction, condition2, childParameter,
+                targetParameter2, "Bibliotecario entro a Salon4");
+        complexAction.addAction(simpleAction2);
+
+        Parameter targetParameter3 = new ImplicitParameter("Salon3");
+        Condition condition3 = new RandomCondition(80);
+        SimpleAction simpleAction3 = new MoveChildSimpleAction(complexAction, condition3, childParameter,
+                targetParameter3, "Bibliotecario entro a Salon3");
+        complexAction.addAction(simpleAction3);
+
+        Parameter targetParameter4 = new ImplicitParameter("Salon4");
+        Condition condition4 = new RandomCondition(80);
+        SimpleAction simpleAction4 = new MoveChildSimpleAction(complexAction, condition4, childParameter,
+                targetParameter4, "Bibliotecario entro a Salon4");
+        complexAction.addAction(simpleAction4);
+
+        Parameter targetParameter5 = new ImplicitParameter("Salon1");
+        Condition condition5 = new RandomCondition(80);
+        SimpleAction simpleAction5 = new MoveChildSimpleAction(complexAction, condition5, childParameter,
+                targetParameter5, "Bibliotecario entro a Salon1");
+        complexAction.addAction(simpleAction5);*/
+
+        Parameter targetParameter6 = new ImplicitParameter("BibliotecaAcceso");
+        SimpleAction simpleAction6 = new MoveChildSimpleAction(complexAction, new TrueCondition(), childParameter,
+                targetParameter6, "Bibliotecario entro a BibliotecaAcceso");
+        complexAction.addAction(simpleAction6);
+
+        return complexAction;
     }
 }

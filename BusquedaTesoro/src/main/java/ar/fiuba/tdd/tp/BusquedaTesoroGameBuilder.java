@@ -7,18 +7,17 @@ import ar.fiuba.tdd.tp.action.simple.parameter.ExplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitCurrentParentParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
-import ar.fiuba.tdd.tp.builder.*;
 import ar.fiuba.tdd.tp.condition.*;
 import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.*;
 
 @SuppressWarnings("CPD-START")
-public class BusquedaTesoroGameBuilder implements ar.fiuba.tdd.tp.builder.GameBuilder {
+public class BusquedaTesoroGameBuilder implements GameBuilder {
 
     @Override
     public Game build() {
         GameObject scene = buildScene();
-        Game game = new Game(scene);
+        Game game = new Game(scene, "Busqueda del Tesoro");
         addActions(game);
 
         return game;
@@ -100,7 +99,7 @@ public class BusquedaTesoroGameBuilder implements ar.fiuba.tdd.tp.builder.GameBu
         redBox.addChild(poison);
         room4.addChild(redBox);
         GameObject antiPoison = new GameObject("anti-poison");
-        antiPoison.getAttributesMap().put("help", "You can drink the potion.");
+        antiPoison.getAttributes().put("help", "You can drink the potion.");
         GameObject greenBox = new GameObject("green-box");
         greenBox.addChild(antiPoison);
         room4.addChild(greenBox);
@@ -113,7 +112,7 @@ public class BusquedaTesoroGameBuilder implements ar.fiuba.tdd.tp.builder.GameBu
         GameObject door5 = new GameObject("door5");
         room5.addChild(door5);
         GameObject treasure = new GameObject("treasure");
-        treasure.getAttributesMap().put("help", "You can pick the treasure.");
+        treasure.getAttributes().put("help", "You can pick the treasure.");
         room5.addChild(treasure);
 
         return room5;
@@ -133,9 +132,7 @@ public class BusquedaTesoroGameBuilder implements ar.fiuba.tdd.tp.builder.GameBu
         Parameter whichParameter = new ImplicitParameter("player");
 
         String result = "There's <siblings> in the room.";
-        SimpleAction simpleAction = new LookAroundSimpleAction(complexAction, new TrueCondition(), whichParameter, result);
-
-        return simpleAction;
+        return new LookAroundSimpleAction(complexAction, new TrueCondition(), whichParameter, result);
     }
 
     private ComplexAction buildPickSilverKeyComplexAction(Game game) {
@@ -219,10 +216,7 @@ public class BusquedaTesoroGameBuilder implements ar.fiuba.tdd.tp.builder.GameBu
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, playerParameter, 1)
                 .or(new ChildrenSizeEqualsCondition(game, playerParameter, 2));
         String result = "Ok";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter,
-                targetParameter, result);
-
-        return simpleAction;
+        return new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
     }
 
     private ComplexAction buildHelpComplexAction(Game game) {

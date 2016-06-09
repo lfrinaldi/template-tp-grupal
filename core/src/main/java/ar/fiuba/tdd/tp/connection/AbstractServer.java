@@ -12,10 +12,16 @@ public abstract class AbstractServer extends Thread {
 
     protected Socket socket;
     protected Game game;
+    protected ClientManager clientManager;
 
-    public AbstractServer(Socket socket, Game game) throws IOException {
+    public AbstractServer(Socket socket, Game game, ClientManager clientManager) throws IOException {
         this.socket = socket;
         this.game = game;
+        this.clientManager = clientManager;
+    }
+
+    public Socket getSocket() {
+        return this.socket;
     }
 
     public void run() {
@@ -55,7 +61,7 @@ public abstract class AbstractServer extends Thread {
         new Client(socket, out);
         OutputStream outputStream = socket.getOutputStream();
         PrintStream printStream = new PrintStream(outputStream, true, "UTF-8");
-        out.println("Welcome to " + game.getName());
+        //out.println("Welcome to " + game.getName());
         while (true) {
             String line = in.readLine();
             if (line != null) {
@@ -79,8 +85,11 @@ public abstract class AbstractServer extends Thread {
                     exit = processOutput(out, input);
                 } else {
                     if (game != null) {
-                        String response = game.doCommand(input);
+                        String response = game.doCommand(input, "player" + this.getName());
                         out.println(response);
+                        if (game.isMultiPlayer()) {
+                            this.clientManager.broadcastButMe(this, response);
+                        }
                     } else {
                         out.println(input);
                     }
@@ -90,4 +99,14 @@ public abstract class AbstractServer extends Thread {
     }
 
     protected abstract boolean processOutput(PrintWriter out, String input);
+
+    public void print(String string) {
+        try {
+            PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets
+                    .UTF_8), true);
+            out.println(string);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

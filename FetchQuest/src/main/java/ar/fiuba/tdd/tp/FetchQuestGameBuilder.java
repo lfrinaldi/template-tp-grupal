@@ -20,7 +20,7 @@ public class FetchQuestGameBuilder implements GameBuilder {
     public Game build() {
 
         GameObject scene = buildScene();
-        Game game = new Game(scene);
+        Game game = new Game(scene, "Fetch Quest");
         ComplexAction complexAction = buildLookAroundComplexAction(game);
         game.addAction(complexAction);
         complexAction = buildPickStickComplexAction(game);
@@ -73,9 +73,7 @@ public class FetchQuestGameBuilder implements GameBuilder {
         Parameter whichParameter = new ImplicitParameter("player");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, whichParameter, 1).not(null);
         String result = "There’s <siblings> in the room.";
-        SimpleAction simpleAction = new LookAroundSimpleAction(complexAction, condition, whichParameter, result);
-
-        return simpleAction;
+        return new LookAroundSimpleAction(complexAction, condition, whichParameter, result);
     }
 
     private SimpleAction buildPickStickSimpleAction(Game game, ComplexAction complexAction) {
@@ -84,10 +82,7 @@ public class FetchQuestGameBuilder implements GameBuilder {
         Parameter targetParameter = new ImplicitParameter("player");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, targetParameter, 1).not(null);
         String result = "You won the game!";
-        SimpleAction simpleAction = new MoveChildSimpleAction(complexAction, condition, childParameter,
-                targetParameter, result);
-
-        return simpleAction;
+        return new MoveChildSimpleAction(complexAction, condition, childParameter, targetParameter, result);
     }
 
     private SimpleAction buildYouWonSimpleAction(Game game, ComplexAction complexAction) {
@@ -95,8 +90,6 @@ public class FetchQuestGameBuilder implements GameBuilder {
         Parameter whereParameter = new ImplicitParameter("player");
         Condition<String> condition = new ChildrenSizeEqualsCondition(game, whereParameter, 1);
         String result = "There's nothing in the room. You won the game!";
-        SimpleAction simpleAction = new MessageSimpleAction(complexAction, condition, result);
-
-        return simpleAction;
+        return new MessageSimpleAction(complexAction, condition, result);
     }
 }

@@ -18,8 +18,8 @@ public class ExplicitCurrentLastChildParameter implements Parameter {
 
         String[] splitCommand = command.split(" ");
         GameObject gameObject = game.getScene().find(splitCommand[position]);
-        if (!gameObject.getChildrenList().isEmpty()) {
-            GameObject lastGameObject = gameObject.getChildrenList().get(gameObject.getChildrenList().size() - 1);
+        if (!gameObject.getChildren().isEmpty()) {
+            GameObject lastGameObject = gameObject.getChildren().get(gameObject.getChildren().size() - 1);
             return lastGameObject.getName();
         }
 

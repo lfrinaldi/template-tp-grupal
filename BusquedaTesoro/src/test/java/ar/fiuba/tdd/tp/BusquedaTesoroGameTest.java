@@ -23,7 +23,6 @@ public class BusquedaTesoroGameTest {
         return result;
     }
 
-
     @Test
     public void busquedaTesoroRoomTest() {
         // Secuential

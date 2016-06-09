@@ -9,9 +9,8 @@ public class GameObject {
 
     private String name;
     private GameObject parent;
-    private Map<String, GameObject> childrenMap = new HashMap<>();
-    private List<GameObject> childrenList = new ArrayList<>();
-    private Map<String, String> attributesMap = new HashMap<>();
+    private List<GameObject> children = new ArrayList<>();
+    private Map<String, String> attributes = new HashMap<>();
 
     public GameObject(String name) {
         this.name = name;
@@ -29,64 +28,54 @@ public class GameObject {
         this.parent = parent;
     }
 
-    public Map<String, GameObject> getChildrenMap() {
-        return childrenMap;
-    }
-
-    public List<GameObject> getChildrenList() {
-        return childrenList;
+    public List<GameObject> getChildren() {
+        return children;
     }
 
     public void addChild(GameObject gameObject) {
-        String name = gameObject.getName();
         gameObject.setParent(this);
-        childrenMap.put(name, gameObject);
-        childrenList.add(gameObject);
-    }
-
-    public GameObject getChild(String name) {
-        return childrenMap.get(name);
+        children.add(gameObject);
     }
 
     public GameObject removeChild(String name) {
-        GameObject gameObject = childrenMap.remove(name);
-        childrenList.remove(gameObject);
+        GameObject gameObject = find(name);
+        children.remove(gameObject);
         gameObject.setParent(null);
         return gameObject;
     }
 
-    public Map<String, String> getAttributesMap() {
-        return attributesMap;
+    public Map<String, String> getAttributes() {
+        return attributes;
     }
 
     public void addAtribute(String name, String value) {
-        attributesMap.put(name, value);
+        attributes.put(name, value);
     }
 
     public String getAttribute(String name) {
-        return attributesMap.get(name);
+        return attributes.get(name);
     }
 
     public boolean changeAttribute(String name, String value) {
 
-        if (attributesMap.containsKey(name)) {
-            attributesMap.replace(name, value);
+        if (attributes.containsKey(name)) {
+            attributes.replace(name, value);
             return true;
         } else {
-            attributesMap.put(name, value);
+            attributes.put(name, value);
         }
 
         return false;
     }
 
     public String removeAttribute(String name) {
-        return attributesMap.remove(name);
+        return attributes.remove(name);
     }
 
     public List<GameObject> getSiblingsList() {
 
         List<GameObject> siblingsList = new ArrayList<>();
-        List<GameObject> parentChildren = parent.getChildrenList();
+        List<GameObject> parentChildren = parent.getChildren();
 
         for (GameObject sibling : parentChildren) {
             if (!sibling.getName().equals(name)) {
@@ -115,7 +104,7 @@ public class GameObject {
             return this;
         } else {
 
-            for (GameObject gameObject : getChildrenList()) {
+            for (GameObject gameObject : getChildren()) {
 
                 String gameObjectName = gameObject.getName();
 
@@ -133,5 +122,10 @@ public class GameObject {
         }
 
         return null;
+    }
+
+
+    public boolean hasChildNamed(final String name) {
+        return children.stream().map(GameObject::getName).filter(name::equals).findFirst().isPresent();
     }
 }
