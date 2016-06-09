@@ -14,6 +14,9 @@ import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameBuilder;
 import ar.fiuba.tdd.tp.model.GameObject;
+import ar.fiuba.tdd.tp.model.TimeTask;
+
+import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings("CPD-START")
 public class EscapeGameBuilder implements GameBuilder {
@@ -26,6 +29,12 @@ public class EscapeGameBuilder implements GameBuilder {
         addActions(game);
 
         return game;
+    }
+
+    private void createTimeTask(Game game) {
+        TimeTask timeTask = new TimeTask(1, TimeUnit.MINUTES);
+        timeTask.setExecute(buildGotoToRandomComplexAction(game), "goto random Bibliotecario");
+        game.addTimeTask(timeTask);
     }
 
     private void addActions(Game game) {
@@ -43,6 +52,7 @@ public class EscapeGameBuilder implements GameBuilder {
         game.addAction(buildInitPlayerComplexAction(game));
 
         game.addAction(buildGotoToRandomComplexAction(game));
+        createTimeTask(game);
     }
 
     private void addGotoActions(Game game) {
