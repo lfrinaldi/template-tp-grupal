@@ -29,7 +29,10 @@ public class EngineGameServer extends Thread {
             ServerSocket listener = new ServerSocket(port);
 
             Game gameInstance = this.gameManager.loadGame(gameName);
-            gameInstance.setClientManager(clientManager);
+            if (gameInstance != null) {
+                gameInstance.setClientManager(clientManager);
+                gameInstance.runTimeTasks();
+            }
             //noinspection InfiniteLoopStatement
             while (true) {
                 AbstractServer server = makeServer(listener.accept(), gameInstance, clientManager);

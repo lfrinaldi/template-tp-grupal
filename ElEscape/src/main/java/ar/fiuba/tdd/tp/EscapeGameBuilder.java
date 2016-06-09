@@ -27,13 +27,13 @@ public class EscapeGameBuilder implements GameBuilder {
         Game game = new Game(scene, "El Escape 2");
         game.setMultiPlayer();
         addActions(game);
-        game.runTimeTasks();
         return game;
     }
 
     private void createTimeTask(Game game) {
-        TimeTask timeTask = new TimeTask(1, TimeUnit.MINUTES);
-        timeTask.setExecute(buildGotoToRandomComplexAction(game), "goto random Bibliotecario");
+        TimeTask timeTask = new TimeTask(10, TimeUnit.SECONDS);
+        //timeTask.setExecute(buildGotoToRandomComplexAction(game), "goto random Bibliotecario");
+        timeTask.setExecute(buildLookAroundComplexAction(game), "look around");
         game.addTimeTask(timeTask);
     }
 
