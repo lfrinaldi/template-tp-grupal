@@ -20,16 +20,16 @@ public class ClientManager {
     }
 
     public void broadcastButMe(AbstractServer client, String string) {
-        this.clients.remove(client);
         for (AbstractServer c: this.clients) {
-            try {
-                PrintWriter out = new PrintWriter(new OutputStreamWriter(c.getSocket().getOutputStream(), StandardCharsets
-                        .UTF_8), true);
-                out.println(string);
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (c != client) {
+                try {
+                    PrintWriter out = new PrintWriter(new OutputStreamWriter(c.getSocket().getOutputStream(), StandardCharsets
+                            .UTF_8), true);
+                    out.println(string);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
-        this.clients.add(client);
     }
 }

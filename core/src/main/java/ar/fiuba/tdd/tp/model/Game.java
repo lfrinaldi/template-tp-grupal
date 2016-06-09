@@ -1,6 +1,7 @@
 package ar.fiuba.tdd.tp.model;
 
 import ar.fiuba.tdd.tp.action.ComplexAction;
+import ar.fiuba.tdd.tp.connection.ClientManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ public class Game {
     private List<ComplexAction> actions = new ArrayList<>();
     private List<GameObject> players = new ArrayList<>();
     private List<TimeTask> timeTasks = new ArrayList<>();
+    private ClientManager clientManager;
 
     public Game(GameObject scene, String name) {
         this.scene = scene;
@@ -51,7 +53,9 @@ public class Game {
         for (ComplexAction complexAction : actions) {
 
             if (command.startsWith(complexAction.getName())) {
-                return complexAction.execute(command + " " + currentPlayer.getName());
+                if (currentPlayer != null) {
+                    return complexAction.execute(command + " " + currentPlayer.getName());
+                }
             }
         }
 
@@ -121,5 +125,13 @@ public class Game {
 
     public String getCurrentPlayerId() {
         return this.players.get(this.players.size() - 1).getName();
+    }
+
+    public void setClientManager(ClientManager clientManager) {
+        this.clientManager = clientManager;
+    }
+
+    public void broadcast(String string) {
+        this.clientManager.broadcastButMe(null, string);
     }
 }
