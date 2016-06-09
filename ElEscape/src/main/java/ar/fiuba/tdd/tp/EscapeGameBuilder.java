@@ -32,8 +32,7 @@ public class EscapeGameBuilder implements GameBuilder {
 
     private void createTimeTask(Game game) {
         TimeTask timeTask = new TimeTask(10, TimeUnit.SECONDS);
-        //timeTask.setExecute(buildGotoToRandomComplexAction(game), "goto random Bibliotecario");
-        timeTask.setExecute(buildLookAroundComplexAction(game), "look around");
+        timeTask.setExecute(buildGotoToRandomComplexAction(game), "goto random Bibliotecario");
         game.addTimeTask(timeTask);
     }
 
@@ -560,7 +559,7 @@ public class EscapeGameBuilder implements GameBuilder {
         Parameter childParameter = new ExplicitParameter(2);
         ComplexAction complexAction = new ComplexAction(name, command, game);
 
-        Parameter targetParameter1 = new ImplicitParameter("Pasillo");
+        /*Parameter targetParameter1 = new ImplicitParameter("Pasillo");
         Condition condition1 = new RandomCondition(70);
         SimpleAction simpleAction1 = new MoveChildSimpleAction(complexAction, condition1, childParameter,
                 targetParameter1, "Bibliotecario entro a Pasillo");
@@ -588,7 +587,7 @@ public class EscapeGameBuilder implements GameBuilder {
         Condition condition5 = new RandomCondition(80);
         SimpleAction simpleAction5 = new MoveChildSimpleAction(complexAction, condition5, childParameter,
                 targetParameter5, "Bibliotecario entro a Salon1");
-        complexAction.addAction(simpleAction5);
+        complexAction.addAction(simpleAction5);*/
 
         Parameter targetParameter6 = new ImplicitParameter("BibliotecaAcceso");
         SimpleAction simpleAction6 = new MoveChildSimpleAction(complexAction, new TrueCondition(), childParameter,
