@@ -20,6 +20,10 @@ public abstract class AbstractServer extends Thread {
         this.clientManager = clientManager;
     }
 
+    public Socket getSocket() {
+        return this.socket;
+    }
+
     public void run() {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
