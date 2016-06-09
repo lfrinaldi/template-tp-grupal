@@ -27,7 +27,7 @@ public class multiPlayerGameTest {
     }
 
     @Test
-    public void it_should_lost_if_download_using_stairs() {
+    public void player_one_can_see_player_two() {
         Assert.assertEquals("There’s a Lapicera in the room.", execute("look around", "player1"));
         // Entra otro jugador
         game.addNewPlayer("player2");

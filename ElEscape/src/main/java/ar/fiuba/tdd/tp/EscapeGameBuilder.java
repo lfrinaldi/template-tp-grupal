@@ -9,10 +9,7 @@ import ar.fiuba.tdd.tp.action.simple.MoveChildSimpleAction;
 import ar.fiuba.tdd.tp.action.simple.parameter.ExplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.ImplicitParameter;
 import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
-import ar.fiuba.tdd.tp.condition.AttributeEqualsCondition;
-import ar.fiuba.tdd.tp.condition.ChildrenSizeEqualsCondition;
-import ar.fiuba.tdd.tp.condition.HasChildCondition;
-import ar.fiuba.tdd.tp.condition.TrueCondition;
+import ar.fiuba.tdd.tp.condition.*;
 import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.Game;
 import ar.fiuba.tdd.tp.model.GameBuilder;
@@ -44,6 +41,8 @@ public class EscapeGameBuilder implements GameBuilder {
 
         game.addAction(buildAddPlayerComplexAction(game));
         game.addAction(buildInitPlayerComplexAction(game));
+
+        game.addAction(buildGotoToRandomComplexAction(game));
     }
 
     private void addGotoActions(Game game) {
@@ -543,5 +542,49 @@ public class EscapeGameBuilder implements GameBuilder {
         Parameter whichParameter = new ExplicitParameter(2);
         String result = "There’s <siblings> in the room.";
         return new LookAroundSimpleAction(complexAction, new TrueCondition(), whichParameter, result);
+    }
+
+    private ComplexAction buildGotoToRandomComplexAction(Game game) {
+        String name = "goto random";
+        String command = "goto random <parameter>";
+        Parameter childParameter = new ExplicitParameter(2);
+        ComplexAction complexAction = new ComplexAction(name, command, game);
+
+        Parameter targetParameter1 = new ImplicitParameter("Pasillo");
+        Condition condition1 = new RandomCondition(70);
+        SimpleAction simpleAction1 = new MoveChildSimpleAction(complexAction, condition1, childParameter,
+                targetParameter1, "Bibliotecario entro a Pasillo");
+        complexAction.addAction(simpleAction1);
+
+        Parameter targetParameter2 = new ImplicitParameter("Salon4");
+        Condition condition2 = new RandomCondition(80);
+        SimpleAction simpleAction2 = new MoveChildSimpleAction(complexAction, condition2, childParameter,
+                targetParameter2, "Bibliotecario entro a Salon4");
+        complexAction.addAction(simpleAction2);
+
+        Parameter targetParameter3 = new ImplicitParameter("Salon3");
+        Condition condition3 = new RandomCondition(80);
+        SimpleAction simpleAction3 = new MoveChildSimpleAction(complexAction, condition3, childParameter,
+                targetParameter3, "Bibliotecario entro a Salon3");
+        complexAction.addAction(simpleAction3);
+
+        Parameter targetParameter4 = new ImplicitParameter("Salon4");
+        Condition condition4 = new RandomCondition(80);
+        SimpleAction simpleAction4 = new MoveChildSimpleAction(complexAction, condition4, childParameter,
+                targetParameter4, "Bibliotecario entro a Salon4");
+        complexAction.addAction(simpleAction4);
+
+        Parameter targetParameter5 = new ImplicitParameter("Salon1");
+        Condition condition5 = new RandomCondition(80);
+        SimpleAction simpleAction5 = new MoveChildSimpleAction(complexAction, condition5, childParameter,
+                targetParameter5, "Bibliotecario entro a Salon1");
+        complexAction.addAction(simpleAction5);
+
+        Parameter targetParameter6 = new ImplicitParameter("BibliotecaAcceso");
+        SimpleAction simpleAction6 = new MoveChildSimpleAction(complexAction, new TrueCondition(), childParameter,
+                targetParameter6, "Bibliotecario entro a BibliotecaAcceso");
+        complexAction.addAction(simpleAction6);
+
+        return complexAction;
     }
 }
