@@ -10,6 +10,8 @@ public class TimeTask {
     private ScheduledExecutorService executor;
     private TimeUnit timeUnit;
     private long delay;
+    private Action action;
+    private String command;
 
     public TimeTask(long delay, TimeUnit timeUnit) {
         executor = Executors.newScheduledThreadPool(1);
@@ -32,7 +34,12 @@ public class TimeTask {
         }
     }
 
-    public void run(Action action, String command) {
+    public void setExecute(Action action, String command) {
+        this.action = action;
+        this.command = command;
+    }
+
+    public void run() {
         run(() -> action.execute(command));
     }
 

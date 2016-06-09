@@ -1,6 +1,5 @@
 package ar.fiuba.tdd.tp.model;
 
-import ar.fiuba.tdd.tp.action.Action;
 import ar.fiuba.tdd.tp.action.ComplexAction;
 
 import java.util.ArrayList;
@@ -13,6 +12,7 @@ public class Game {
     private boolean isMultiPlayer = false;
     private List<ComplexAction> actions = new ArrayList<>();
     private List<GameObject> players = new ArrayList<>();
+    private List<TimeTask> timeTasks = new ArrayList<>();
 
     public Game(GameObject scene, String name) {
         this.scene = scene;
@@ -95,6 +95,20 @@ public class Game {
             this.doCommand("init player " + playerId);
         }
         return newPlayer;
+    }
+
+    public void addTimeTask(TimeTask timeTask) {
+        timeTasks.add(timeTask);
+    }
+
+    public void runTimeTasks() {
+        if (timeTasks.size() > 0) {
+            timeTasks.forEach(e -> e.run());
+        }
+    }
+
+    public void stopTimeTasks() {
+        timeTasks.forEach(e -> e.shutDown());
     }
 
     public boolean isMultiPlayer() {
