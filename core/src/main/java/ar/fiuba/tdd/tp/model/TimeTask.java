@@ -1,6 +1,7 @@
 package ar.fiuba.tdd.tp.model;
 
 import ar.fiuba.tdd.tp.action.Action;
+import ar.fiuba.tdd.tp.connection.ClientManager;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -39,8 +40,11 @@ public class TimeTask {
         this.command = command;
     }
 
-    public void run() {
-        run(() -> action.execute(command));
+    public void run(ClientManager clientManager) {
+        run(() -> {
+            String value = action.execute(command);
+            clientManager.broadcastButMe(null, value);
+        });
     }
 
     public void shutDown() {

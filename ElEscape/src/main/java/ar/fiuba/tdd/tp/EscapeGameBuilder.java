@@ -27,7 +27,7 @@ public class EscapeGameBuilder implements GameBuilder {
         Game game = new Game(scene, "El Escape 2");
         game.setMultiPlayer();
         addActions(game);
-
+        game.runTimeTasks();
         return game;
     }
 

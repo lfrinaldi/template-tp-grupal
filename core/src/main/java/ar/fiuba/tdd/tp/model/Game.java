@@ -107,7 +107,7 @@ public class Game {
 
     public void runTimeTasks() {
         if (timeTasks.size() > 0) {
-            timeTasks.forEach(e -> e.run());
+            timeTasks.forEach(e -> e.run(clientManager));
         }
     }
 
