@@ -1,5 +1,6 @@
 package ar.fiuba.tdd.tp.model;
 
+import ar.fiuba.tdd.tp.action.Action;
 import ar.fiuba.tdd.tp.action.ComplexAction;
 
 import java.util.ArrayList;
@@ -50,6 +51,17 @@ public class Game {
         for (ComplexAction complexAction : actions) {
 
             if (command.startsWith(complexAction.getName())) {
+                return complexAction.execute(command + " " + currentPlayer.getName());
+            }
+        }
+
+        return null;
+    }
+
+    public String doCommand(String command) {
+        for (ComplexAction complexAction : actions) {
+
+            if (command.startsWith(complexAction.getName())) {
                 return complexAction.execute(command);
             }
         }
@@ -73,12 +85,14 @@ public class Game {
         return false;
     }
 
-    private GameObject addNewPlayer(String playerId) {
+    public GameObject addNewPlayer(String playerId) {
         GameObject newPlayer = null;
         if (!this.existPlayer(playerId)) {
             newPlayer = new GameObject(playerId);
             this.players.add(newPlayer);
             this.scene.addChild(newPlayer);
+            this.doCommand("add player " + playerId);
+            this.doCommand("init player " + playerId);
         }
         return newPlayer;
     }

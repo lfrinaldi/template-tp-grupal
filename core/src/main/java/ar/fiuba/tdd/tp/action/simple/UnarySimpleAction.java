@@ -6,9 +6,6 @@ import ar.fiuba.tdd.tp.action.simple.parameter.Parameter;
 import ar.fiuba.tdd.tp.condition.core.Condition;
 import ar.fiuba.tdd.tp.model.GameObject;
 
-/**
- * Created by leandro on 15/05/16.
- */
 public abstract class UnarySimpleAction extends SimpleAction {
 
     protected Parameter parameter;
@@ -22,17 +19,17 @@ public abstract class UnarySimpleAction extends SimpleAction {
 
     protected GameObject getObject(String command, Parameter parameter) {
         String whichName = parameter.value(command);
-        return scene.find(this.getIdentifierName(whichName));
+        return scene.find(whichName);
     }
 
-    private String getIdentifierName(String whichName) {
+    /*private String getIdentifierName(String whichName) {
         String identifierName = whichName;
         if (this.game.isMultiPlayer() && this.isPlayer(whichName))
             identifierName = game.getCurrentPlayerId();
         return identifierName;
-    }
+    }*/
 
-    private boolean isPlayer(String whichName) {
+    /*private boolean isPlayer(String whichName) {
         return whichName.toLowerCase().contains("player");
-    }
+    }*/
 }
