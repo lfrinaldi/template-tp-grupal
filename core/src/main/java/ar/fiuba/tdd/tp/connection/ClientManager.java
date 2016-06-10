@@ -10,9 +10,15 @@ import java.util.List;
 public class ClientManager {
 
     private List<AbstractServer> clients;
+    private String lastMessage;
 
     public ClientManager() {
         this.clients = new ArrayList<>();
+    }
+
+    // Testing pourpose
+    public String getLastMessage() {
+        return this.lastMessage;
     }
 
     public void addClient(AbstractServer client) {
@@ -20,6 +26,7 @@ public class ClientManager {
     }
 
     public void broadcastButMe(AbstractServer client, String string) {
+        this.lastMessage = string;
         for (AbstractServer c: this.clients) {
             if (c != client) {
                 try {

@@ -7,11 +7,7 @@ import ar.fiuba.tdd.tp.model.Scheduleable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by nicolas on 09/06/16.
- */
 public class TimeTaskMock implements Scheduleable {
-
 
     private TimeUnit timeUnit;
     private long delay;
@@ -30,7 +26,8 @@ public class TimeTaskMock implements Scheduleable {
 
     @Override
     public void run(ClientManager clientManager) {
-        action.execute(command);
+        String value = action.execute(command);
+        clientManager.broadcastButMe(null,value);
     }
 
     @Override
