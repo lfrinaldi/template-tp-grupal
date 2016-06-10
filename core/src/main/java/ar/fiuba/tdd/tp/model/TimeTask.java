@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class TimeTask {
+public class TimeTask implements Scheduleable {
     private ScheduledExecutorService executor;
     private TimeUnit timeUnit;
     private long delay;
@@ -34,6 +34,8 @@ public class TimeTask {
             executor.scheduleWithFixedDelay(task, 0, this.delay, timeUnit);
         }
     }
+
+
 
     public void setExecute(Action action, String command) {
         this.action = action;

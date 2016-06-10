@@ -13,7 +13,7 @@ public class Game {
     private boolean isMultiPlayer = false;
     private List<ComplexAction> actions = new ArrayList<>();
     private List<GameObject> players = new ArrayList<>();
-    private List<TimeTask> timeTasks = new ArrayList<>();
+    private List<Scheduleable> timeTasks = new ArrayList<>();
     private ClientManager clientManager;
 
     public Game(GameObject scene, String name) {
@@ -101,7 +101,7 @@ public class Game {
         return newPlayer;
     }
 
-    public void addTimeTask(TimeTask timeTask) {
+    public void addTimeTask(Scheduleable timeTask) {
         timeTasks.add(timeTask);
     }
 
